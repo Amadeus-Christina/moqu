@@ -11,26 +11,27 @@
         </div>
         <div class="content-middle">
           <div class="content-middle-comment" v-if="item.usernameTail === '回复了我的评论'">
-            <div>
-              回复
-              <span class="atName">@{{item.atName}}</span>
-              {{item.content}}
-            </div>
+            回复
+            <span class="atName">@{{item.atName}}</span>
+            {{item.content}}
           </div>
-          <div class="content-middle-at-me" v-if="item.usernameTail === '在帖子中@了我'">
-            <div class="clear">
-              <img class="content-img left" :src="item.contentImg" alt="帖子图片">
-              <div class="content-middle-right left">
-                <div class="atMyName">@{{item.myUsername}}（{{item.myAnonymousUsername}}）</div>
-                <div class="comment">{{item.comment}}</div>
-              </div>
+          <div class="content-middle-good" v-if="item.usernameTail === '点赞了我的评论'">
+            {{item.content}}
+          </div>
+          <div class="content-middle-at-me clear" v-if="item.usernameTail === '在帖子中@了我'">
+            <img class="content-img left" :src="item.contentImg" alt="帖子图片">
+            <div class="content-middle-right left">
+              <div class="atMyName">@{{item.myUsername}}（{{item.myAnonymousUsername}}）</div>
+              <div class="comment">{{item.comment}}</div>
             </div>
           </div>
         </div>
         <div class="content-footer">
           {{item.time}}
-          <i class="icon"></i>
-          回复
+          <span v-if="item.usernameTail === '回复了我的评论'">
+            <i class="icon"></i>
+            回复
+          </span>
         </div>
       </div>
     </div>
@@ -88,7 +89,8 @@ export default {
         color: #B5B5B5;
       }
     }
-    .content-middle-comment {
+    .content-middle-comment,
+    .content-middle-good {
       margin-top: .2rem;
       font-size: .28rem;
       font-family:PingFang-SC-Medium;
