@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       userInfo: {
-        ID: 12
+        ID: 13
       },
       viewInfo: {
         ID: 12,
@@ -249,6 +249,7 @@ export default {
         text-align: center;
         background-color: #FFC824;
         margin-left: 0.3rem;
+        line-height: 0.4rem;
       }
     }
     .ff{
