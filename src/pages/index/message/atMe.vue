@@ -1,38 +1,42 @@
 <template>
   <div class="at-me-group">
-    <div class="at-me-item" v-for="(item,index) in atMeInfo" :key="index">
-      <div class="photo">
-        <img class="photo-img" :src="item.profilePicture" alt="头像">
-      </div>
-      <div class="content-main">
-        <div class="content-header">
-          <div class="username">{{item.username}}（{{item.anonymousUsername}}）</div>
-          <div class="usernameTail">{{item.usernameTail}}</div>
-        </div>
-        <div class="content-middle clear">
-          <img class="content-img left" :src="item.contentImg" alt="帖子图片">
-          <div class="content-middle-right left">
-            <div class="atMyName">@{{item.myUsername}}（{{item.myAnonymousUsername}}）</div>
-            <div class="comment">{{item.comment}}</div>
-          </div>
-        </div>
-        <div class="content-footer">
-          {{item.time}}
-          <i class="icon"></i>
-          回复
-        </div>
-      </div>
-    </div>
+<!--    <div class="at-me-item" v-for="(item,index) in atMeInfo" :key="index">-->
+<!--      <div class="photo">-->
+<!--        <img class="photo-img" :src="item.profilePicture" alt="头像">-->
+<!--      </div>-->
+<!--      <div class="content-main">-->
+<!--        <div class="content-header">-->
+<!--          <div class="username">{{item.username}}（{{item.anonymousUsername}}）</div>-->
+<!--          <div class="usernameTail">{{item.usernameTail}}</div>-->
+<!--        </div>-->
+<!--        <div class="content-middle clear">-->
+<!--          <img class="content-img left" :src="item.contentImg" alt="帖子图片">-->
+<!--          <div class="content-middle-right left">-->
+<!--            <div class="atMyName">@{{item.myUsername}}（{{item.myAnonymousUsername}}）</div>-->
+<!--            <div class="comment">{{item.comment}}</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="content-footer">-->
+<!--          {{item.time}}-->
+<!--          <i class="icon"></i>-->
+<!--          回复-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <message-item :messageInfo="messageInfo"/>
   </div>
 </template>
 <script>
+import messageItem from '@/components/MessageItem.vue'
 export default {
-  components: {},
+  components: {
+    messageItem
+  },
   mixins: [],
   name: '',
   data () {
     return {
-      atMeInfo: [
+      messageInfo: [
         {
           profilePicture: '/static/images/message/Anonymouscomments.png',
           username: '山鬼',
