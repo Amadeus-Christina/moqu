@@ -7,7 +7,7 @@
       <span class="item-name">{{item.name}}</span>
       <div class="right clear right-part">
         <span class="next right"> > </span>
-        <span class="msg-num left" v-show="item.msgNum > 0">{{item.msgNum}}</span>
+        <span class="msg-num right" v-show="item.msgNum > 0">{{item.msgNum > 99 ? '99+' : item.msgNum}}</span>
       </div>
     </div>
   </div>
@@ -59,28 +59,25 @@ export default {
       background-color: #ffffff;
       border-bottom: 0.01rem solid #F5F5F5;
       .right-part{
-        width: 1.1rem;
+        width: 1.6rem;
       }
       .next {
-        margin-right: 0.3rem;
+        margin:0 0.3rem 0 0.2rem;
         transform: scale(1, 1.8);
       }
       .msg-num {
         display: flex;
         position: relative;
-        width: 0.4rem;
+        min-width: 0.4rem;
         height: 0.4rem;
+        padding: 0 0.1rem;
         align-items: center;
         justify-content: center;
         top: 0.35rem;
         background-color: #FD493E;
-        border-radius: 50%;
+        border-radius: 0.2rem;
         color: #ffffff;
         font-size: 0.24rem;
-      }
-      .moreMsg {
-        width: 0.6rem;
-        border-radius:28px;
       }
     }
   }

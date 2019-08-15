@@ -30,7 +30,7 @@ export default {
           name: '收到的赞',
           iconPath: '/static/images/message/goodII.png',
           toPath: '/',
-          msgNum: 99
+          msgNum: 102
         },
         {
           name: '悄悄话',
