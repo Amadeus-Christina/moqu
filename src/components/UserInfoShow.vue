@@ -1,6 +1,7 @@
 <template>
   <div class="user-info-show">
-    <div class="backgorund-img" :style="{backgroundImage: 'url('+viewInfo.profile+')'}">
+    <div class="backgorund-img" :style="{backgroundImage: 'url('+viewInfo.profile+')'}"></div>
+    <div class="content">
       <i class="top-right-icon setting" v-if="userInfo.ID == viewInfo.ID"></i>
       <div class="top-right-icon follow" v-else>
         <span class="follow-plus">+</span>
@@ -37,7 +38,7 @@
     <div class="lv-wrap" v-if="userInfo.ID == viewInfo.ID">
       <span class="lv">LV{{viewInfo.lv}}</span>
       <div class="process-bar">
-        <process-bar/>
+        <process-bar :currentStatus="viewInfo.currentStatus" :totalStatue="viewInfo.totalStatue"/>
       </div>
       <div class="split-line"></div>
       <div class="user-info">帐号资料</div>
@@ -69,7 +70,9 @@ export default {
         follow: 231,
         followers: 23124,
         lv: 5,
-        profile: '/static/images/mock/01.jpg'
+        profile: '/static/images/mock/01.jpg',
+        currentStatus: 1234,
+        totalStatue: 2345
       }
     }
   },
@@ -94,11 +97,16 @@ export default {
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;
-      /*filter: blur(5px);*/
+      filter: blur(5px);
+    }
+    .content{
+      position: absolute;
+      top: 0;
+      left: 2rem;
     }
     .top-right-icon {
       position: absolute;
-      right: 0.4rem;
+      right: -1.1rem;
       top: 0.4rem;
       &.setting{
         display: inline-block;
@@ -260,7 +268,7 @@ export default {
         font-size: 0.36rem;
         vertical-align: center;
         font-family:PingFangSC-Semibold;
-        font-weight:600;
+        /*font-weight:600;*/
       }
     }
     .lv-wrap {

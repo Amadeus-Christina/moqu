@@ -11,15 +11,14 @@ export default {
   name: '',
   data () {
     return {
-      currentStatus: 1234,
-      totalStatue: 2345
     }
   },
-  props: {},
+  props: ['currentStatus','totalStatue'],
   computed: {},
   watch: {},
   methods: {},
-  mounted () {},
+  mounted () {
+  },
   created () {},
   filters: {},
   directives: {},
