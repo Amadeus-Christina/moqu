@@ -8,6 +8,7 @@ const MessageComment = r => require.ensure([], () => r(require('@/pages/index/me
 const MessageNoComment = r => require.ensure([], () => r(require('@/pages/index/message/noComment')), 'MessageNoComment');
 const MessageAtMe = r => require.ensure([], () => r(require('@/pages/index/message/atMe')), 'MessageAtMe');
 const MessageGood = r => require.ensure([], () => r(require('@/pages/index/message/good')), 'MessageGood');
+const AboutMeIndex = r => require.ensure([], () => r(require('@/pages/index/about-me/index')), 'AboutMeIndex');
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
           path: 'good',
           name: 'Good',
           component: MessageGood
+        },
+        {
+          path: 'aboutMe',
+          name: 'AboutMe',
+          component: AboutMeIndex
         }
       ]
     }

@@ -6,7 +6,7 @@
       </div>
       <div class="content-main">
         <div class="content-header">
-          <div class="username">{{item.username}}（{{item.anonymousUsername}}）</div>
+          <div class="username">{{item.username}}({{item.anonymousUsername}})</div>
           <div class="usernameTail">{{item.usernameTail}}</div>
         </div>
         <div class="content-middle">
@@ -21,7 +21,7 @@
           <div class="content-middle-at-me clear" v-if="item.usernameTail === '在帖子中@了我'">
             <img class="content-img left" :src="item.contentImg" alt="帖子图片">
             <div class="content-middle-right left">
-              <div class="atMyName">@{{item.myUsername}}（{{item.myAnonymousUsername}}）</div>
+              <div class="atMyName">@{{item.myUsername}}({{item.myAnonymousUsername}})</div>
               <div class="comment">{{item.comment}}</div>
             </div>
           </div>
