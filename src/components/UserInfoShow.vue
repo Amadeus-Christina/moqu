@@ -55,28 +55,9 @@ export default {
   name: '',
   data () {
     return {
-      userInfo: {
-        ID: 13
-      },
-      viewInfo: {
-        ID: 12,
-        username: '烈烈龙',
-        anonymousUsername: '敖烈',
-        isVip: true,
-        vipInfo: '日出联盟会长',
-        gender: '女',
-        age: 20,
-        constellation: '处女座',
-        follow: 231,
-        followers: 23124,
-        lv: 5,
-        profile: '/static/images/mock/01.jpg',
-        currentStatus: 1234,
-        totalStatue: 2345
-      }
     }
   },
-  props: {},
+  props: ['userInfo','viewInfo'],
   computed: {},
   watch: {},
   methods: {},

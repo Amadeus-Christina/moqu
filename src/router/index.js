@@ -9,6 +9,9 @@ const MessageNoComment = r => require.ensure([], () => r(require('@/pages/index/
 const MessageAtMe = r => require.ensure([], () => r(require('@/pages/index/message/atMe')), 'MessageAtMe');
 const MessageGood = r => require.ensure([], () => r(require('@/pages/index/message/good')), 'MessageGood');
 const AboutMeIndex = r => require.ensure([], () => r(require('@/pages/index/about-me/index')), 'AboutMeIndex');
+const AccountInfoIndex = r => require.ensure([], () => r(require('@/pages/index/account-info/index')), 'AccountInfoIndex');
+const AccountInfoSetting = r => require.ensure([], () => r(require('@/pages/index/account-info/setting')), 'AccountInfoSetting');
+const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/follow-list/index')), 'FollowListIndex');
 
 Vue.use(Router)
 
@@ -53,6 +56,21 @@ export default new Router({
           path: 'aboutMe',
           name: 'AboutMe',
           component: AboutMeIndex
+        },
+        {
+          path: 'accountInfo',
+          name: 'AccountInfoIndex',
+          component: AccountInfoIndex
+        },
+        {
+          path: 'accountSetting',
+          name: 'AccountInfoSetting',
+          component: AccountInfoSetting
+        },
+        {
+          path: 'followList',
+          name: 'FollowListIndex',
+          component: FollowListIndex
         }
       ]
     }
