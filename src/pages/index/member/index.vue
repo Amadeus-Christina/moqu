@@ -35,7 +35,7 @@
       <div class="card-name black-card-font">黑卡会员</div>
       <div class="price black-card-font">4999</div>
       <div class="diamond black-card-font">钻石</div>
-      <div class="buy black-card-font black-card-bg">立即购买</div>
+      <div class="buy black-card-bg">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
