@@ -12,7 +12,7 @@
         <div class="cash-out-text">提现</div>
       </div>
       <div class="separator">|</div>
-      <div class="recharge">
+      <div class="recharge" @click="$router.push('/index/recharge')">
         <div class="recharge-icon"></div>
         <div class="recharge-text">充值</div>
       </div>

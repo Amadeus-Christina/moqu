@@ -22,12 +22,12 @@ export default {
         {
           name: '我的会员',
           iconPath: '/static/images/account-info/members.png',
-          toPath: '/',
+          toPath: '/index/member',
         },
         {
           name: '我的钱包',
           iconPath: '/static/images/account-info/wallet.png',
-          toPath: '/',
+          toPath: '/index/wallet',
         },
         {
           name: '日出联盟招募',
