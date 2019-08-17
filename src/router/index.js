@@ -5,7 +5,6 @@ const Login = r =>require.ensure([],()=>r(require('@/pages/login/index')),'Login
 const Index = r => require.ensure([], () => r(require('@/pages/index/index')), 'Index');
 const MessageIndex = r => require.ensure([], () => r(require('@/pages/index/message/index')), 'MessageIndex');
 const MessageComment = r => require.ensure([], () => r(require('@/pages/index/message/comment')), 'MessageComment');
-const MessageNoComment = r => require.ensure([], () => r(require('@/pages/index/message/noComment')), 'MessageNoComment');
 const MessageAtMe = r => require.ensure([], () => r(require('@/pages/index/message/atMe')), 'MessageAtMe');
 const MessageGood = r => require.ensure([], () => r(require('@/pages/index/message/good')), 'MessageGood');
 const AboutMeIndex = r => require.ensure([], () => r(require('@/pages/index/about-me/index')), 'AboutMeIndex');
@@ -42,11 +41,6 @@ export default new Router({
           path: 'atMe',
           name: 'MessageAtMe',
           component: MessageAtMe
-        },
-        {
-          path: 'noComment',
-          name: 'MessageNoComment',
-          component: MessageNoComment
         },
         {
           path: 'good',

@@ -1,13 +1,15 @@
 <template>
   <div class="message-item-group">
-    <div class="message-item clear" v-for="(item,index) in itemInfo" :key="index">
-      <i class="icon">
-        <img class="icon-img" :src="item.iconPath" alt="图标">
-      </i>
-      <span class="item-name">{{item.name}}</span>
-      <div class="right clear right-part">
-        <span class="next right"> > </span>
-        <span class="msg-num right" v-show="item.msgNum > 0">{{item.msgNum > 99 ? '99+' : item.msgNum}}</span>
+    <div class="message-item clear" v-for="(item,index) in itemInfo" :key="index" >
+      <div @click="$router.push(item.toPath)">
+        <i class="icon">
+          <img class="icon-img" :src="item.iconPath" alt="图标">
+        </i>
+        <span class="item-name">{{item.name}}</span>
+        <div class="right clear right-part">
+          <span class="next right"> > </span>
+          <span class="msg-num right" v-show="item.msgNum > 0">{{item.msgNum > 99 ? '99+' : item.msgNum}}</span>
+        </div>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
       <div class="card-name">银卡会员</div>
       <div class="price">1999</div>
       <div class="diamond">钻石</div>
-      <div class="buy">立即购买</div>
+      <div class="buy" @click="showPopup">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -45,6 +45,11 @@
         <div class="text">赠送10张交流卡</div>
       </div>
     </div>
+    <van-popup v-model="show">
+      <div class="buy-pop">
+
+      </div>
+    </van-popup>
   </div>
 </template>
 <script>
@@ -53,12 +58,19 @@ export default {
   mixins: [],
   name: '',
   data () {
-    return {}
+    return {
+      show: false
+    }
   },
   props: {},
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    // 弹出购买窗口
+    showPopup() {
+      this.show = true;
+    }
+  },
   mounted () {},
   created () {},
   filters: {},

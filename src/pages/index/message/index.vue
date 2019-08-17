@@ -17,19 +17,19 @@ export default {
         {
           name: '评论',
           iconPath: '/static/images/message/replyI.png',
-          toPath: '/',
+          toPath: '/index/comment',
           msgNum: 0
         },
         {
           name: '@我',
           iconPath: '/static/images/message/@I.png',
-          toPath: '/',
+          toPath: '/index/atMe',
           msgNum: 0
         },
         {
           name: '收到的赞',
           iconPath: '/static/images/message/goodII.png',
-          toPath: '/',
+          toPath: '/index/good',
           msgNum: 102
         },
         {

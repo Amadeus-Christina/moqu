@@ -1,6 +1,12 @@
 <template>
   <div class="message-item-group">
-    <div class="message-item" v-for="(item,index) in messageInfo" :key="index">
+    <div class="blank" v-if="messageInfo == undefined || messageInfo.length <=0 ">
+      <div class="container">
+        <img class="container-img" src="/static/images/message/nocontent.png" alt="无评论"/>
+        <div class="text">还没有消息哦～</div>
+      </div>
+    </div>
+    <div class="message-item" v-else v-for="(item,index) in messageInfo" :key="index">
       <div class="photo">
         <img class="photo-img" :src="item.profilePicture" alt="头像">
       </div>
@@ -60,6 +66,28 @@ export default {
 <style scoped lang="less">
   .message-item-group {
     background-color: #ffffff;
+    .blank {
+      .container{
+        height: 3rem;
+        width: 2.5rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -1.5rem;
+        margin-left: -1.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        .container-img {
+          max-width: 2rem;
+        }
+        .text {
+          font-size: 0.24rem;
+          color: #B5B5B5;
+        }
+      }
+    }
     .message-item {
       /*height: 2.03rem;*/
       width: 100%;
