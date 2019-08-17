@@ -12,6 +12,7 @@ const AccountInfoIndex = r => require.ensure([], () => r(require('@/pages/index/
 const AccountInfoSetting = r => require.ensure([], () => r(require('@/pages/index/account-info/setting')), 'AccountInfoSetting');
 const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/follow-list/index')), 'FollowListIndex');
 const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/member/index')), 'MemberIndex');
+const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
 
 Vue.use(Router)
 
@@ -71,6 +72,11 @@ export default new Router({
           path: 'member',
           name: 'MemberIndex',
           component: MemberIndex
+        },
+        {
+          path: 'discover',
+          name: 'DiscoverIndex',
+          component: DiscoverIndex
         }
       ]
     }
