@@ -5,9 +5,9 @@
     </div>
     <div class="silver-card">
       <div class="card-name">银卡会员</div>
-      <div class="price">1999</div>
+      <div class="price" v-text="price.silver"></div>
       <div class="diamond">钻石</div>
-      <div class="buy" @click="showPopup">立即购买</div>
+      <div class="buy" @click="showChange(price.silver)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -19,9 +19,9 @@
     </div>
     <div class="gold-card">
       <div class="card-name">金卡会员</div>
-      <div class="price">2999</div>
+      <div class="price" v-text="price.gold"></div>
       <div class="diamond">钻石</div>
-      <div class="buy">立即购买</div>
+      <div class="buy" @click="showChange(price.gold)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -33,9 +33,9 @@
     </div>
     <div class="black-card">
       <div class="card-name black-card-font">黑卡会员</div>
-      <div class="price black-card-font">4999</div>
+      <div class="price black-card-font" v-text="price.black"></div>
       <div class="diamond black-card-font">钻石</div>
-      <div class="buy black-card-bg">立即购买</div>
+      <div class="buy black-card-bg" @click="showChange(price.black)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -45,9 +45,17 @@
         <div class="text">赠送10张交流卡</div>
       </div>
     </div>
-    <van-popup v-model="show">
+    <van-popup v-model="show" round>
       <div class="buy-pop">
-
+        <div class="header clear">
+          <div class="title">购买会员</div>
+          <div class="close right" @click="showChange(priceNow)"></div>
+        </div>
+        <div class="content">
+          <div class="buy-price" v-text="priceNow"></div>
+          <i class="diamond-icon"></i>
+          <div class="confirm" @click="showToast">确定</div>
+        </div>
       </div>
     </van-popup>
   </div>
@@ -59,16 +67,33 @@ export default {
   name: '',
   data () {
     return {
-      show: false
+      show: false,
+      price: {
+        silver: 1999,
+        gold: 2999,
+        black: 4999
+      },
+      priceNow: 1999
     }
   },
   props: {},
   computed: {},
   watch: {},
   methods: {
-    // 弹出购买窗口
-    showPopup() {
-      this.show = true;
+    // 弹出/关闭弹窗
+    showChange(data = 1999) {
+      this.show = !this.show;
+      this.priceNow = data
+    },
+    // 显示支付提示信息
+    showToast() {
+      this.showChange()
+      this.$toast.success({
+        message: "购买成功",
+      })
+      // this.$toast.fail({
+      //   message: "钻石不足",
+      // })
     }
   },
   mounted () {},
@@ -194,5 +219,57 @@ export default {
   }
   .black-card-bg {
     background: linear-gradient(to right, #8E8E8EFF , #656565FF);
+  }
+  .buy-pop {
+    width: 5.4rem;
+    height: 3.15rem;
+    background-color: #FFFFFF;
+    font-size: 0.32rem;
+    text-align: center;
+    .header{
+      /*background-color: #FD493E;*/
+      width: 5.20rem;
+      height: 1rem;
+      line-height: 1rem;
+      margin: 0 auto;
+      position: relative;
+      border-bottom: 0.01rem solid #FAFAFAFF;
+      .title {
+        display: inline-block;
+      }
+      .close {
+        height: 0.27rem;
+        width: 0.27rem;
+        background-image: url("/static/images/member/Shutdown.png");
+        background-size: 0.27rem 0.27rem;
+        position: absolute;
+        right: 0.15rem;
+        top: 0.35rem;
+      }
+    }
+    .content {
+      height: 2.2rem;
+      .buy-price{
+        margin-top: 0.35rem;
+        display: inline-block;
+      }
+      .diamond-icon{
+        display: inline-block;
+        width: 0.32rem;
+        height: 0.28rem;
+        background-image: url("/static/images/member/diamondI.png");
+        background-size: 0.32rem 0.28rem;
+      }
+      .confirm {
+        width: 2rem;
+        height: 0.6rem;
+        color: #ffffff;
+        background-color: #23D2CDFF;
+        border-radius: 0.3rem;
+        line-height: 0.6rem;
+        margin: 0 auto;
+        margin-top: 0.5rem;
+      }
+    }
   }
 </style>
