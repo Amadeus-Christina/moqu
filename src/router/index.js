@@ -15,6 +15,7 @@ const AccountInfoWallet = r => require.ensure([], () => r(require('@/pages/index
 const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/follow-list/index')), 'FollowListIndex');
 const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/member/index')), 'MemberIndex');
 const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
+const VideoAuthenticationIndex = r => require.ensure([], () => r(require('@/pages/index/video-authentication/index')), 'VideoAuthenticationIndex');
 
 Vue.use(Router)
 
@@ -89,6 +90,11 @@ export default new Router({
           path: 'wallet',
           name: 'AccountInfoWallet',
           component: AccountInfoWallet
+        },
+        {
+          path: 'videoAuthentication',
+          name: 'VideoAuthenticationIndex',
+          component: VideoAuthenticationIndex
         }
       ]
     }

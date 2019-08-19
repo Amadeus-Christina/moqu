@@ -5,9 +5,9 @@ import App from './App'
 import router from './router'
 
 import {
-  Tabbar, TabbarItem, Popup, Toast
+  Tabbar, TabbarItem, Popup, Toast, Uploader, Button
 } from 'vant'
-Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast);
+Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast).use(Uploader).use(Button);
 
 Vue.config.productionTip = false
 
