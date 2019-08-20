@@ -12,6 +12,7 @@ const AccountInfoIndex = r => require.ensure([], () => r(require('@/pages/index/
 const AccountInfoSetting = r => require.ensure([], () => r(require('@/pages/index/account-info/setting')), 'AccountInfoSetting');
 const AccountInfoRecharge = r => require.ensure([], () => r(require('@/pages/index/account-info/recharge')), 'AccountInfoRecharge');
 const AccountInfoWallet = r => require.ensure([], () => r(require('@/pages/index/account-info/wallet')), 'AccountInfoWallet');
+const AccountInfoCashOut = r => require.ensure([], () => r(require('@/pages/index/account-info/cashOut')), 'AccountInfoCashOut');
 const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/follow-list/index')), 'FollowListIndex');
 const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/member/index')), 'MemberIndex');
 const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
@@ -95,6 +96,11 @@ export default new Router({
           path: 'videoAuthentication',
           name: 'VideoAuthenticationIndex',
           component: VideoAuthenticationIndex
+        },
+        {
+          path: 'cashOut',
+          name: 'AccountInfoCashOut',
+          component: AccountInfoCashOut
         }
       ]
     }
