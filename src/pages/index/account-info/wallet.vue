@@ -2,7 +2,7 @@
   <div class="wallet">
     <div class="title">
       <div class="account-balance">
-        30000 <i class="icon"></i>
+        {{amount}} <i class="icon"></i>
       </div>
       <div class="text">账户余额</div>
     </div>
@@ -25,7 +25,9 @@ export default {
   mixins: [],
   name: '',
   data () {
-    return {}
+    return {
+      amount: 50000
+    }
   },
   props: {},
   computed: {},
@@ -62,7 +64,7 @@ export default {
       display: inline-block;
       height: 0.27rem;
       width: 0.34rem;
-      background-image: url("/static/images/account-info/diamondI.png");
+      background-image: url("/static/images/account-info/diamondIII.png");
       background-size: 0.34rem 0.27rem;
     }
     .text {
@@ -87,7 +89,7 @@ export default {
     .cash-out-icon {
       height: 0.38rem;
       width: 0.38rem;
-      background-image: url("/static/images/account-info/diamondI.png");
+      background-image: url("/static/images/account-info/withdrawal.png");
       background-size: 0.38rem;
       background-repeat: no-repeat;
       margin: 0 auto;
@@ -95,7 +97,7 @@ export default {
     .recharge-icon{
       height: 0.38rem;
       width: 0.38rem;
-      background-image: url("/static/images/account-info/diamondI.png");
+      background-image: url("/static/images/account-info/top-up.png");
       background-size: 0.38rem;
       background-repeat: no-repeat;
       margin: 0 auto;

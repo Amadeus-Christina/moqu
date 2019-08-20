@@ -41,7 +41,7 @@ export default {
         {
           name: '系统消息',
           iconPath: '/static/images/message/SystemmessageI.png',
-          toPath: '/',
+          toPath: '/index/systemNotification',
           msgNum: 0
         }
       ]
