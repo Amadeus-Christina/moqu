@@ -4,10 +4,10 @@
       <div class="msg">陌趣社区黑卡用户最低享受5折起</div>
     </div>
     <div class="silver-card">
-      <div class="card-name">银卡会员</div>
-      <div class="price" v-text="price.silver"></div>
-      <div class="diamond">钻石</div>
-      <div class="buy" @click="showChange(price.silver)">立即购买</div>
+      <div class="card-name silver-card-font">银卡会员</div>
+      <div class="price silver-card-font" v-text="price.silver"></div>
+      <div class="diamond silver-card-font">钻石</div>
+      <div class="buy silver-card-bg" @click="showChange(price.silver)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -142,13 +142,13 @@ export default {
     position: relative;
   }
   .silver-card{
-    background-image: url("/static/images/member/v-card@2x.png");
+    background-image: url("/static/images/member/a-card.png");
   }
   .gold-card{
-    background-image: url("/static/images/member/a-card@2x.png");
+    background-image: url("/static/images/member/a-cardI.png");
   }
   .black-card {
-    background-image: url("/static/images/member/s-card@2x.png");
+    background-image: url("/static/images/member/s-card.png");
   }
   .card-name,
   .diamond{
@@ -213,6 +213,12 @@ export default {
       text-align: center;
       letter-spacing: 2px;
     }
+  }
+  .silver-card-font{
+    color: #848484;
+  }
+  .silver-card-bg {
+    background: linear-gradient(to right, #C3C3C3 , #AAAAAA);
   }
   .black-card-font {
     color: #AFAFAFFF;
