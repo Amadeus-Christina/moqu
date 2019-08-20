@@ -15,7 +15,7 @@ export default {
     return {
       // 本人信息
       userInfo: {
-        ID: 12
+        ID: 13
       },
       // 访问的页面信息
       viewInfo: {
@@ -30,9 +30,16 @@ export default {
         follow: 231,
         followers: 23124,
         lv: 5,
-        profile: '/static/images/mock/01.jpg',
+        profile: '/static/images/mock/03.jpg',
         currentStatus: 1234,
-        totalStatue: 2345
+        totalStatue: 2345,
+        imagesShowIist: [
+          '/static/images/mock/01.jpg',
+          '/static/images/mock/02.jpg',
+          '/static/images/mock/03.jpg',
+          '/static/images/mock/04.jpg',
+          '/static/images/mock/05.jpg'
+        ]
       }
     }
   },

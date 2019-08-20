@@ -36,7 +36,7 @@ export default {
       showView: 'follow',
       followUserInfo: [
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '山鬼',
           anonymousUsername: '九月',
           gender: '男',
@@ -45,7 +45,7 @@ export default {
           isFollower: true
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈龙',
           anonymousUsername: '敖烈',
           gender: '女',
@@ -54,7 +54,7 @@ export default {
           isFollower: false
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈龙',
           anonymousUsername: '敖烈',
           gender: '女',
@@ -63,7 +63,7 @@ export default {
           isFollower: true,
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈龙',
           anonymousUsername: '敖烈',
           gender: '男',
@@ -74,7 +74,7 @@ export default {
       ],
       followerUserInfo: [
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '山鬼',
           anonymousUsername: '九月',
           gender: '男',
@@ -83,7 +83,7 @@ export default {
           isFollower: true
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈龙',
           anonymousUsername: '敖',
           gender: '女',
@@ -92,7 +92,7 @@ export default {
           isFollower: true
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈',
           anonymousUsername: '敖烈',
           gender: '女',
@@ -101,7 +101,7 @@ export default {
           isFollower: true,
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈龙',
           anonymousUsername: '敖烈',
           gender: '男',
@@ -110,7 +110,7 @@ export default {
           isFollower: true,
         },
         {
-          profile: '/static/images/mock/01.jpg',
+          profile: '/static/images/mock/03.jpg',
           username: '烈烈龙',
           anonymousUsername: '敖烈',
           gender: '男',
