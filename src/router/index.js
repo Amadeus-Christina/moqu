@@ -18,6 +18,7 @@ const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/f
 const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/member/index')), 'MemberIndex');
 const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
 const VideoAuthenticationIndex = r => require.ensure([], () => r(require('@/pages/index/video-authentication/index')), 'VideoAuthenticationIndex');
+const Contact = r => require.ensure([], () => r(require('@/pages/index/contact')), 'Contact');
 
 Vue.use(Router)
 
@@ -107,6 +108,11 @@ export default new Router({
           path: 'systemNotification',
           name: 'MessageSystemNotification',
           component: MessageSystemNotification
+        },
+        {
+          path: 'contact',
+          name: 'Contact',
+          component: Contact
         }
       ]
     }

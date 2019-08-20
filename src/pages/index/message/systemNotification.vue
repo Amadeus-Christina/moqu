@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import sysNote from '@/components/system-notification-item'
+import sysNote from '@/components/systemNotificationItem'
 export default {
   components: {
     sysNote
