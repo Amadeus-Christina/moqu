@@ -9,7 +9,7 @@
     <div class="content">
       <div class="cash-out">
         <div class="cash-out-icon"></div>
-        <div class="cash-out-text">提现</div>
+        <div class="cash-out-text" @click="$router.push('/index/cashOut')">提现</div>
       </div>
       <div class="separator">|</div>
       <div class="recharge" @click="$router.push('/index/recharge')">

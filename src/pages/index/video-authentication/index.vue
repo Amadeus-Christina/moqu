@@ -23,7 +23,8 @@
     data() {
       return {
         showPrompt: false,
-        canSubmit: false
+        canSubmit: false,
+        src: ''
       }
     },
     props: {},
@@ -46,6 +47,7 @@
         if(url) {
           videoId.src = url;
           this.showPrompt = true
+          this.src = url
         }
         function getFileURL(file) {
           var getUrl = null;

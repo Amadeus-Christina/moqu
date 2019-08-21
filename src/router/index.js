@@ -19,6 +19,7 @@ const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/membe
 const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
 const VideoAuthenticationIndex = r => require.ensure([], () => r(require('@/pages/index/video-authentication/index')), 'VideoAuthenticationIndex');
 const Contact = r => require.ensure([], () => r(require('@/pages/index/contact')), 'Contact');
+const VehicleCertification = r => require.ensure([], () => r(require('@/pages/index/vehicle-certification/index')), 'VehicleCertification');
 
 Vue.use(Router)
 
@@ -113,6 +114,11 @@ export default new Router({
           path: 'contact',
           name: 'Contact',
           component: Contact
+        },
+        {
+          path: 'vehicle',
+          name: 'VehicleCertification',
+          component: VehicleCertification
         }
       ]
     }
