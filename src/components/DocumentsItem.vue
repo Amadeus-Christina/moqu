@@ -4,6 +4,7 @@
     <div class="img-group">
       <van-uploader
         :after-read="afterRead"
+        :before-delete="beforeDelete"
         v-model="fileList"
         :max-count="1"
       >
@@ -35,6 +36,10 @@ export default {
       // console.log(file);
       this.$set(file,'name',this.item.name)
       this.$emit('add', file)
+    },
+    beforeDelete(file) {
+      this.$emit('deleteUpload', file.name)
+      return true
     }
   },
   mounted () {

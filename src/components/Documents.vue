@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <documents-item v-for="(item,index) in info" :key="index" :item="item" @add="add"/>
+    <documents-item v-for="(item,index) in info" :key="index" :item="item" @add="add" @deleteUpload="deleteUpload"/>
     <div class="sure" @click="showToast">提交</div>
   </div>
 </template>
@@ -64,6 +64,15 @@ export default {
           message: '提交成功\n待审核'
         })
       }
+    },
+    // 在上传列表中删除图片
+    deleteUpload(fileName) {
+      console.log(fileName)
+      console.log('before: ',this.uploadList)
+      this.uploadList = this.uploadList.filter((item) => {
+        return item.name != fileName
+      })
+      console.log('after: ',this.uploadList)
     }
   },
   mounted () {},

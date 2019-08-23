@@ -49,7 +49,7 @@
       <div class="buy-pop">
         <div class="header clear">
           <div class="title">购买会员</div>
-          <div class="close right" @click="showChange()"></div>
+          <div class="close right" @click="showChange(buyMoneyNow, cardTypeIdNow)"></div>
         </div>
         <div class="content">
           <div class="buy-price" v-text="buyMoneyNow"></div>
@@ -87,9 +87,9 @@ export default {
     },
     // 显示支付提示信息
     showToast() {
-      buyCard(this.userID, this.cardTypeId, this.buyMoneyNow).then(res => {
+      buyCard(this.userID, this.cardTypeIdNow, this.buyMoneyNow).then(res => {
         if (res.code == 200) {
-          // console.log(200)
+          console.log(200)
           this.show = false;
           this.$toast.success({
             message: "购买成功",
@@ -106,6 +106,14 @@ export default {
           this.$toast.fail({
             message: "余额不足",
           })
+        }else if(res.code == 10444) {
+          // console.log('请购买更高级的卡')
+          this.show = false;
+          this.$toast.fail({
+            message: "不需要\n重复购买",
+          })
+        } else {
+          this.$toast.fail(res.msg)
         }
       })
     },

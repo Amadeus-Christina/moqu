@@ -1,12 +1,12 @@
 <template>
-  <div class="about-me">
-    <user-info-show :userInfo="userInfo" :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
+  <div class="about-me" v-if="viewInfo">
+    <user-info-show  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
   </div>
 </template>
 <script>
   import userInfoShow from '@/components/UserInfoShow'
   import {myInformation, myAlbum, intercommunication} from "@/api/my/index.js"
-
+  import {mapMutations} from 'vuex'
   export default {
     components: {
       userInfoShow
@@ -16,7 +16,7 @@
     data() {
       return {
         // 本人信息
-        userInfo: {},
+        // userInfo: {},
         // 访问的页面信息
         viewInfo: {},
         // 访问页面的相册信息
@@ -29,6 +29,9 @@
     computed: {},
     watch: {},
     methods: {
+      ...mapMutations([
+        'SET_USER_INFO'
+      ]),
       async getMessage() {
         this.$toast.loading({
           duration: 0,
@@ -37,9 +40,10 @@
           message: "加载中..."
         });
         // 获取本人信息
-        await myInformation(1).then(res => {
+        await myInformation(2).then(res => {
           if (res.code == 200) {
             this.userInfo = res.data
+            this.SET_USER_INFO(res.data)
           } else {
             this.$toast(res.msg)
           }

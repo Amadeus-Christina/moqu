@@ -1,5 +1,5 @@
 <template>
-  <div class="user-info-show">
+  <div class="user-info-show" v-if="userInfo">
     <div class="myPage" v-if="userInfo.userId == viewInfo.userId">
       <div class="backgorund-img blur" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
       <div class="black"></div>
@@ -39,10 +39,10 @@
           <process-bar :currentStatus="viewInfo.experienceNum" :totalStatue="viewInfo.maxExperienceNum"/>
         </div>
         <div class="split-line"></div>
-        <div class="user-info">帐号资料</div>
+        <div class="user-info" @click="$router.push('/index/accountInfo')">帐号资料</div>
       </div>
     </div>
-    <div class="othersPage" v-else>
+    <div class="othersPage" v-else-if="viewInfo.userId">
       <div class="top-right-icon follow" :class="{'gray' : isFollower == true}">
         <div v-if="isFollower == false" @click="addFollow">
           <span class="follow-plus">+</span>
@@ -106,8 +106,11 @@ export default {
     return {
     }
   },
-  props: ['userInfo', 'viewInfo', 'album', 'isFollower'],
+  props: ['viewInfo', 'album', 'isFollower'],
   computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
   },
   watch: {},
   methods: {
