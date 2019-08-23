@@ -3,8 +3,15 @@
     <img class="img" :src="item.logo" alt="">
     <div class="model">{{item.model}}</div>
     <div class="car-number">{{item.area}} · {{item.number}}</div>
-    <div class="btn" :class="{'green': item.buttonStatus === '正在使用'}">{{item.buttonStatus}}</div>
-    <div class="right-top" :class="{'through': item.status === 'through'}"></div>
+    <div class="btn" :class="{'green': index === activeIndex}" @click="$emit('changeActiveIndex',index)">
+      <div v-if="index === activeIndex">正在使用</div>
+      <div v-else-if="item.status === 'through'">点击使用</div>
+      <div v-else-if="item.status === 'wait'">标签待定</div>
+      <div v-else>重新认证</div>
+    </div>
+    <div class="right-top"
+         :class="{'through': item.status === 'through','notThrough': item.status === 'notThrough','wait': item.status === 'wait'}"
+    ></div>
   </div>
 </template>
 <script>
@@ -15,11 +22,12 @@ export default {
   data () {
     return {}
   },
-  props: ['item'],
+  props: ['item','index','activeIndex'],
   computed: {},
   watch: {},
   methods: {},
-  mounted () {},
+  mounted () {
+  },
   created () {},
   filters: {},
   directives: {},
@@ -38,6 +46,7 @@ export default {
     flex-direction: column;
     margin-bottom: 0.4rem;
     margin-left: 0.3rem;
+    position: relative;
     .img{
       height: 1rem;
       width: 1rem;
@@ -71,6 +80,25 @@ export default {
         background: #23D2CD;
         border: none;
         color: #FFFFFF;
+      }
+    }
+    .right-top{
+      width: 1.25rem;
+      height: 0.98rem;
+      background-size: 1.25rem 0.98rem;
+      background-position: center center;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &.through{
+        background-image: url("../../static/images/vehicle/through.png");
+      }
+      &.notThrough{
+        background-image: url("../../static/images/vehicle/Notthrough.png");
+      }
+      &.wait{
+        background-image: url("../../static/images/vehicle/wait.png");
       }
     }
   }

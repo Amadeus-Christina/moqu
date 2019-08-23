@@ -1,22 +1,23 @@
 <template>
   <div class="user-info-show">
-    <div class="myPage" v-if="userInfo.ID == viewInfo.ID">
-      <div class="backgorund-img blur" :style="{backgroundImage: 'url('+viewInfo.profile+')'}"></div>
+    <div class="myPage" v-if="userInfo.userId == viewInfo.userId">
+      <div class="backgorund-img blur" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
+      <div class="black"></div>
       <div class="content">
-        <i class="top-right-icon setting" v-if="userInfo.ID == viewInfo.ID"></i>
+        <i class="top-right-icon setting" v-if="userInfo.userId == viewInfo.userId"></i>
         <div class="main">
           <div class="profile-group">
-            <div class="profile" :style="{backgroundImage: 'url('+viewInfo.profile+')'}"></div>
-            <i class="v-icon" v-if="viewInfo.isVip"></i>
+            <div class="profile" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
+            <i class="v-icon" v-if="viewInfo.whetherMember == 2"></i>
           </div>
-          <div class="username">{{viewInfo.username}}({{viewInfo.anonymousUsername}})</div>
-          <div class="v-info" v-if="viewInfo.isVip">
+          <div class="username">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
+          <div class="v-info" v-if="viewInfo.whetherMember == 2">
             <i class="v-icon-small"></i>
-            {{viewInfo.vipInfo}}
+            {{viewInfo.identity}}
           </div>
           <div class="tag">
-            <div class="gender-tag" :class="{'male' : viewInfo.gender === '男', 'female' : viewInfo.gender === '女'} ">
-              <i class="gender-icon" :class="{'icon-male' : viewInfo.gender === '男', 'icon-female' : viewInfo.gender === '女'} "/>
+            <div class="gender-tag" :class="{'male' : viewInfo.sex == 1, 'female' : viewInfo.sex == 2} ">
+              <i class="gender-icon" :class="{'icon-male' : viewInfo.sex == 1, 'icon-female' : viewInfo.sex == 2} "/>
               <span class="age">{{viewInfo.age}}</span>
             </div>
             <div class="constellation-tag">
@@ -25,43 +26,50 @@
           </div>
           <div class="ff">
             关注
-            <span class="ffNum">{{viewInfo.follow}}</span>
+            <span class="ffNum">{{viewInfo.attention}}</span>
             <span class="split-line">|</span>
             粉丝
-            <span class="ffNum">{{viewInfo.followers}}</span>
+            <span class="ffNum">{{viewInfo.fan}}</span>
           </div>
         </div>
       </div>
-      <div class="lv-wrap" v-if="userInfo.ID == viewInfo.ID">
-        <span class="lv">LV{{viewInfo.lv}}</span>
+      <div class="lv-wrap" v-if="userInfo.userId == viewInfo.userId">
+        <span class="lv">LV{{viewInfo.wealthGrade}}</span>
         <div class="process-bar">
-          <process-bar :currentStatus="viewInfo.currentStatus" :totalStatue="viewInfo.totalStatue"/>
+          <process-bar :currentStatus="viewInfo.experienceNum" :totalStatue="viewInfo.maxExperienceNum"/>
         </div>
         <div class="split-line"></div>
         <div class="user-info">帐号资料</div>
       </div>
     </div>
     <div class="othersPage" v-else>
-      <div class="top-right-icon follow">
-        <span class="follow-plus">+</span>
-        <span class="text-follow">关注</span>
+      <div class="top-right-icon follow" :class="{'gray' : isFollower != true}">
+        <div v-if="isFollower == true">
+          <span class="follow-plus">+</span>
+          <span class="text-not-follow">关注</span>
+        </div>
+        <div v-else>
+          <span class="text-already-follow">已关注</span>
+        </div>
       </div>
-      <van-swipe :autoplay="3000" indicator-color="#FFFFFF">
-        <van-swipe-item v-for="(image, index) in viewInfo.imagesShowIist" :key="index">
-          <div class="backgorund-img" :style="{backgroundImage: 'url('+image+')'}"></div>
-        </van-swipe-item>
-      </van-swipe>
+      <div class="swipe">
+        <van-swipe :autoplay="3000" indicator-color="#FFFFFF">
+          <van-swipe-item v-for="(image, index) in album" :key="index">
+            <div class="backgorund-img" :style="{backgroundImage: 'url('+image+')'}"></div>
+          </van-swipe-item>
+        </van-swipe>
+      </div>
       <div class="main clear">
         <div class="profile-group left">
-          <div class="profile" :style="{backgroundImage: 'url('+viewInfo.profile+')'}"></div>
-          <i class="v-icon" v-if="viewInfo.isVip"></i>
+          <div class="profile" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
+          <i class="v-icon" v-if="viewInfo.whetherMember == 2"></i>
         </div>
         <div class="content left clear">
           <div class="header clear">
-            <div class="username left">{{viewInfo.username}}({{viewInfo.anonymousUsername}})</div>
+            <div class="username left">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
             <div class="tag left">
-              <div class="gender-tag" :class="{'male' : viewInfo.gender === '男', 'female' : viewInfo.gender === '女'} ">
-                <i class="gender-icon" :class="{'icon-male' : viewInfo.gender === '男', 'icon-female' : viewInfo.gender === '女'} "/>
+              <div class="gender-tag" :class="{'male' : viewInfo.sex == 1, 'female' : viewInfo.sex == 2} ">
+                <i class="gender-icon" :class="{'icon-male' : viewInfo.sex == 1, 'icon-female' : viewInfo.sex == 2} "/>
                 <span class="age">{{viewInfo.age}}</span>
               </div>
               <div class="constellation-tag">
@@ -69,16 +77,16 @@
               </div>
             </div>
           </div>
-          <div class="v-info" v-if="viewInfo.isVip">
+          <div class="v-info" v-if="viewInfo.whetherMember == 2">
             <i class="v-icon-small"></i>
-            {{viewInfo.vipInfo}}
+            {{viewInfo.identity}}
           </div>
           <div class="ff">
             关注
-            <span class="ffNum">{{viewInfo.follow}}</span>
+            <span class="ffNum">{{viewInfo.attention}}</span>
             <span class="split-line">|</span>
             粉丝
-            <span class="ffNum">{{viewInfo.followers}}</span>
+            <span class="ffNum">{{viewInfo.fan}}</span>
           </div>
         </div>
       </div>
@@ -97,7 +105,7 @@ export default {
     return {
     }
   },
-  props: ['userInfo','viewInfo'],
+  props: ['userInfo', 'viewInfo', 'album', 'isFollower'],
   computed: {},
   watch: {},
   methods: {},
@@ -119,6 +127,9 @@ export default {
         right: -1.1rem;
         top: 0.4rem;
         &.setting{
+          position: absolute;
+          right: -1.1rem;
+          top: 0.6rem;
           display: inline-block;
           height: 0.4rem;
           width: 0.4rem;
@@ -157,9 +168,17 @@ export default {
         background-position: center center;
         background-size: cover;
         background-repeat: no-repeat;
+        z-index: -5;
         &.blur{
           filter: blur(5px);
         }
+      }
+      .black{
+        height: 6.77rem;
+        background: #000000;
+        opacity:0.4;
+        position: relative;
+        top: -6.77rem;
       }
       .content{
         position: absolute;
@@ -345,6 +364,9 @@ export default {
       }
     }
     .othersPage{
+      .swipe{
+        height: 6.77rem;
+      }
       .backgorund-img {
         height: 6.77rem;
         background-position: center center;
@@ -375,6 +397,9 @@ export default {
           background-color: #23D2CD;
           z-index: 100;
           right: 0.3rem;
+          &.gray{
+            background-color: #BCBCBC;
+          }
           .follow-plus {
             font-size: 0.5rem;
             font-weight: 500;
@@ -383,9 +408,16 @@ export default {
             top: -0.1rem;
             left: 0.1rem;
           }
-          .text-follow {
+          .text-already-follow {
             font-size: 0.24rem;
             color: #ffffff;
+            position: absolute;
+            top: 0.1rem;
+            right: 0.3rem;
+          }
+          .text-not-follow {
+            font-size: 0.24rem;
+            color: #FFFFFF;
             position: absolute;
             top: 0.1rem;
             right: 0.2rem;

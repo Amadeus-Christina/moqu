@@ -1,11 +1,11 @@
 <template>
   <div class="walletItem" :class="{'active': activeIndex === index}" @click="change()">
     <div class="diamond">
-      <div class="diamond-num" v-text="item.diamondNum"></div>
+      <div class="diamond-num" v-text="item.numberOfDiamonds"></div>
       <div class="diamond-icon-gold" v-show="activeIndex === index"></div>
       <div class="diamond-icon" v-show="activeIndex !== index"></div>
     </div>
-    <div class="price">￥{{item.price}}</div>
+    <div class="price">￥{{item.money}}</div>
   </div>
 </template>
 <script>

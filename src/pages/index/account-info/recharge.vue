@@ -2,7 +2,7 @@
   <div class="wallet">
     <wallet-item
       class="wallet-item-group"
-      v-for="(item,index) in wallet"
+      v-for="(item,index) in findPayPlan"
       :key="index" :item="item" :index="index" :activeIndex="activeIndex"
       @changeAmount="changeAmount"
       @changeActiveIndex="changeActiveIndex"
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script>
+  import {findPayPlan} from '@/api/my/index'
   import walletItem from '@/components/WalletItem'
   export default {
     components: {
@@ -68,7 +69,8 @@
             diamondNum: 1000,
             price: 1000
           }
-        ]
+        ],
+        findPayPlan: {}
       }
     },
     props: {},
@@ -93,9 +95,19 @@
           message: "充值成功"
         })
       },
-
+      getData() {
+        findPayPlan().then(res=>{
+          if (res.code == 200){
+            this.findPayPlan = res.data
+            console.log(this.findPayPlan)
+          } else {
+            this.$toast(res.msg)
+          }
+        })
+      }
     },
     mounted() {
+      this.getData()
     },
     created() {
     },
@@ -140,6 +152,7 @@
     }
   }
   .payment-method {
+    width: 5rem;
     font-size: 0.28rem;
     margin: 0.7rem 0 0.3rem 0.3rem;
     .title {

@@ -5,9 +5,9 @@
     </div>
     <div class="silver-card">
       <div class="card-name silver-card-font">银卡会员</div>
-      <div class="price silver-card-font" v-text="price.silver"></div>
+      <div class="price silver-card-font" v-text="findAllMemberCardPrice[0].buyMoney"></div>
       <div class="diamond silver-card-font">钻石</div>
-      <div class="buy silver-card-bg" @click="showChange(price.silver)">立即购买</div>
+      <div class="buy silver-card-bg" @click="showChange(findAllMemberCardPrice[0].buyMoney, cardTypeId = 1)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -19,9 +19,9 @@
     </div>
     <div class="gold-card">
       <div class="card-name">金卡会员</div>
-      <div class="price" v-text="price.gold"></div>
+      <div class="price" v-text="findAllMemberCardPrice[1].buyMoney"></div>
       <div class="diamond">钻石</div>
-      <div class="buy" @click="showChange(price.gold)">立即购买</div>
+      <div class="buy" @click="showChange(findAllMemberCardPrice[1].buyMoney, cardTypeId = 2)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -33,9 +33,9 @@
     </div>
     <div class="black-card">
       <div class="card-name black-card-font">黑卡会员</div>
-      <div class="price black-card-font" v-text="price.black"></div>
+      <div class="price black-card-font" v-text="findAllMemberCardPrice[2].buyMoney"></div>
       <div class="diamond black-card-font">钻石</div>
-      <div class="buy black-card-bg" @click="showChange(price.black)">立即购买</div>
+      <div class="buy black-card-bg" @click="showChange(findAllMemberCardPrice[2].buyMoney, cardTypeId = 3)">立即购买</div>
     </div>
     <div class="rights">
       <div class="icon"></div>
@@ -49,10 +49,10 @@
       <div class="buy-pop">
         <div class="header clear">
           <div class="title">购买会员</div>
-          <div class="close right" @click="showChange(priceNow)"></div>
+          <div class="close right" @click="showChange()"></div>
         </div>
         <div class="content">
-          <div class="buy-price" v-text="priceNow"></div>
+          <div class="buy-price" v-text="buyMoneyNow"></div>
           <i class="diamond-icon"></i>
           <div class="confirm" @click="showToast">确定</div>
         </div>
@@ -61,19 +61,18 @@
   </div>
 </template>
 <script>
+import {findAllMemberCardPrice,buyCard} from '@/api/my/index.js'
 export default {
   components: {},
   mixins: [],
   name: '',
   data () {
     return {
+      userID: 2,
       show: false,
-      price: {
-        silver: 1999,
-        gold: 2999,
-        black: 4999
-      },
-      priceNow: 1999
+      buyMoneyNow: 1999,
+      cardTypeIdNow: 1,
+      findAllMemberCardPrice:{}
     }
   },
   props: {},
@@ -81,23 +80,50 @@ export default {
   watch: {},
   methods: {
     // 弹出/关闭弹窗
-    showChange(data = 1999) {
+    showChange(buyMoney, cardTypeId) {
       this.show = !this.show;
-      this.priceNow = data
+      this.buyMoneyNow = buyMoney
+      this.cardTypeIdNow = cardTypeId
     },
     // 显示支付提示信息
     showToast() {
-      this.showChange()
-      this.$toast.success({
-        message: "购买成功",
+      buyCard(this.userID, this.cardTypeId, this.buyMoneyNow).then(res => {
+        if (res.code == 200) {
+          // console.log(200)
+          this.show = false;
+          this.$toast.success({
+            message: "购买成功",
+          })
+        } else if(res.code == 10002){
+          // console.log('数据不能为空')
+          this.show = false;
+          this.$toast.fail({
+            message: "数据不能为空",
+          })
+        } else if(res.code == 10888) {
+          // console.log('余额不足')
+          this.show = false;
+          this.$toast.fail({
+            message: "余额不足",
+          })
+        }
       })
-      // this.$toast.fail({
-      //   message: "钻石不足",
-      // })
+    },
+    getMessage() {
+      findAllMemberCardPrice().then(res=>{
+        if (res.code == 200) {
+          this.findAllMemberCardPrice = res.data
+        } else {
+          this.$toast(res.msg)
+        }
+      })
     }
   },
-  mounted () {},
-  created () {},
+  mounted () {
+  },
+  created () {
+    this.getMessage()
+  },
   filters: {},
   directives: {},
   beforeDestroy () {},
