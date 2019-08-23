@@ -49,3 +49,21 @@ export function intercommunication(userId, beAttentionUserId) {
   }
   return axios.post(url, data)
 }
+
+export function addAttention(userId, followedId) {
+  const url = "/api/user/addAttention"
+  const data = {
+    userId,
+    followedId
+  }
+  return axios.post(url, data)
+}
+
+export function cancelAttention(userId, followedId) {
+  const url = "/api/user/cancelAttention"
+  const data = {
+    userId,
+    followedId
+  }
+  return axios.post(url, data)
+}

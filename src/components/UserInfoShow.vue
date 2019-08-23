@@ -43,12 +43,12 @@
       </div>
     </div>
     <div class="othersPage" v-else>
-      <div class="top-right-icon follow" :class="{'gray' : isFollower != true}">
-        <div v-if="isFollower == true">
+      <div class="top-right-icon follow" :class="{'gray' : isFollower == true}">
+        <div v-if="isFollower == false" @click="addFollow">
           <span class="follow-plus">+</span>
           <span class="text-not-follow">关注</span>
         </div>
-        <div v-else>
+        <div v-else @click="cancelFollow">
           <span class="text-already-follow">已关注</span>
         </div>
       </div>
@@ -95,6 +95,7 @@
 </template>
 <script>
 import processBar from '@/components/ProgressBar'
+import {addAttention, cancelAttention} from "@/api/my/index.js"
 export default {
   components: {
     processBar
@@ -106,10 +107,38 @@ export default {
     }
   },
   props: ['userInfo', 'viewInfo', 'album', 'isFollower'],
-  computed: {},
+  computed: {
+  },
   watch: {},
-  methods: {},
-  mounted () {},
+  methods: {
+    //添加关注
+    addFollow(){
+      addAttention(this.userInfo.userId, this.viewInfo.userId).then(res => {
+        if (res.code == 200) {
+          // console.log('添加关注成功')
+          this.$emit('changeIsFollower',true)
+        } else {
+          this.$toast(res.msg)
+        }
+      })
+    },
+
+    // 取消关注
+    cancelFollow(){
+      cancelAttention(this.userInfo.userId, this.viewInfo.userId).then(res => {
+        if (res.code == 200) {
+          // console.log('取消关注成功')
+          this.$emit('changeIsFollower',false)
+        } else {
+          this.$toast(res.msg)
+        }
+      })
+    }
+
+
+  },
+  mounted () {
+  },
   created () {},
   filters: {},
   directives: {},
