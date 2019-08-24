@@ -1,15 +1,15 @@
 <template>
   <div class="about-me" v-if="viewInfo">
-    <user-info-show  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
+    <user-info-show-new  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
   </div>
 </template>
 <script>
-  import userInfoShow from '@/components/UserInfoShow'
+  import userInfoShowNew from '@/components/UserInfoShowNew'
   import {myInformation, myAlbum, intercommunication} from "@/api/my/index.js"
   import {mapMutations} from 'vuex'
   export default {
     components: {
-      userInfoShow
+      userInfoShowNew
     },
     mixins: [],
     name: '',
@@ -40,7 +40,7 @@
           message: "加载中..."
         });
         // 获取本人信息
-        await myInformation(2).then(res => {
+        await myInformation(1).then(res => {
           if (res.code == 200) {
             this.userInfo = res.data
             this.SET_USER_INFO(res.data)

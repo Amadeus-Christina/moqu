@@ -2,29 +2,35 @@
   <div class="message-item-group">
     <div class="blank" v-if="messageInfo == undefined || messageInfo.length <=0 ">
       <div class="container">
-        <img class="container-img" src="/static/images/message/nocontent.png" alt="无评论"/>
+        <img class="container-img" src="../../static/images/message/nocontent.png" alt="无评论"/>
         <div class="text">还没有消息哦～</div>
       </div>
     </div>
     <div class="message-item" v-else v-for="(item,index) in messageInfo" :key="index">
       <div class="photo">
-        <img class="photo-img" :src="item.profilePicture" alt="头像">
+        <img v-if="isWishpers" class="photo-img" src="../../static/images/message/Headportrait.png">
+        <img v-else class="photo-img" :src="item.head_img || item.user.headImg">
       </div>
       <div class="content-main">
         <div class="content-header">
-          <div class="username">{{item.username}}({{item.anonymousUsername}})</div>
-          <div class="usernameTail">{{item.usernameTail}}</div>
+          <div class="username" v-if="isWishpers">悄悄地</div>
+          <div class="username" v-else>{{item.real_nick_name || item.user.realNickName}}({{item.anonymous  || item.user.value}})</div>
+          <div class="usernameTail">  {{usernameTail}}
+            <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '1'">帖子</span>
+            <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '2'">评论</span>
+          </div>
         </div>
         <div class="content-middle">
-          <div class="content-middle-comment" v-if="item.usernameTail === '回复了我的评论'">
+          <div class="content-middle-comment" v-if="usernameTail === '回复了我的评论'">
             回复
-            <span class="atName">@{{item.atName}}</span>
-            {{item.content}}
+            <span class="atName">@{{item.real_nick_name2}}</span>
+            {{item.reply_text || item.reply.replyText}}
           </div>
-          <div class="content-middle-good" v-if="item.usernameTail === '点赞了我的评论'">
-            {{item.content}}
+          <div class="content-middle-good" v-if="usernameTail === '点赞了我的'">
+            <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '1'">{{item.post.postText}}</span>
+            <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '2'">{{item.reply.replyText}}</span>
           </div>
-          <div class="content-middle-at-me clear" v-if="item.usernameTail === '在帖子中@了我'">
+          <div class="content-middle-at-me clear" v-if="usernameTail === '在帖子中@了我'">
             <img class="content-img left" :src="item.contentImg" alt="帖子图片">
             <div class="content-middle-right left">
               <div class="atMyName">@{{item.myUsername}}({{item.myAnonymousUsername}})</div>
@@ -33,8 +39,8 @@
           </div>
         </div>
         <div class="content-footer">
-          {{item.time}}
-          <span v-if="item.usernameTail === '回复了我的评论'">
+          {{item.time || item.time3 || item.user.time2}}
+          <span v-if="usernameTail === '回复了我的评论'">
             <i class="icon"></i>
             回复
           </span>
@@ -49,9 +55,10 @@ export default {
   mixins: [],
   name: '',
   data () {
-    return {}
+    return {
+    }
   },
-  props: ['messageInfo'],
+  props: ['messageInfo','usernameTail','isWishpers'],
   computed: {},
   watch: {},
   methods: {},
@@ -112,6 +119,7 @@ export default {
       font-family:PingFangSC-Medium;
       .username{
         color: #323232;
+        margin-right: 0.1rem;
       }
       .usernameTail{
         color: #B5B5B5;

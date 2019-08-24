@@ -1,9 +1,12 @@
 <template>
   <div class="">
-    <item-list :itemInfo="messageItemList" />
+    <item-list :itemInfo="messageItemList"/>
   </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
+import {myInformation} from "@/api/my/index.js"
+import {queryAllMessage} from "@/api/message/index.js"
 import itemList from '@/components/ItemList'
 export default {
   components: {
@@ -30,13 +33,13 @@ export default {
           name: '收到的赞',
           iconPath: '/static/images/message/goodII.png',
           toPath: '/index/good',
-          msgNum: 102
+          msgNum: 0
         },
         {
           name: '悄悄话',
           iconPath: '/static/images/message/whispersI.png',
-          toPath: '/',
-          msgNum: 3
+          toPath: '/index/wishpers',
+          msgNum: 0
         },
         {
           name: '系统消息',
@@ -50,8 +53,43 @@ export default {
   props: {},
   computed: {},
   watch: {},
-  methods: {},
-  mounted () {},
+  methods: {
+    ...mapMutations([
+      'SET_USER_INFO'
+    ]),
+    async getMyInfo () {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+        // loadingType: "spinner",
+        message: "加载中..."
+      });
+      // 获取本人信息
+      await myInformation(1).then(res => {
+        if (res.code == 200) {
+          this.SET_USER_INFO(res.data)
+        } else {
+          this.$toast(res.msg)
+        }
+      })
+
+      await queryAllMessage(this.$store.state.userInfo.userId).then(res => {
+        if (res.code == 200) {
+          this.messageItemList[0].msgNum = res.data.commentCount
+          this.messageItemList[1].msgNum = res.data.liftUpCount
+          this.messageItemList[2].msgNum = res.data.likeCount
+          this.messageItemList[3].msgNum = res.data.whisperCount
+          this.messageItemList[4].msgNum = res.data.systemCount
+        } else {
+          this.$toast(res.msg)
+        }
+      })
+      this.$toast.clear();
+    }
+  },
+  mounted () {
+    this.getMyInfo()
+  },
   created () {},
   filters: {},
   directives: {},

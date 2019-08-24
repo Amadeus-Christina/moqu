@@ -68,11 +68,9 @@ export default {
     // 在上传列表中删除图片
     deleteUpload(fileName) {
       console.log(fileName)
-      console.log('before: ',this.uploadList)
       this.uploadList = this.uploadList.filter((item) => {
         return item.name != fileName
       })
-      console.log('after: ',this.uploadList)
     }
   },
   mounted () {},

@@ -7,6 +7,7 @@ const MessageIndex = r => require.ensure([], () => r(require('@/pages/index/mess
 const MessageComment = r => require.ensure([], () => r(require('@/pages/index/message/comment')), 'MessageComment');
 const MessageAtMe = r => require.ensure([], () => r(require('@/pages/index/message/atMe')), 'MessageAtMe');
 const MessageGood = r => require.ensure([], () => r(require('@/pages/index/message/good')), 'MessageGood');
+const MessageWishpers = r => require.ensure([], () => r(require('@/pages/index/message/wishpers')), 'MessageWishpers');
 const MessageSystemNotification = r => require.ensure([], () => r(require('@/pages/index/message/systemNotification')), 'MessageSystemNotification');
 const AboutMeIndex = r => require.ensure([], () => r(require('@/pages/index/about-me/index')), 'AboutMeIndex');
 const AccountInfoIndex = r => require.ensure([], () => r(require('@/pages/index/account-info/index')), 'AccountInfoIndex');
@@ -119,6 +120,11 @@ export default new Router({
           path: 'vehicle',
           name: 'VehicleCertification',
           component: VehicleCertification
+        },
+        {
+          path: 'wishpers',
+          name: 'MessageWishpers',
+          component: MessageWishpers
         }
       ]
     }

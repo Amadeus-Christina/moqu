@@ -1,10 +1,10 @@
 <template>
-  <div class="comment-group">
-    <message-item :messageInfo="message" :usernameTail="usernameTail"/>
+  <div class="wishpers-group">
+    <message-item :messageInfo="message" :usernameTail="usernameTail" :isWishpers="true"/>
   </div>
 </template>
 <script>
-import {queryCommentsMyComments} from '@/api/message/index.js'
+import {queryMyWishpers} from '@/api/message/index.js'
 import messageItem from '@/components/MessageItem.vue'
 export default {
   components: {
@@ -42,11 +42,12 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // 获取评论
-    getComment() {
-      queryCommentsMyComments(this.$store.state.userInfo.userId).then(res => {
+    // 获取悄悄话信息
+    getWishpers() {
+      queryMyWishpers(this.$store.state.userInfo.userId).then(res => {
         if (res.code == 200) {
           this.message = res.data
+          console.log(res.data)
         } else {
           this.$toast(res.msg)
         }
@@ -54,7 +55,7 @@ export default {
     }
   },
   mounted () {
-    this.getComment()
+    this.getWishpers()
   },
   created () {},
   filters: {},
