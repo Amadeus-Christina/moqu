@@ -6,9 +6,9 @@ import router from './router'
 import store from './vuex'
 
 import {
-  Tabbar, TabbarItem, Popup, Toast, Uploader, Button, Swipe, SwipeItem, Lazyload
+  Tabbar, TabbarItem, Popup, Toast, Uploader, Button, Swipe, SwipeItem, Lazyload, Checkbox, CheckboxGroup
 } from 'vant'
-Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast).use(Uploader).use(Button).use(Swipe).use(SwipeItem).use(Lazyload);
+Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast).use(Uploader).use(Button).use(Swipe).use(SwipeItem).use(Lazyload).use(Checkbox).use(CheckboxGroup);
 
 Vue.config.productionTip = false
 

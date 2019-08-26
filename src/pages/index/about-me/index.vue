@@ -40,7 +40,7 @@
           message: "加载中..."
         });
         // 获取本人信息
-        await myInformation(1).then(res => {
+        await myInformation(2).then(res => {
           if (res.code == 200) {
             this.userInfo = res.data
             this.SET_USER_INFO(res.data)
@@ -53,6 +53,7 @@
         await myInformation(2).then(res => {
           if (res.code == 200) {
             this.viewInfo = res.data
+            console.log(res.data)
           } else {
             this.$toast(res.msg)
           }

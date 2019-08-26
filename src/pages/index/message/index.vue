@@ -75,6 +75,7 @@ export default {
 
       await queryAllMessage(this.$store.state.userInfo.userId).then(res => {
         if (res.code == 200) {
+          console.log(res.data)
           this.messageItemList[0].msgNum = res.data.commentCount
           this.messageItemList[1].msgNum = res.data.liftUpCount
           this.messageItemList[2].msgNum = res.data.likeCount

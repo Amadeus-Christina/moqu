@@ -10,7 +10,7 @@
           <div class="prompt" v-if="showPrompt">点击更改视频</div>
         </label>
       </div>
-      <input type="submit" class="sure" @click="showToast" :disabled=!canSubmit>
+      <input type="submit" class="sure" @click="showToast" :disabled=!canSubmit :class="">
 <!--      <div class="sure">确认</div>-->
     </form>
   </div>

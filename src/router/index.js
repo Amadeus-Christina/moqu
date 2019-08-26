@@ -10,6 +10,7 @@ const MessageGood = r => require.ensure([], () => r(require('@/pages/index/messa
 const MessageWishpers = r => require.ensure([], () => r(require('@/pages/index/message/wishpers')), 'MessageWishpers');
 const MessageSystemNotification = r => require.ensure([], () => r(require('@/pages/index/message/systemNotification')), 'MessageSystemNotification');
 const AboutMeIndex = r => require.ensure([], () => r(require('@/pages/index/about-me/index')), 'AboutMeIndex');
+const AboutMeCoverImage = r => require.ensure([], () => r(require('@/pages/index/about-me/cover-image')), 'AboutMeCoverImage');
 const AccountInfoIndex = r => require.ensure([], () => r(require('@/pages/index/account-info/index')), 'AccountInfoIndex');
 const AccountInfoSetting = r => require.ensure([], () => r(require('@/pages/index/account-info/setting')), 'AccountInfoSetting');
 const AccountInfoRecharge = r => require.ensure([], () => r(require('@/pages/index/account-info/recharge')), 'AccountInfoRecharge');
@@ -125,6 +126,11 @@ export default new Router({
           path: 'wishpers',
           name: 'MessageWishpers',
           component: MessageWishpers
+        },
+        {
+          path: 'coverImage',
+          name: 'AboutMeCoverImage',
+          component: AboutMeCoverImage
         }
       ]
     }
