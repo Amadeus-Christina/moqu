@@ -3,7 +3,7 @@
     <div class="message-item clear" v-for="(item,index) in itemInfo" :key="index" >
       <div @click="$router.push(item.toPath)">
         <i class="icon">
-          <img class="icon-img" :src="item.iconPath" alt="图标">
+          <img class="icon-img" :src="item.iconPath" alt="图标" v-if="item.iconPath">
         </i>
         <span class="item-name">{{item.name}}</span>
         <div class="right clear right-part">
@@ -46,8 +46,8 @@ export default {
       margin: 0 0.3rem;
       .icon-img {
         max-width: 0.4rem;
+        max-height: 0.4rem;
         vertical-align: middle;
-        display: inline-block;
       }
     }
     .message-item {
@@ -58,8 +58,13 @@ export default {
       color: #5C5C5C;
       font-family: PingFangSC-Regular;
       font-weight: 400;
+      position: relative;
       background-color: #ffffff;
       border-bottom: 0.01rem solid #F5F5F5;
+      .item-name{
+        position: absolute;
+        left: 1rem;
+      }
       .right-part{
         width: 1.6rem;
       }

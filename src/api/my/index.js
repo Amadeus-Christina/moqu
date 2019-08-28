@@ -67,3 +67,46 @@ export function cancelAttention(userId, followedId) {
   }
   return axios.post(url, data)
 }
+
+export function videoAuthentication(videoUrl, userId, imgUrl) {
+  const url = "/api/identityAuthentication/videoAuthentication"
+  const data = {
+    videoUrl,
+    userId,
+    imgUrl
+  }
+  return axios.post(url, data)
+}
+
+
+export function uploadWordImg(file) {
+  const url = "/admin/adminUpload/uploadWordImg"
+  const data = {
+    file
+  }
+  return axios.post(url, data)
+}
+
+export function updateCoverImage(userId, coverImage) {
+  const url = "/api/user/updateCoverImage"
+  const data = {
+    userId,
+    coverImage
+  }
+  return axios.post(url, data)
+}
+
+export function upload(that,file) {
+
+  const uploadUrl = `${that.$webUrl}/admin/adminUpload/upload`
+  return axios({
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+    url: uploadUrl,
+    data: file
+  });
+}
+
+

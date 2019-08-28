@@ -1,9 +1,11 @@
 <template>
-  <div class="user-info-show">
+  <div class="user-info-show" v-if="userInfo">
 <!--  设置按钮  -->
     <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon setting"></i>
-<!--  上传封面按钮  -->
+<!--    上传封面按钮  -->
     <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon picture" @click="showPopup"></i>
+<!--  查看关注/粉丝按钮  -->
+    <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon attention" @click="$router.push('/index/followList')"></i>
 <!--  关注按钮  -->
     <div v-else class="top-right-icon follow" :class="{'gray' : isFollower == true}">
       <div v-if="isFollower == false" @click="addFollow">
@@ -17,9 +19,16 @@
 <!--  轮播图  -->
     <div class="swipe">
       <van-swipe :autoplay="3000" indicator-color="#FFFFFF">
-        <van-swipe-item v-for="(image, index) in viewInfo.coverImageList" :key="index">
-          <div class="backgorund-img" :style="{backgroundImage: 'url('+image+')'}"></div>
-        </van-swipe-item>
+        <div v-if="viewInfo.coverImageList.length > 0 && viewInfo.coverImage">
+          <van-swipe-item v-for="(image, index) in viewInfo.coverImageList" :key="index">
+            <div class="backgorund-img" :style="{backgroundImage: 'url('+image+')'}"></div>
+          </van-swipe-item>
+        </div>
+        <div v-else>
+          <van-swipe-item>
+            <div class="backgorund-img default-img"></div>
+          </van-swipe-item>
+        </div>
       </van-swipe>
     </div>
 <!--  头像  -->
@@ -103,7 +112,8 @@ export default {
   name: '',
   data () {
     return {
-      show: false
+      show: false,
+      blank: []
     }
   },
   props: ['viewInfo', 'album', 'isFollower'],
@@ -182,6 +192,18 @@ export default {
         background-size: 0.5rem 0.5rem;
         background-repeat: no-repeat;
       }
+      &.attention{
+        display: block;
+        position: absolute;
+        right: 0.3rem;
+        top: 1.9rem;
+        height: 0.5rem;
+        width: 0.5rem;
+        background-image: url("/static/images/about-me/Focuson.png");
+        background-position: center center;
+        background-size: 0.5rem 0.5rem;
+        background-repeat: no-repeat;
+      }
       &.follow {
         display: inline-block;
         height: 0.5rem;
@@ -226,6 +248,9 @@ export default {
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;
+      &.default-img{
+        background-image: url("/static/images/about-me/Mask.png");
+      }
     }
     .profile{
       width: 1.6rem;

@@ -35,91 +35,6 @@ export default {
   data () {
     return {
       showView: 'follow',
-      // followUserInfo: [
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '山鬼',
-      //     anonymousUsername: '九月',
-      //     gender: '男',
-      //     age: 20,
-      //     following: true,
-      //     isFollower: true
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈龙',
-      //     anonymousUsername: '敖烈',
-      //     gender: '女',
-      //     age: 21,
-      //     following: true,
-      //     isFollower: false
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈龙',
-      //     anonymousUsername: '敖烈',
-      //     gender: '女',
-      //     age: 22,
-      //     following: true,
-      //     isFollower: true,
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈龙',
-      //     anonymousUsername: '敖烈',
-      //     gender: '男',
-      //     age: 20,
-      //     following: true,
-      //     isFollower: false,
-      //   }
-      // ],
-      // followerUserInfo: [
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '山鬼',
-      //     anonymousUsername: '九月',
-      //     gender: '男',
-      //     age: 24,
-      //     following: true,
-      //     isFollower: true
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈龙',
-      //     anonymousUsername: '敖',
-      //     gender: '女',
-      //     age: 27,
-      //     following: false,
-      //     isFollower: true
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈',
-      //     anonymousUsername: '敖烈',
-      //     gender: '女',
-      //     age: 27,
-      //     following: true,
-      //     isFollower: true,
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈龙',
-      //     anonymousUsername: '敖烈',
-      //     gender: '男',
-      //     age: 20,
-      //     following: true,
-      //     isFollower: true,
-      //   },
-      //   {
-      //     profile: '/static/images/mock/03.jpg',
-      //     username: '烈烈龙',
-      //     anonymousUsername: '敖烈',
-      //     gender: '男',
-      //     age: 20,
-      //     following: false,
-      //     isFollower: true,
-      //   }
-      // ],
       attentionList: [],
       fansList:[]
     }
@@ -131,6 +46,8 @@ export default {
     // 更改展示的页面
     show (data) {
       this.showView = data
+      this.getAttention()
+      this.getFans()
     },
     // 获取关注列表
     getAttention() {

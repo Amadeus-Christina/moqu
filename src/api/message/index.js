@@ -31,3 +31,11 @@ export function queryMyWishpers(userId) {
   }
   return axios.post(url, data)
 }
+
+export function queryMySystemInfo(userId) {
+  const url = "/api/post/queryMySystemInfo"
+  const data = {
+    userId
+  }
+  return axios.post(url, data)
+}

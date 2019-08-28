@@ -19,9 +19,12 @@ const AccountInfoCashOut = r => require.ensure([], () => r(require('@/pages/inde
 const FollowListIndex = r => require.ensure([], () => r(require('@/pages/index/follow-list/index')), 'FollowListIndex');
 const MemberIndex = r => require.ensure([], () => r(require('@/pages/index/member/index')), 'MemberIndex');
 const DiscoverIndex = r => require.ensure([], () => r(require('@/pages/index/discover/index')), 'DiscoverIndex');
-const VideoAuthenticationIndex = r => require.ensure([], () => r(require('@/pages/index/video-authentication/index')), 'VideoAuthenticationIndex');
+const Authentication = r => require.ensure([], () => r(require('@/pages/index/authentication/index')), 'Authentication');
+const VideoAuthentication = r => require.ensure([], () => r(require('@/pages/index/authentication/video')), 'VideoAuthentication');
 const Contact = r => require.ensure([], () => r(require('@/pages/index/contact')), 'Contact');
-const VehicleCertification = r => require.ensure([], () => r(require('@/pages/index/vehicle-certification/index')), 'VehicleCertification');
+const VehicleAuthentication = r => require.ensure([], () => r(require('@/pages/index/authentication/vehicle')), 'VehicleAuthentication');
+const PhoneAuthentication = r => require.ensure([], () => r(require('@/pages/index/account-info/phone')), 'PhoneAuthentication');
+const SunriseIndex = r => require.ensure([], () => r(require('@/pages/index/sunrise/index')), 'SunriseIndex');
 
 Vue.use(Router)
 
@@ -99,8 +102,8 @@ export default new Router({
         },
         {
           path: 'videoAuthentication',
-          name: 'VideoAuthenticationIndex',
-          component: VideoAuthenticationIndex
+          name: 'VideoAuthentication',
+          component: VideoAuthentication
         },
         {
           path: 'cashOut',
@@ -118,9 +121,9 @@ export default new Router({
           component: Contact
         },
         {
-          path: 'vehicle',
-          name: 'VehicleCertification',
-          component: VehicleCertification
+          path: 'vehicleAuthentication',
+          name: 'VehicleAuthentication',
+          component: VehicleAuthentication
         },
         {
           path: 'wishpers',
@@ -131,6 +134,21 @@ export default new Router({
           path: 'coverImage',
           name: 'AboutMeCoverImage',
           component: AboutMeCoverImage
+        },
+        {
+          path: 'authentication',
+          name: 'Authentication',
+          component: Authentication
+        },
+        {
+          path: 'phoneAuthentication',
+          name: 'PhoneAuthentication',
+          component: PhoneAuthentication
+        },
+        {
+          path: 'sunrise',
+          name: 'SunriseIndex',
+          component: SunriseIndex
         }
       ]
     }

@@ -5,7 +5,7 @@
 </template>
 <script>
   import userInfoShowNew from '@/components/UserInfoShowNew'
-  import {myInformation, myAlbum, intercommunication} from "@/api/my/index.js"
+  import {myInformation, intercommunication} from "@/api/my/index.js"
   import {mapMutations} from 'vuex'
   export default {
     components: {
@@ -40,7 +40,7 @@
           message: "加载中..."
         });
         // 获取本人信息
-        await myInformation(2).then(res => {
+        await myInformation(1).then(res => {
           if (res.code == 200) {
             this.userInfo = res.data
             this.SET_USER_INFO(res.data)
@@ -50,7 +50,7 @@
         })
 
         // 获取访问页面人信息
-        await myInformation(2).then(res => {
+        await myInformation(1).then(res => {
           if (res.code == 200) {
             this.viewInfo = res.data
             console.log(res.data)
@@ -59,29 +59,22 @@
           }
         })
 
-        // 获取访问页面的相册
-        await myAlbum(this.viewInfo.userId).then(res => {
-          if (res.code == 200) {
-            this.album = res.data
-          } else {
-            this.$toast(res.msg)
-          }
-        })
-
-        // 获取两个用户之间的关注关系，参数（本人用户编号， 访问页面人的编号）
-        await intercommunication(this.userInfo.userId, this.viewInfo.userId).then(res => {
-          if (res.code == 200) {
-            if (res.data == 0){
-              this.isFollower = true
-              // console.log(res.data, '已关注')
+        if (this.userInfo.userId != this.viewInfo.userId){
+          // 获取两个用户之间的关注关系，参数（本人用户编号， 访问页面人的编号）
+          await intercommunication(this.userInfo.userId, this.viewInfo.userId).then(res => {
+            if (res.code == 200) {
+              if (res.data == 0){
+                this.isFollower = true
+                // console.log(res.data, '已关注')
+              } else {
+                this.isFollower = false
+                // console.log(res.data, '未关注')
+              }
             } else {
-              this.isFollower = false
-              // console.log(res.data, '未关注')
+              this.$toast(res.msg)
             }
-          } else {
-            this.$toast(res.msg)
-          }
-        })
+          })
+        }
         this.$toast.clear();
       },
 

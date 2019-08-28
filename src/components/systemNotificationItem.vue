@@ -1,9 +1,9 @@
 <template>
-  <div class="">
+  <div class="sys-note">
     <div class="sys-note-group" v-for="(item, index) in msg" :key="index">
-      <div class="title">{{item.title}}</div>
-      <div class="content">{{item.content}}</div>
-      <div class="time">{{item.time}}</div>
+      <div class="title">{{item.systemInfomationTitle}}</div>
+      <div class="content">{{item.systemInfomation}}</div>
+      <div class="time">{{item.timeDifference}}</div>
     </div>
   </div>
 </template>
@@ -28,6 +28,9 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .sys-note{
+    margin-bottom: 2rem;
+  }
   .sys-note-group{
     border-bottom: 1px solid #F5F5F5;
     padding: 0.3rem;

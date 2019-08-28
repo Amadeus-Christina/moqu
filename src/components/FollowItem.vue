@@ -1,14 +1,15 @@
 <template>
   <div class="follow-item">
     <div class="container">
-      <div class="profile" :style="{backgroundImage: 'url('+followUserInfo.profile+')'}"></div>
-      <div class="username">{{followUserInfo.username}}({{followUserInfo.anonymousUsername}})</div>
-      <div class="gender-tag" :class="{'male' : followUserInfo.gender === '男', 'female' : followUserInfo.gender === '女'} ">
-        <i class="gender-icon" :class="{'icon-male' : followUserInfo.gender === '男', 'icon-female' : followUserInfo.gender === '女'} "/>
+      <div class="profile" :style="{backgroundImage: 'url('+followUserInfo.headImg+')'}"></div>
+      <div class="username">{{followUserInfo.realNickName}}({{followUserInfo.anonymous}})</div>
+      <div class="gender-tag" :class="{'male' : followUserInfo.sex === '1', 'female' : followUserInfo.sex === '2'} ">
+        <i class="gender-icon" :class="{'icon-male' : followUserInfo.sex === '1', 'icon-female' : followUserInfo.sex === '2'} "/>
         <span class="age">{{followUserInfo.age}}</span>
       </div>
       <div class="follow-button">
-        <follow-button :following="followUserInfo.following" :isFollower="followUserInfo.isFollower" :showView="showView"/>
+<!--        <follow-button :following="followUserInfo.following" :isFollower="followUserInfo.isFollower" :showView="showView"/>-->
+        <follow-button :itemUserId="followUserInfo.userId" :showView="showView"/>
       </div>
     </div>
   </div>

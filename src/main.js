@@ -6,12 +6,12 @@ import router from './router'
 import store from './vuex'
 
 import {
-  Tabbar, TabbarItem, Popup, Toast, Uploader, Button, Swipe, SwipeItem, Lazyload, Checkbox, CheckboxGroup
+  Tabbar, TabbarItem, Popup, Toast, Uploader, Button, Swipe, SwipeItem, Lazyload, Checkbox, CheckboxGroup, Image
 } from 'vant'
-Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast).use(Uploader).use(Button).use(Swipe).use(SwipeItem).use(Lazyload).use(Checkbox).use(CheckboxGroup);
+Vue.use(Tabbar).use(TabbarItem).use(Popup).use(Toast).use(Uploader).use(Button).use(Swipe).use(SwipeItem).use(Lazyload).use(Checkbox).use(CheckboxGroup).use(Image);
 
 Vue.config.productionTip = false
-
+Vue.prototype.$webUrl = 'https://lvyou.shouwangs.com'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

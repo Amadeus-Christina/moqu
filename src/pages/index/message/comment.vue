@@ -15,27 +15,7 @@ export default {
   data () {
     return {
       usernameTail: '回复了我的评论',
-      message: null,
-      // messageInfo: [
-      //   {
-      //     profilePicture: '/static/images/message/Anonymouscomments.png',
-      //     username: '山鬼',
-      //     anonymousUsername: '九月',
-      //     usernameTail: '回复了我的评论',
-      //     atName: '烈烈龙',
-      //     content: '大兄弟很稳的',
-      //     time: '1小时前'
-      //   },
-      //   {
-      //     profilePicture: '/static/images/message/Anonymouscomments.png',
-      //     username: '摸鱼',
-      //     anonymousUsername: '七月',
-      //     usernameTail: '回复了我的评论',
-      //     atName: '烈烈龙',
-      //     content: '大兄弟很不稳',
-      //     time: '2小时前'
-      //   }
-      // ],
+      message: null
     }
   },
   props: {},
@@ -47,6 +27,7 @@ export default {
       queryCommentsMyComments(this.$store.state.userInfo.userId).then(res => {
         if (res.code == 200) {
           this.message = res.data
+          console.log('msg', res.data)
         } else {
           this.$toast(res.msg)
         }

@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
+import {myInformation} from "@/api/my/index.js"
 import itemList from '@/components/ItemList'
 export default {
   components: {
@@ -17,7 +19,7 @@ export default {
         {
           name: '身份认证',
           iconPath: '/static/images/account-info/certification.png',
-          toPath: '/',
+          toPath: '/index/authentication',
         },
         {
           name: '我的会员',
@@ -30,9 +32,14 @@ export default {
           toPath: '/index/wallet',
         },
         {
-          name: '日出联盟招募',
+          name: '手机认证',
+          iconPath: '/static/images/account-info/Mobilephone.png',
+          toPath: '/index/phoneAuthentication',
+        },
+        {
+          name: '日出联盟',
           iconPath: '/static/images/account-info/recruiting.png',
-          toPath: '/',
+          toPath: '/index/sunrise',
         }
       ]
     }
@@ -40,8 +47,30 @@ export default {
   props: {},
   computed: {},
   watch: {},
-  methods: {},
-  mounted () {},
+  methods: {
+    ...mapMutations([
+      'SET_USER_INFO'
+    ]),
+    async getMyInfo () {
+      this.$toast.loading({
+        duration: 0,
+        forbidClick: true,
+        message: "加载中..."
+      });
+      // 获取本人信息
+      await myInformation(2).then(res => {
+        if (res.code == 200) {
+          this.SET_USER_INFO(res.data)
+        } else {
+          this.$toast(res.msg)
+        }
+      })
+      this.$toast.clear();
+    }
+  },
+  mounted () {
+    this.getMyInfo()
+  },
   created () {},
   filters: {},
   directives: {},

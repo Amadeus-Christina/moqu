@@ -1,21 +1,20 @@
 <template>
   <div class="video-authentication-blank">
     <div class="text">请上传一段15秒以上的自我介绍视频：</div>
-    <form action="">
-      <div class="video">
-        <label id="labelr" class="pop_file" for="pop_video">
-          <video id="videoId" autoplay muted loop></video>
-          <input style="display: none;" id="pop_video" type="file" accept="audio/mp4,video/mp4"
-                 v-on:change="uploadFile($event)" name="fileTrans" ref="file" value=""/>
-          <div class="prompt" v-if="showPrompt">点击更改视频</div>
-        </label>
-      </div>
-      <input type="submit" class="sure" @click="showToast" :disabled=!canSubmit :class="">
-<!--      <div class="sure">确认</div>-->
-    </form>
+    <div class="video">
+      <label id="labelr" class="pop_file" for="pop_video">
+        <video id="videoId" autoplay muted loop></video>
+        <input style="display: none;" id="pop_video" type="file" accept="audio/mp4,video/mp4"
+               v-on:change="uploadFile($event)" name="fileTrans" ref="file" value=""/>
+        <div class="prompt" v-if="showPrompt">点击更改视频</div>
+      </label>
+    </div>
+    <div class="sure" @click="showToast" :disabled=!canSubmit :class="{'gray': canSubmit == false}">确认</div>
   </div>
 </template>
 <script>
+  import {videoAuthentication, uploadWordImg} from '@/api/my/index.js'
+  import { upload } from "@/api/index/index.js";
   export default {
     components: {},
     mixins: [],
@@ -24,21 +23,46 @@
       return {
         showPrompt: false,
         canSubmit: false,
-        src: ''
+        src: '',
+        formData:null,
+        video: '',
+        picture: ''
       }
     },
     props: {},
     computed: {},
     watch: {},
     methods: {
-      // 显示提示信息
+      upFile(that, formData) {
+        return new Promise(resolve => {
+          that.$toast.loading({
+            duration: 0,
+            forbidClick: true,
+            loadingType: "spinner",
+            message: "加载中..."
+          });
+          upload(that, formData).then(res => {
+            if (res.data.code == 0) {
+              this.video = res.data.msg.split(',')[0]
+              this.picture = res.data.msg.split(',')[1]
+              // 视频认证申请
+              videoAuthentication(this.video, this.$store.state.userInfo.userId, this.picture)
+              that.$toast.clear();
+            }
+          });
+        });
+      },
+
+      // 点击提交按钮
       showToast() {
         if (this.$data.canSubmit) {
+          this.upFile(this,this.formData)
           this.$toast.success({
             message: "提交成功\n待审核",
           })
         }
       },
+      // 上传文件
       uploadFile(ev){
         var that = this;
         var filesId = document.getElementById('pop_video');
@@ -71,7 +95,14 @@
                 message: "视频长度不能少于15秒",
               })
             }else{
+              // 视频上传操作
               that.$data.canSubmit = true
+              let formData = new FormData();
+              formData.append("file", filesId.files[0], "file_" + Date.parse(new Date()) + ".mp4");
+              that.formData = formData
+              // that.upFile(that,formData).then(res => {
+              //   console.log('upFile-res',res)f
+              // })
             }
           }
           else {
@@ -159,6 +190,10 @@
       align-items: center;
       position: absolute;
       bottom: 2rem;
+      &.gray{
+        background: #E3E3E3;
+        box-shadow: 0 0;
+      }
     }
   }
 </style>

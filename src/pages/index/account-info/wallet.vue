@@ -26,11 +26,14 @@ export default {
   name: '',
   data () {
     return {
-      amount: 50000
     }
   },
   props: {},
-  computed: {},
+  computed: {
+    amount(){
+      return this.$store.state.userInfo.numberOfDiamonds
+    }
+  },
   watch: {},
   methods: {},
   mounted () {},
