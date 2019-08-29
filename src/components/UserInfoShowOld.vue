@@ -33,10 +33,50 @@
     </div>
 <!--  头像  -->
     <div class="profile" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
-<!--    页面信息展示-->
-    <div class="page">
+<!--    本人页面展示-->
+    <div class="my-page" v-if="userInfo.userId == viewInfo.userId">
+      <div class="tag">
+        <div class="gender-tag" :class="{'male' : viewInfo.sex == 1, 'female' : viewInfo.sex == 2} ">
+          <i class="gender-icon" :class="{'icon-male' : viewInfo.sex == 1, 'icon-female' : viewInfo.sex == 2} "/>
+          <span class="age">{{viewInfo.age}}</span>
+        </div>
+        <div class="constellation-tag">
+          {{viewInfo.constellation}}
+        </div>
+      </div>
+      <div class="account-info-btn">帐号资料</div>
+      <div class="blank"></div>
       <div class="username">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
-      <constellation-icon/>
+      <progress-bar
+        :currentStatus="viewInfo.experienceNum"
+        :totalStatue="viewInfo.maxExperienceNum"
+        :lv="viewInfo.wealthGrade"
+      />
+    </div>
+<!--    他人页面展示-->
+    <div class="others-page" v-else>
+      <div class="username">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
+      <div class="tag">
+        <div class="gender-tag" :class="{'male' : viewInfo.sex == 1, 'female' : viewInfo.sex == 2} ">
+          <i class="gender-icon" :class="{'icon-male' : viewInfo.sex == 1, 'icon-female' : viewInfo.sex == 2} "/>
+          <span class="age">{{viewInfo.age}}</span>
+        </div>
+        <div class="constellation-tag">
+          {{viewInfo.constellation}}
+        </div>
+      </div>
+    </div>
+<!--    勋章-->
+    <div class="medal" v-if="viewInfo.whetherMember == 2 || viewInfo.medalVos">
+      <div class="v-info" v-if="viewInfo.whetherMember == 2">
+        <i class="v-icon-small"></i>
+        {{viewInfo.identity}}
+      </div>
+      <medal class="medal-item"
+           v-for="(item, index) in viewInfo.medalVos"
+           :key="index"
+           :item="item"
+      ></medal>
     </div>
 <!--    个人简介-->
     <div class="person-information">{{viewInfo.personInformation}}</div>
@@ -60,11 +100,13 @@
   </div>
 </template>
 <script>
+import progressBar from '@/components/ProgressBarNew'
+import Medal from '@/components/Medal'
 import {addAttention, cancelAttention} from "@/api/my/index.js"
-import constellationIcon from '@/components/ConstellationIcon'
 export default {
   components: {
-    constellationIcon
+    progressBar,
+    Medal
   },
   mixins: [],
   name: '',
@@ -223,7 +265,88 @@ export default {
       top: 5.97rem;
       left: 0.3rem;
     }
-    .page{
+    .my-page{
+      .tag {
+         color: #ffffff;
+         font-size: 0.24rem;
+         text-align: center;
+         margin-left: -0.7rem;
+         position: relative;
+         top: 0.35rem;
+         .gender-tag {
+           display: inline-block;
+           /*margin: 0 auto;*/
+           height: 0.4rem;
+           width: 1rem;
+           border-radius: 0.2rem;
+           position: relative;
+           vertical-align: middle;
+           &.male{
+             background-color: #41CAC0;
+           }
+           &.female {
+             background-color: #FF648F;
+           }
+           .gender-icon {
+             display: inline-block;
+             width: 0.25rem;
+             height: 0.25rem;
+             background-size: 0.25rem 0.25rem;
+             background-repeat: no-repeat;
+             vertical-align: middle;
+             line-height: 0.25rem;
+             /*position: absolute;*/
+             &.icon-male{
+               background-image: url("/static/images/about-me/male.png");
+             }
+             &.icon-female {
+               background-image: url("/static/images/about-me/female.png");
+             }
+           }
+           .age {
+             vertical-align: middle;
+           }
+         }
+         .constellation-tag {
+           display: inline-block;
+           /*margin: 0 auto;*/
+           height: 0.4rem;
+           width: 1rem;
+           border-radius: 0.2rem;
+           position: relative;
+           vertical-align: middle;
+           text-align: center;
+           background-color: #FFC824;
+           margin-left: 0.3rem;
+           line-height: 0.4rem;
+         }
+       }
+      .account-info-btn{
+        width: 1.55rem;
+        height: 0.6rem;
+        border:1px solid #0BCEE5;
+        border-radius: 0.07rem;
+        text-align: center;
+        line-height: 0.6rem;
+        color: #02C9EF;
+        font-size: 0.28rem;
+        position: absolute;
+        right: 0.2rem;
+        top: 6.9rem;
+      }
+      .blank{
+        /*height: 0.6rem;*/
+      }
+      .username {
+        font-size: 0.32rem;
+        color: #41CAC0;
+        display: inline-block;
+        margin-left: 0.3rem;
+        vertical-align: bottom;
+        font-weight: 600;
+      }
+    }
+    .others-page{
       position: relative;
       .username {
         display: inline;
@@ -235,6 +358,82 @@ export default {
         left: 2.1rem;
         position: absolute;
         top: 0.2rem;
+      }
+      .tag {
+        color: #ffffff;
+        font-size: 0.24rem;
+        position: relative;
+        top: 0.25rem;
+        left: 5rem;
+        .gender-tag {
+          text-align: center;
+          display: inline-block;
+          margin: 0 auto;
+          height: 0.4rem;
+          width: 1rem;
+          border-radius: 0.2rem;
+          position: relative;
+          vertical-align: middle;
+          &.male{
+            background-color: #41CAC0;
+          }
+          &.female {
+            background-color: #FF648F;
+          }
+          .gender-icon {
+            display: inline-block;
+            width: 0.25rem;
+            height: 0.25rem;
+            background-size: 0.25rem 0.25rem;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            line-height: 0.25rem;
+            /*position: absolute;*/
+            &.icon-male{
+              background-image: url("/static/images/about-me/male.png");
+            }
+            &.icon-female {
+              background-image: url("/static/images/about-me/female.png");
+            }
+          }
+          .age {
+            vertical-align: middle;
+          }
+        }
+        .constellation-tag {
+          display: inline-block;
+          /*margin: 0 auto;*/
+          height: 0.4rem;
+          width: 1rem;
+          border-radius: 0.2rem;
+          position: relative;
+          vertical-align: middle;
+          text-align: center;
+          background-color: #FFC824;
+          margin-left: 0.2rem;
+          line-height: 0.4rem;
+        }
+      }
+    }
+    .medal{
+      /*display: inline-block;*/
+      font-size: 0.24rem;
+      color: #5C5C5C;
+      margin-bottom: 0.3rem;
+      .v-info {
+        display: inline-block;
+        color: #5C5C5C;
+        padding: 0.3rem 0 0 0.3rem;
+        .v-icon-small{
+          display: inline-block;
+          width: 0.28rem;
+          height: 0.28rem;
+          background-image: url("/static/images/about-me/vip.png");
+          background-size: 0.25rem 0.25rem;
+          background-repeat: no-repeat;
+          position: relative;
+          vertical-align: middle;
+        }
       }
     }
     .person-information{
