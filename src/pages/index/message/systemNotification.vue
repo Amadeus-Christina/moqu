@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <sys-note :msg="message"/>
+  <div class="sys-msg fillcontain">
+    <sys-note :msg="message" class="fillcontain"/>
   </div>
 </template>
 <script>
@@ -41,4 +41,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .sys-msg{
+    background: #F7F7F7;
+  }
 </style>

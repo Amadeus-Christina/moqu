@@ -1,6 +1,5 @@
 <template>
-  <div class="constellation-icon">
-
+  <div class="constellation-icon" :style="{backgroundImage: 'url('+showUrl[0].url+')'}">
   </div>
 </template>
 <script>
@@ -63,7 +62,13 @@ export default {
     }
   },
   props: ['constellation'],
-  computed: {},
+  computed: {
+    showUrl () {
+      return this.constellationGroup.filter( item => {
+        return item.name == this.constellation
+      })
+    }
+  },
   watch: {},
   methods: {},
   mounted () {},
@@ -75,4 +80,13 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .constellation-icon{
+    height: 0.4rem;
+    width: 0.4rem;
+    border-radius: 0.2rem;
+    margin-left: 0.2rem;
+    background-size: 0.4rem 0.4rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
 </style>

@@ -1,8 +1,11 @@
 <template>
-  <div class="container">
-    <img class="container-img" src="/static/images/message/nocontent.png" alt="无数据"/>
-    <div class="text">{{message}}</div>
+  <div class="wrap fillcontain">
+    <div class="container">
+      <img class="container-img" src="/static/images/message/nocontent.png" alt="无数据"/>
+      <div class="text">{{message}}</div>
+    </div>
   </div>
+
 </template>
 <script>
 export default {
@@ -25,6 +28,9 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .wrap{
+    background: #F7F7F7;
+  }
   .container{
     height: 3rem;
     width: 2.5rem;

@@ -1,5 +1,5 @@
 <template>
-  <div class="message-goods-group">
+  <div class="goods-group fillcontain">
     <message-item :messageInfo="message" :usernameTail="usernameTail"/>
   </div>
 </template>
@@ -66,4 +66,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .goods-group{
+    background: #F7F7F7;
+  }
 </style>

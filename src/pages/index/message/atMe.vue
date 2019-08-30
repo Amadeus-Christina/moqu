@@ -1,5 +1,5 @@
 <template>
-  <div class="at-me-group">
+  <div class="at-me-group fillcontain">
     <message-item :messageInfo="messageInfo"/>
   </div>
 </template>
@@ -52,4 +52,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .at-me-group{
+    background: #F7F7F7;
+  }
 </style>

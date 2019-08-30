@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="message fillcontain">
     <item-list :itemInfo="messageItemList"/>
   </div>
 </template>
@@ -99,4 +99,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .message{
+    background: #F7F7F7;
+  }
 </style>

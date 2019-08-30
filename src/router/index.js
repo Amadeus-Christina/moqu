@@ -26,6 +26,7 @@ const VehicleAuthentication = r => require.ensure([], () => r(require('@/pages/i
 const PhoneAuthentication = r => require.ensure([], () => r(require('@/pages/index/account-info/phone')), 'PhoneAuthentication');
 const SunriseIndex = r => require.ensure([], () => r(require('@/pages/index/sunrise/index')), 'SunriseIndex');
 const SunriseLearnMore = r => require.ensure([], () => r(require('@/pages/index/sunrise/learnMore')), 'SunriseLearnMore');
+const SunriseRecruit = r => require.ensure([], () => r(require('@/pages/index/sunrise/recruit')), 'SunriseRecruit');
 
 Vue.use(Router)
 
@@ -155,6 +156,11 @@ export default new Router({
           path: 'sunriseLearnMore',
           name: 'SunriseLearnMore',
           component: SunriseLearnMore
+        },
+        {
+          path: 'sunriseRecruit',
+          name: 'SunriseRecruit',
+          component: SunriseRecruit
         }
       ]
     }

@@ -1,5 +1,5 @@
 <template>
-  <div class="wishpers-group">
+  <div class="wishpers-group fillcontain">
     <message-item :messageInfo="message" :usernameTail="usernameTail" :isWishpers="true"/>
   </div>
 </template>
@@ -65,4 +65,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .wishpers-group{
+    background: #F7F7F7;
+  }
 </style>

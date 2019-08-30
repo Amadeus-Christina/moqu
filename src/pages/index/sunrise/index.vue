@@ -10,7 +10,7 @@
     />
     <div class="name">{{mock.realNickName}}({{mock.anonymous}})</div>
     <div class="invite-code" >
-      <div class="" v-if="mock.lv != 0">专属邀请码：{{mock.inviteCode}}</div>
+<!--      <div class="" v-if="mock.lv != 0">专属邀请码：{{mock.inviteCode}}</div>-->
     </div>
     <div class="cobber" v-if="mock.lv != 0">
       <div class="title">

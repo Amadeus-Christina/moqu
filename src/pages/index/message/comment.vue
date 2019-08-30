@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-group">
+  <div class="comment-group fillcontain">
     <message-item :messageInfo="message" :usernameTail="usernameTail"/>
   </div>
 </template>
@@ -45,4 +45,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .comment-group{
+    background: #F7F7F7;
+  }
 </style>

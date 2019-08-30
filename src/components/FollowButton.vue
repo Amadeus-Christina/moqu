@@ -1,10 +1,10 @@
 <template>
   <div class="follow-button" :class="{ 'green' :  (showView == 'follower') && (following == false)}">
-    <span v-if = 'following === true' @click="cancelFollow">取消关注</span>
-    <span v-else @click="addFollow">
+    <span v-if = 'following != true' @click="addFollow">
         <span class="plus">+</span>
         <span class="text-not-follow">关注</span>
     </span>
+    <span v-else @click="cancelFollow">取消关注</span>
   </div>
 </template>
 <script>
@@ -15,7 +15,7 @@ export default {
   name: '',
   data () {
     return {
-      following: true
+      following: false
     }
   },
   props: ["showView",'itemUserId'],

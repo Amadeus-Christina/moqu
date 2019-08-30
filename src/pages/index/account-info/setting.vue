@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="setting">
     <item-list :itemInfo="accountInfoSettingItemList" />
     <button class="sure logout">退出登录</button>
   </div>
@@ -36,8 +36,16 @@ export default {
 }
 </script>
 <style scoped lang="less">
-  .logout {
-    position: relative;
-    top: 4.74rem;
+  .setting{
+    height: 100%;
+    width: 100%;
+    background: #F7F7F7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .logout {
+      margin-bottom: 1.7rem;
+    }
   }
+
 </style>

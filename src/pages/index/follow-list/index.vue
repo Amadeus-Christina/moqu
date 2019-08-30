@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="fillcontain">
     <follow-title @show="show"/>
     <div v-if="attentionList !== undefined && attentionList.length > 0 ">
       <div v-if="showView ===  'follow'" class="follow-group" v-for="(item,index) in attentionList" :key="index">
@@ -84,4 +84,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .fillcontain{
+    background: #F7F7F7;
+  }
 </style>

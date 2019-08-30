@@ -1,7 +1,7 @@
 <template>
   <div class="user-info-show" v-if="userInfo">
 <!--  设置按钮  -->
-    <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon setting"></i>
+    <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon setting" @click="$router.push('/index/accountSetting')"></i>
 <!--    上传封面按钮  -->
     <i v-if="userInfo.userId == viewInfo.userId" class="top-right-icon picture" @click="showPopup"></i>
 <!--  查看关注/粉丝按钮  -->
@@ -32,21 +32,64 @@
       </van-swipe>
     </div>
 <!--  头像  -->
-    <div class="profile" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}"></div>
+    <div class="profile" :style="{backgroundImage: 'url('+viewInfo.headImg+')'}">
+      <i class="v-icon" v-if="viewInfo.identity != ''"></i>
+    </div>
 <!--    页面信息展示-->
     <div class="page">
-      <div class="username">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
-      <constellation-icon/>
+      <div class="group">
+        <div class="username">{{viewInfo.realNickName}}({{viewInfo.anonymous}})</div>
+        <div class="grade">LV{{viewInfo.grade}}</div>
+        <div class="gender" :class="{'male' : viewInfo.sex == 1, 'female' : viewInfo.sex == 2} ">
+          <i class="gender-icon" :class="{'icon-male' : viewInfo.sex == 1, 'icon-female' : viewInfo.sex == 2} "/>
+        </div>
+        <constellation-icon :constellation="viewInfo.constellation"/>
+      </div>
+    </div>
+    <div class="blank"></div>
+<!--    身份标识-->
+    <div class="identity">
+      <div class="vip" v-if="viewInfo.identity != ''">
+        <div class="vip-icon"></div>
+        {{viewInfo.identity}}
+      </div>
+      <div class="card silver" v-if="viewInfo.cardTypeId == 1">
+        <div class="icon"></div>
+        银卡会员
+      </div>
+      <div class="card gold" v-else-if="viewInfo.cardTypeId == 2">
+        <div class="icon"></div>
+        金卡会员
+      </div>
+      <div class="card black" v-else-if="viewInfo.cardTypeId == 3">
+        <div class="icon"></div>
+        黑卡高级会员
+      </div>
+      <div class="wealth-grade" v-if="viewInfo.wealthGrade != 0">
+        <div class="icon"></div>
+        <div class="right-part">LV{{viewInfo.wealthGrade}}</div>
+      </div>
+      <div class="video-authentication"></div>
+    </div>
+<!--    车辆信息-->
+    <div class="vehicle-group">
+      <div class="vehicle" v-for="(item, index) in vehicleGroup" :key="index">
+        <div class="logo" :style="{backgroundImage: 'url(' + item.logo + ')'}"></div>
+        {{item.brand}}{{item.model}} &nbsp; 车主
+      </div>
     </div>
 <!--    个人简介-->
     <div class="person-information">{{viewInfo.personInformation}}</div>
-<!--  follow & follower  -->
-    <div class="ff">
-      关注
-      <span class="ffNum">{{viewInfo.attention}}</span>
-      <span class="split-line">|</span>
-      粉丝
-      <span class="ffNum">{{viewInfo.fan}}</span>
+    <div class="footer">
+      <!--  follow & follower  -->
+      <div class="ff">
+        关注
+        <span class="ffNum">{{viewInfo.attention}}</span>
+        <span class="split-line">|</span>
+        粉丝
+        <span class="ffNum">{{viewInfo.fan}}</span>
+      </div>
+      <div class="account-info-btn" @click="$router.push('/index/accountInfo')" v-if="userInfo.userId == viewInfo.userId">帐号资料</div>
     </div>
 <!--    更改封面弹出层-->
     <van-popup
@@ -71,7 +114,19 @@ export default {
   data () {
     return {
       show: false,
-      blank: []
+      blank: [],
+      vehicleGroup:[
+        {
+          logo: '/static/images/vehicle/Lamborghini.png',
+          brand: '兰博基尼',
+          model: 'Reventon'
+        },
+        {
+          logo: '/static/images/vehicle/falali.png',
+          brand: '法拉利',
+          model: 'Enzo'
+        }
+      ]
     }
   },
   props: ['viewInfo', 'album', 'isFollower'],
@@ -222,43 +277,267 @@ export default {
       position: absolute;
       top: 5.97rem;
       left: 0.3rem;
+      .v-icon {
+        display: inline-block;
+        width: 0.36rem;
+        height: 0.36rem;
+        background-image: url("/static/images/about-me/vip.png");
+        background-size: 0.36rem 0.36rem;
+        background-repeat: no-repeat;
+        position: absolute;
+        right: 0;
+        top: 1.1rem;
+      }
     }
     .page{
       position: relative;
+      .group{
+        width: 5.4rem;
+        height: 1rem;
+        position: absolute;
+        left: 2.1rem;
+        display: flex;
+        padding-top: 0.2rem;
+      }
       .username {
-        display: inline;
         font-size: 0.32rem;
         color: #41CAC0;
         display: inline-block;
         vertical-align: bottom;
         font-weight: 600;
-        left: 2.1rem;
-        position: absolute;
-        top: 0.2rem;
+      }
+      .grade{
+        width: 0.7rem;
+        height: 0.4rem;
+        background-color: #23D2CD;
+        color: #FFFFFF;
+        border-radius: 0.2rem;
+        font-size: 0.24rem;
+        text-align: center;
+        line-height: 0.4rem;
+        margin-left: 0.2rem;
+      }
+      .sex{
+        width: 0.4rem;
+        height: 0.4rem;
+        background-position: center;
+        background-size: 0.4rem 0.4rem;
+        background-repeat: no-repeat;
+      }
+      .gender {
+        height: 0.4rem;
+        width: 0.4rem;
+        border-radius: 0.2rem;
+        vertical-align: middle;
+        display: flex;
+        margin-left: 0.2rem;
+        &.male{
+          background-color: #41CAC0;
+        }
+        &.female {
+          background-color: #FF648F;
+        }
+        .gender-icon {
+          width: 0.4rem;
+          height: 0.4rem;
+          background-size: 0.25rem 0.25rem;
+          background-repeat: no-repeat;
+          background-position: center center;
+          line-height: 0.25rem;
+          justify-content: center;
+          &.icon-male{
+            background-image: url("/static/images/about-me/male.png");
+          }
+          &.icon-female {
+            background-image: url("/static/images/about-me/female.png");
+          }
+        }
+      }
+    }
+    .blank{
+      height: 1rem;
+    }
+    .identity{
+      display: flex;
+      margin-left: 0.4rem;
+      margin-bottom: 0.3rem;
+      .vip{
+        height: 0.4rem;
+        background-color: #FFC824;
+        color: #ffffff;
+        border-radius: 0.07rem;
+        font-size: 0.24rem;
+        line-height: 0.4rem;
+        padding-left: 0.4rem;
+        padding-right: 0.15rem;
+        position: relative;
+        margin-right: 0.45rem;
+        .vip-icon{
+          width: 0.4rem;
+          height: 0.4rem;
+          background-position: center;
+          background-size: 0.42rem 0.42rem;
+          background-repeat: no-repeat;
+          background-image: url("/static/images/about-me/vip.png");
+          position: absolute;
+          left: -0.1rem;
+        }
+      }
+      .card{
+        height: 0.4rem;
+        width: 2.1rem;
+        color: #FFFFFF;
+        font-size: 0.24rem;
+        display: flex;
+        border-radius: 0.07rem;
+        position: relative;
+        margin-right: 0.3rem;
+        &.silver {
+          padding-left: 0.4rem;
+          width: 1.56rem;
+          height: 0.4rem;
+          line-height: 0.4rem;
+          background: linear-gradient(to right, #E6E6E6,#A9A9A9);
+          .icon{
+            width: 0.44rem;
+            height: 0.39rem;
+            background-image: url("/static/images/about-me/1.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            left: -0.17rem;
+          }
+        }
+        &.gold {
+          padding-left: 0.4rem;
+          width: 1.56rem;
+          height: 0.4rem;
+          line-height: 0.4rem;
+          background: linear-gradient(to right, #BEA482,#AD8755);
+          .icon{
+            width: 0.44rem;
+            height: 0.39rem;
+            background-image: url("/static/images/about-me/2.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            left: -0.17rem;
+          }
+        }
+        &.black {
+          padding-left: 0.3rem;
+          width: 1.83rem;
+          height: 0.4rem;
+          line-height: 0.4rem;
+          background: linear-gradient(to right, #787878,#2F2F2F);
+          .icon{
+            width: 0.44rem;
+            height: 0.39rem;
+            background-image: url("/static/images/about-me/3.png");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            left: -0.17rem;
+          }
+        }
+      }
+      .wealth-grade{
+        height: 0.4rem;
+        border: 1px solid #FFB624;
+        border-radius: 0.2rem;
+        font-size: 0.24rem;
+        color: #FFFFFF;
+        display: flex;
+        margin-right: 0.3rem;
+        .icon{
+          width: 0.4rem;
+          height: 0.4rem;
+          background-image: url("/static/images/about-me/crown.png");
+          background-position: center;
+          background-size: 0.28rem 0.28rem;
+          background-repeat: no-repeat;
+        }
+        .right-part{
+          height: 0.38rem;
+          line-height: 0.4rem;
+          background: #FFB624;
+          border-radius: 0 0.2rem 0.2rem 0;
+          padding: 0 0.1rem;
+        }
+      }
+      .video-authentication{
+        height: 0.4rem;
+        width: 0.4rem;
+        background-image: url("/static/images/about-me/Videoauthentication.png");
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-right: 0.3rem;
+      }
+    }
+    .vehicle-group{
+      display: flex;
+      flex-direction: column;
+      margin-left: 0.3rem;
+      .vehicle{
+        display: flex;
+        height: 0.4rem;
+        line-height: 0.4rem;
+        font-size: 0.24rem;
+        color: #5C5C5C;
+        margin-bottom: 0.2rem;
+        .logo{
+          height: 0.4rem;
+          width: 0.4rem;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          margin-right: 0.3rem;
+        }
       }
     }
     .person-information{
+      width: 6rem;
       margin-left: 0.3rem;
-      margin-bottom: 0.3rem;
-      height: 0.3rem;
+      margin-bottom: 0.2rem;
       font-size: 0.24rem;
       color: #5C5C5C;
     }
-    .ff{
-      margin-left: 0.3rem;
-      font-family:PingFang-SC-Medium;
-      color: #5C5C5CFF;
-      font-size: 0.28rem;
-      font-weight:500;
-      .split-line{
-        font-size: 0.4rem;
-        margin-right: 0.1rem;
+    .footer{
+      display: flex;
+      height: 0.6rem;
+      .ff{
+        margin-left: 0.3rem;
+        font-family:PingFang-SC-Medium;
+        color: #5C5C5CFF;
+        font-size: 0.28rem;
+        font-weight:500;
+        .split-line{
+          font-size: 0.4rem;
+          margin-right: 0.1rem;
+        }
+        .ffNum {
+          margin: 0 0.1rem;
+          font-size: 0.36rem;
+        }
       }
-      .ffNum {
-        margin: 0 0.1rem;
-        font-size: 0.36rem;
+      .account-info-btn{
+        width: 1.55rem;
+        height: 0.6rem;
+        border:1px solid #41CAC0;
+        border-radius: 0.07rem;
+        text-align: center;
+        line-height: 0.6rem;
+        color: #41CAC0;
+        font-size: 0.28rem;
+        position: absolute;
+        right: 0.2rem;
       }
     }
+
     .upload{
       margin: 0 auto;
       width: 7.1rem;
