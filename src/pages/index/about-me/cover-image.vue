@@ -15,7 +15,7 @@
                     id="uppic"
                     accept="image/gif,image/jpeg,image/jpg,image/png"
                     class="uppic"
-                    v-on:change="uploadFile($event)"
+                    v-on:change="upload($event)"
             >
             上传封面
         </div>
@@ -31,7 +31,7 @@
 <script>
   import axios from 'axios'
   import {updateCoverImage} from '@/api/my/index.js'
-  import {upload} from '@/api/index/index.js'
+  import {uploadFile} from '@/api/index/index.js'
 
   export default {
     components: {},
@@ -90,43 +90,37 @@
         filesId.click()
       },
       // 上传文件
-      uploadFile(ev) {
+      upload(ev) {
         let file = document.getElementById("uppic").files[0]
         // 上传操作
         console.log(file)
         let formData = new FormData();
         formData.append("file", file, "file_" + Date.parse(new Date()) + ".jpg");
-        // const uploadUrl = `${this.$webUrl}/admin/adminUpload/uploadWordImg`
+
+        // const uploadUrl = `${this.$webUrl}/admin/adminUpload/upload`
         // axios({
         //   method: 'post',
         //   headers: {
         //     'Content-Type': 'multipart/form-data'
         //   },
         //   url: uploadUrl,
-        //   data: formData,
-        //   success(res) {
-        //     console.log(res);
-        //   }
+        //   data: formData
+        // }).then(res=>{
+        //   console.log(res);
         // })
-        this.upload(this,formData).then(res => {
-          console.log('res',res)
+
+        uploadFile(this,formData).then(res => {
+          this.imgData.push(res.data.data)
+          if (this.remain.length == 0) {
+            this.remain += res.data.data
+          } else {
+            this.remain += ',' + res.data.data
+          }
+          updateCoverImage(this.$store.state.userInfo.userId, this.remain).then(res => {
+            console.log(res)
+          })
         })
-      },
-      upFile(that, formData) {
-        return new Promise(resolve => {
-          that.$toast.loading({
-            duration: 0,
-            forbidClick: true,
-            message: "加载中..."
-          });
-          upload(formData).then(res => {
-            if (res) {
-              console.log(res)
-              that.$toast.clear();
-            }
-          });
-        });
-      },
+      }
     },
     mounted() {
       this.getData()

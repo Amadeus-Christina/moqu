@@ -12,8 +12,8 @@ export function uploadImg(that,file) {
   });
 }
 
-export function upload(that,file) {
-  const uploadUrl = `${this.$webUrl}/admin/adminUpload/upload`
+export function uploadFile(that,file) {
+  const uploadUrl = `${that.$webUrl}/admin/adminUpload/upload`
   return axios({
     method: 'post',
     headers: {
