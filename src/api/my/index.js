@@ -96,17 +96,5 @@ export function updateCoverImage(userId, coverImage) {
   return axios.post(url, data)
 }
 
-export function upload(that,file) {
-
-  const uploadUrl = `${that.$webUrl}/admin/adminUpload/upload`
-  return axios({
-    method: 'post',
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    },
-    url: uploadUrl,
-    data: file
-  });
-}
 
 

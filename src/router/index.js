@@ -24,6 +24,7 @@ const VideoAuthentication = r => require.ensure([], () => r(require('@/pages/ind
 const Contact = r => require.ensure([], () => r(require('@/pages/index/contact')), 'Contact');
 const VehicleAuthentication = r => require.ensure([], () => r(require('@/pages/index/authentication/vehicle')), 'VehicleAuthentication');
 const PhoneAuthentication = r => require.ensure([], () => r(require('@/pages/index/account-info/phone')), 'PhoneAuthentication');
+const IDAuthentication = r => require.ensure([], () => r(require('@/pages/index/authentication/ID')), 'IDAuthentication');
 const SunriseIndex = r => require.ensure([], () => r(require('@/pages/index/sunrise/index')), 'SunriseIndex');
 const SunriseLearnMore = r => require.ensure([], () => r(require('@/pages/index/sunrise/learnMore')), 'SunriseLearnMore');
 const SunriseRecruit = r => require.ensure([], () => r(require('@/pages/index/sunrise/recruit')), 'SunriseRecruit');
@@ -161,6 +162,11 @@ export default new Router({
           path: 'sunriseRecruit',
           name: 'SunriseRecruit',
           component: SunriseRecruit
+        },
+        {
+          path: 'IDAuthentication',
+          name: 'IDAuthentication',
+          component: IDAuthentication
         }
       ]
     }

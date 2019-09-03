@@ -17,7 +17,7 @@
           {
             name: '身份认证',
             // iconPath: '/static/images/message/replyI.png',
-            toPath: '/',
+            toPath: '/index/IDAuthentication',
           },
           {
             name: '视频认证',

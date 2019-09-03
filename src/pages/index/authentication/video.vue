@@ -14,7 +14,7 @@
 </template>
 <script>
   import {videoAuthentication, uploadWordImg} from '@/api/my/index.js'
-  import { upload } from "@/api/index/index.js";
+  import { uploadImg } from "@/api/index/index.js";
   export default {
     components: {},
     mixins: [],
@@ -41,7 +41,7 @@
             loadingType: "spinner",
             message: "加载中..."
           });
-          upload(that, formData).then(res => {
+          uploadImg(that, formData).then(res => {
             if (res.data.code == 0) {
               this.video = res.data.msg.split(',')[0]
               this.picture = res.data.msg.split(',')[1]

@@ -51,7 +51,7 @@ export default {
         height: 0.8rem;
         border: 1px solid #B5B5B5;
         border-radius: 0.18rem;
-        margin: 0.3rem auto 0.3rem;
+        margin: 0.3rem auto;
         padding-left: 0.3rem;
       }
       .code{
@@ -83,6 +83,8 @@ export default {
         color: #323232;
         font-size: 0.28rem;
         margin: 0.5rem auto;
+        margin-top: 0;
+        padding-top: 0.5rem;
       }
       .phoneNum{
         color: #323232;
