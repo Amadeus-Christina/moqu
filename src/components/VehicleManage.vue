@@ -2,23 +2,21 @@
   <div class="vehicle-manage">
     <div class="text">已认证车辆：</div>
     <div class="already">
-      <vehicle-item v-for="(item,index) in vehicleList"
+      <vehicle-item v-for="(item,index) in haveAuthenticationList"
                     :key="index"
-                    :index="index"
                     :item="item"
-                    :activeIndex="activeIndex"
-                    v-if="item.status === 'through'"
                     @changeActiveIndex="changeActiveIndex"
       />
     </div>
     <div class="text">待认证车辆：</div>
     <div class="noYet">
-      <vehicle-item v-for="(item,index) in vehicleList" :key="index" :index="index" :item="item" v-if="item.status !== 'through'"/>
+      <vehicle-item v-for="(item,index) in noAuthentication" :key="index" :item="item"/>
     </div>
   </div>
 </template>
 <script>
 import vehicleItem from '@/components/VehicleItem'
+import {myCarManagement, userOrCancel} from '@/api/my/index.js'
 export default {
   components: {
     vehicleItem
@@ -27,44 +25,8 @@ export default {
   name: '',
   data () {
     return {
-      activeIndex: 0,
-      vehicleList:[
-        {
-          logo: '../../static/images/vehicle/binli.png',
-          model: '宾利 慕尚',
-          area: '浙A',
-          number:'SDF54',
-          status: 'through'
-        },
-        {
-          logo: '../../static/images/vehicle/falali.png',
-          model: '法拉利 488',
-          area: '浙A',
-          number:'S284W',
-          status: 'through'
-        },
-        {
-          logo: '../../static/images/vehicle/benchi.png',
-          model: '奔驰 G级',
-          area: '浙A',
-          number:'WD754',
-          status: 'through'
-        },
-        {
-          logo: '../../static/images/vehicle/Lamborghini.png',
-          model: '兰博基尼 Aventador',
-          area: '浙A',
-          number:'51854',
-          status: 'wait'
-        },
-        {
-          logo: '../../static/images/vehicle/yingfeinidi.png',
-          model: '英菲尼迪 QX50',
-          area: '浙A',
-          number:'SS8D4',
-          status: 'notThrough'
-        }
-      ]
+      haveAuthenticationList: [],
+      noAuthentication: []
     }
   },
   props: {},
@@ -72,11 +34,25 @@ export default {
   watch: {},
   methods: {
     // 切换 点击使用 正在使用 按钮状态
-    changeActiveIndex(index) {
-      this.activeIndex = index
+    changeActiveIndex(userCarMedalId) {
+      userOrCancel (userCarMedalId).then(res => {
+        if (res.code == 10456) {
+          this.$toast.fail(res.msg)
+        } else {
+          this.getData ()
+        }
+      })
+    },
+    getData () {
+      myCarManagement(this.$store.state.userInfo.userId).then(res => {
+        this.haveAuthenticationList = res.data.HaveAuthentication
+        this.noAuthentication = res.data.noAuthentication
+      })
     }
   },
-  mounted () {},
+  mounted () {
+    this.getData()
+  },
   created () {},
   filters: {},
   directives: {},

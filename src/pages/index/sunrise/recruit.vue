@@ -11,6 +11,7 @@
   </div>
 </template>
 <script>
+import {queryMyPromotion} from '@/api/my/index.js'
 export default {
   components: {},
   mixins: [],
@@ -36,8 +37,16 @@ export default {
   props: {},
   computed: {},
   watch: {},
-  methods: {},
-  mounted () {},
+  methods: {
+    getData () {
+      queryMyPromotion(this.$store.state.userInfo.userId).then(res => {
+        console.log(res)
+      })
+    }
+  },
+  mounted () {
+    this.getData()
+  },
   created () {},
   filters: {},
   directives: {},

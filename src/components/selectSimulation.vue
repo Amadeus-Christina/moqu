@@ -5,7 +5,12 @@
       <img class="img" src="/static/images/account-info/jiantouxia.png" alt="">
     </div>
     <div class="list" v-show="show">
-      <ul>
+      <ul v-if="isCar">
+        <li @click="getvalue(item, index)" v-for="(item, index) in data" :key="index" class="list-item">
+          <div class="icon" :style="{backgroundImage: 'url('+item.carMedalUrl+')'}"></div>{{item.carName}}
+        </li>
+      </ul>
+      <ul v-else>
         <li @click="getvalue(item, index)" v-for="(item, index) in data" :key="index">{{item}}</li>
       </ul>
     </div>
@@ -22,7 +27,7 @@
           value:''
       }
     },
-    props: ['data', 'placeholder'],
+    props: ['data', 'placeholder','isCar'],
     computed: {},
     watch: {},
     methods: {
@@ -30,7 +35,11 @@
           this.show=!this.show;
       },
       getvalue(item, index){
+        if (this.isCar) {
+          this.value=item.carName;
+        } else {
           this.value=item;
+        }
           this.show=false;
           this.$emit('selectVal', item)
       }
@@ -79,6 +88,19 @@
       overflow: hidden;
       font-size: 0.28rem;
       border-radius: 0.18rem;
+      .list-item{
+        display: flex;
+
+      }
+      .icon{
+        display: inline-block;
+        width: 0.9rem;
+        height: 0.9rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 0.7rem 0.7rem;
+        margin-right: 0.4rem;
+      }
     }
     .list ul li{
       width: 100%;

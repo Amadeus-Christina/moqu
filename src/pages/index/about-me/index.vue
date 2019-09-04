@@ -1,5 +1,5 @@
 <template>
-  <div class="about-me" v-if="viewInfo">
+  <div class="about-me" v-if="viewInfo.userId">
     <user-info-show-new  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
   </div>
 </template>

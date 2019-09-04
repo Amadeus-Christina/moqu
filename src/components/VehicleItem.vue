@@ -1,16 +1,16 @@
 <template>
   <div class="vehicle-item">
-    <img class="img" :src="item.logo" alt="">
-    <div class="model">{{item.model}}</div>
-    <div class="car-number">{{item.area}} · {{item.number}}</div>
-    <div class="btn" :class="{'green': index === activeIndex}" @click="$emit('changeActiveIndex',index)">
-      <div v-if="index === activeIndex">正在使用</div>
-      <div v-else-if="item.status === 'through'">点击使用</div>
-      <div v-else-if="item.status === 'wait'">标签待定</div>
+    <img class="img" :src="item.carMedalUrl" alt="">
+    <div class="model">{{item.carModel}}</div>
+    <div class="car-number">{{item.carNum.substring(0, 2)}} · {{item.carNum.substring(2)}}</div>
+    <div class="btn" :class="{'green': item.type == '0'}" @click="$emit('changeActiveIndex',item.userCarMedalId)">
+      <div v-if="item.type == '0'">正在使用</div>
+      <div v-else-if="item.type == '1'">点击使用</div>
+      <div v-else-if="item.status === '0'">标签待定</div>
       <div v-else>重新认证</div>
     </div>
     <div class="right-top"
-         :class="{'through': item.status === 'through','notThrough': item.status === 'notThrough','wait': item.status === 'wait'}"
+         :class="{'through': item.type,'notThrough': item.status === '2','wait': item.status === '0'}"
     ></div>
   </div>
 </template>

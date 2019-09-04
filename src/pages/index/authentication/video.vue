@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-  import {videoAuthentication, uploadWordImg} from '@/api/my/index.js'
+  import {videoAuthentication} from '@/api/my/index.js'
   import { uploadImg } from "@/api/index/index.js";
   export default {
     components: {},

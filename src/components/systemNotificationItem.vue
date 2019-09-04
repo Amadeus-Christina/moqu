@@ -59,6 +59,7 @@ export default {
   .sys-note-group{
     border-bottom: 1px solid #F5F5F5;
     padding: 0.3rem;
+    background: #FFFFFF;
     .title{
       padding-bottom: 0.2rem;
       font-size: 0.32rem;

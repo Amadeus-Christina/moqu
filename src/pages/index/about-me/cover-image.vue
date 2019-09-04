@@ -52,6 +52,13 @@
       // 获取图片数据
       getData() {
         this.imgData = this.$store.state.userInfo.coverImageList
+        this.imgData.forEach(item=>{
+          if (this.remain.length == 0) {
+            this.remain += item
+          } else {
+            this.remain += ',' + item
+          }
+        })
       },
       // 切换 编辑/删除模式
       changeMode() {
@@ -120,7 +127,7 @@
             console.log(res)
           })
         })
-      }
+      },
     },
     mounted() {
       this.getData()

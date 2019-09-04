@@ -26,7 +26,6 @@
   import {jsGetAge} from '@/utils/main.js'
   import {realNameAuthentication} from '@/api/accountInfo/authentication.js'
   import {uploadFile} from '@/api/index/index.js'
-
   export default {
     components: {
       selectSimulation,

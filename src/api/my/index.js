@@ -96,5 +96,73 @@ export function updateCoverImage(userId, coverImage) {
   return axios.post(url, data)
 }
 
+export function carAuthentication(frontCardPhone, frontDrivingCard, backDrivingCard, frontLicensePlatePhone,
+                                  userId, carMedalId, carModel, carAuthenticationId) {
+  const url = "/api/identityAuthentication/carAuthentication"
+  const data = {
+    frontCardPhone,
+    frontDrivingCard,
+    backDrivingCard,
+    frontLicensePlatePhone,
+    userId,
+    carMedalId,
+    carModel,
+    carAuthenticationId
+  }
+  return axios.post(url, data)
+}
+
+export function findAllCarMedal() {
+  const url = "/api/identityAuthentication/findAllCarMedal"
+  const data = {
+  }
+  return axios.post(url, data)
+}
+
+export function myCarManagement(userId) {
+  const url = "/api/identityAuthentication/myCarManagement"
+  const data = {
+    userId
+  }
+  return axios.post(url, data)
+}
+
+
+export function userOrCancel(userCarMedalId) {
+  const url = "/api/identityAuthentication/userOrCancel"
+  const data = {
+    userCarMedalId
+  }
+  return axios.post(url, data)
+}
+
+export function uqueryDealerByUserId(userId) {
+  const url = "/api/post/queryDealerByUserId"
+  const data = {
+    userId
+  }
+  return axios.post(url, data)
+}
+
+
+export function queryMyPromotion(userId) {
+  const url = "/api/user/queryMyPromotion"
+  const data = {
+    userId
+  }
+  return axios.post(url, data)
+}
+
+export function identityAuthentication(identityIdentification, realName, telephone, userId, carNum, position,
+                                       professionalCertificate, frontCard, backCard, handCard) {
+  const url = "/api/identityAuthentication/identityAuthentication"
+  const data = {
+    identityIdentification, realName, telephone, userId, carNum, position,
+    professionalCertificate, frontCard, backCard, handCard
+  }
+  return axios.post(url, data)
+}
+
+
 
 

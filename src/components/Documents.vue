@@ -6,8 +6,8 @@
       <div class="sure" @click="nextStep">下一步</div>
     </div>
     <div class="page2" v-show="page == 2">
-      <select-simulation :data="vehicleBrand" @selectVal="changeBrand" :placeholder="'请输入车辆品牌'"/>
-      <input v-model="type" type="text" class="border" placeholder="请输入车辆型号">
+      <select-simulation :data="allCarMedal" @selectVal="changeCarMedalId" :placeholder="'请输入车辆品牌'" :isCar="true"/>
+      <input v-model="carModel" type="text" class="border" placeholder="请输入车辆型号">
       <div class="sure" @click="showToast">提交</div>
     </div>
   </div>
@@ -15,6 +15,8 @@
 <script>
 import selectSimulation from '@/components/selectSimulation'
 import documentsItem from '@/components/DocumentsItem'
+import {uploadFile} from '@/api/index/index.js'
+import {carAuthentication, findAllCarMedal} from '@/api/my/index.js'
 export default {
   components: {
     documentsItem,
@@ -24,44 +26,42 @@ export default {
   name: '',
   data () {
     return {
-      brand: null,
-      type: null,
       page: 1,
       uploadList: [],
       info: [
         {
           title: '身份证正面',
-          name: 'IDCard',
+          name: 'frontCardPhone',
           imgSrc: '../../static/images/vehicle/idcard.png',
           msg: '请上传身份证正面照片'
         },
         {
-          title: '驾驶证正面（黑本）',
-          name: 'drivingLicense',
-          imgSrc: '../../static/images/vehicle/driving.png',
-          msg: '请上传驾驶证正面照片'
-        },
-        {
           title: '行驶证正面（蓝本）',
-          name: 'vehicleLicenseFront',
+          name: 'frontDrivingCard',
           imgSrc: '../../static/images/vehicle/Vehiclelicense.png',
           msg: '请上传行驶证正面照片'
         },
         {
           title: '行驶证背面（蓝本）',
-          name: 'vehicleLicenseBehind',
+          name: 'backDrivingCard',
           imgSrc: '../../static/images/vehicle/VehiclelicenseI.png',
           msg: '请上传行驶证反面照片'
         },
         {
           title: '车辆正面照片（车牌清晰）',
-          name: 'vehiclePhoto',
+          name: 'frontLicensePlatePhone',
           imgSrc: '../../static/images/vehicle/car.png',
           msg: '请上传车辆正面照片'
         }
       ],
-      vehicleBrand: ['宾利','法拉利','劳斯莱斯'],
-      brand: null
+      allCarMedal: null,
+      frontCardPhone: null,
+      frontDrivingCard: null,
+      backDrivingCard: null,
+      frontLicensePlatePhone: null,
+      carMedalId: null,
+      carModel: null,
+      carAuthenticationId: null
     }
   },
   props: {},
@@ -71,12 +71,38 @@ export default {
     // 添加上传的文件到数组中
     add(file){
       this.uploadList.push(file)
+      let formData = new FormData();
+      formData.append("file", file.file, "file_" + Date.parse(new Date()) + ".jpg");
+      uploadFile(this, formData).then(res => {
+        if (file.name == 'frontCardPhone'){
+          this.frontCardPhone = res.data.data
+        }
+        if (file.name == 'frontDrivingCard'){
+          this.frontDrivingCard = res.data.data
+        }
+        if (file.name == 'backDrivingCard'){
+          this.backDrivingCard = res.data.data
+        }
+        if (file.name == 'frontLicensePlatePhone'){
+          this.frontLicensePlatePhone = res.data.data
+        }
+      })
     },
     // 显示提交成功提示
     showToast() {
-      if(this.brand != null && this.type != null){
-        this.$toast.success({
-          message: '提交成功\n待审核'
+      if(this.uploadList.length >= 4 && this.carMedalId != null && this.carModel != null){
+        carAuthentication(this.frontCardPhone, this.frontDrivingCard, this.backDrivingCard, this.frontLicensePlatePhone,
+                this.$store.state.userInfo.userId, this.carMedalId, this.carModel, this.carAuthenticationId).then(res => {
+          if (res.code == 200) {
+            this.$toast.success({
+              message: '提交成功\n待审核'
+            })
+          } else {
+            this.$toast.fail({
+              message: res.msg
+            })
+          }
+
         })
       } else {
         this.$toast.fail('材料不足')
@@ -91,8 +117,7 @@ export default {
     },
     // 进入下一步
     nextStep () {
-
-      if (this.uploadList.length >= 5) {
+      if (this.uploadList.length >= 4) {
         this.page = 2
       } else {
         this.$toast.fail({
@@ -100,12 +125,21 @@ export default {
         })
       }
     },
-    changeBrand (val) {
-      this.brand = val
-      console.log(val);
+    // 改变车辆品牌
+    changeCarMedalId (val) {
+      this.carMedalId = val.carMedalId
+      console.log(this.carMedalId);
+    },
+    // 获取所有车辆信息
+    getAllCarMedal(){
+      findAllCarMedal().then(res => {
+        this.allCarMedal = res.data
+      })
     }
   },
-  mounted () {},
+  mounted () {
+    this.getAllCarMedal()
+  },
   created () {},
   filters: {},
   directives: {},

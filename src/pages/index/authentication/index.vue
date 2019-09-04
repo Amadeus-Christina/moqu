@@ -20,6 +20,11 @@
             toPath: '/index/IDAuthentication',
           },
           {
+            name: '身份标识',
+            // iconPath: '/static/images/message/@I.png',
+            toPath: '/index/identityAuthentication',
+          },
+          {
             name: '视频认证',
             // iconPath: '/static/images/message/@I.png',
             toPath: '/index/videoAuthentication',

@@ -2,10 +2,10 @@
   <div class="message-item-group">
     <div class="message-item clear" v-for="(item,index) in itemInfo" :key="index" >
       <div @click="$router.push(item.toPath)">
-        <i class="icon">
+        <i class="icon" v-if="item.iconPath">
           <img class="icon-img" :src="item.iconPath" alt="图标" v-if="item.iconPath">
         </i>
-        <span class="item-name">{{item.name}}</span>
+        <span class="item-name" :class="{'has-icon':item.iconPath}">{{item.name}}</span>
         <div class="right clear right-part">
           <span class="next right"> > </span>
           <span class="msg-num right" v-show="item.msgNum > 0">{{item.msgNum > 99 ? '99+' : item.msgNum}}</span>
@@ -63,7 +63,10 @@ export default {
       border-bottom: 0.01rem solid #F5F5F5;
       .item-name{
         position: absolute;
-        left: 1rem;
+        left: 0.3rem;
+        &.has-icon{
+          left: 1rem;
+        }
       }
       .right-part{
         width: 1.6rem;

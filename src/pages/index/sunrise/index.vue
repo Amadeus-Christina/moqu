@@ -1,18 +1,18 @@
 <template>
-  <div class="sunrise">
+  <div class="sunrise" v-if="userSunriseData.headImg">
     <van-image
       round
       width="1.6rem"
       height="1.6rem"
       fit="cover"
-      :src=mock.headImg
+      :src=userSunriseData.headImg
       class="head-img"
     />
-    <div class="name">{{mock.realNickName}}({{mock.anonymous}})</div>
+    <div class="name">{{userSunriseData.realNickName}}({{userSunriseData.anonymous}})</div>
     <div class="invite-code" >
 <!--      <div class="" v-if="mock.lv != 0">专属邀请码：{{mock.inviteCode}}</div>-->
     </div>
-    <div class="cobber" v-if="mock.lv != 0">
+    <div class="cobber" v-if="userSunriseData.whetherDealer == 1">
       <div class="title">
         <div class="top-left">合伙人</div>
         <div class="top-right">升级可享更高返利</div>
@@ -21,19 +21,19 @@
         <div class="text">推广人数(人)</div>
         <div class="bar">
           <van-progress
-            :pivot-text="''+mock.personNum"
+            :pivot-text="''+userSunriseData.promotionNum"
             color="linear-gradient(to right, #00C8F0, #1ED9D4)"
-            :percentage="mock.percentage"
+            :percentage="percentage"
           />
           <div class="lv">
-            <div class="current">LV {{mock.lv}}</div>
-            <div class="next">LV {{mock.lv + 1}}</div>
+            <div class="current">LV {{userSunriseData.grade}}</div>
+            <div class="next">LV {{userSunriseData.nextGrade}}</div>
           </div>
         </div>
       </div>
       <div class="footer">
-        <div class="rebate" v-if="mock.lv != 1">返利{{mock.rebate}}%</div>
-        <div class="rebate" v-else>无返利</div>
+        <div class="rebate">{{userSunriseData.rebatePercentage}}</div>
+<!--        <div class="rebate" v-else>无返利</div>-->
         <div class="learn-more" @click="$router.push('/index/sunriseLearnMore')">了解更多</div>
       </div>
     </div>
@@ -49,21 +49,21 @@
     <div class="gray-background">
       <div class="add-up">
         <div class="title">我的返利（钻石）</div>
-        <div class="today" v-if="mock.lv != 0">
-          <div class="num">{{mock.today}}</div>
+        <div class="today" v-if="userSunriseData.whetherDealer == 1">
+          <div class="num">{{userSunriseData.todayRebate || 0}}</div>
           <div class="text">今日返利</div>
         </div>
-        <div class="month" v-if="mock.lv != 0">
-          <div class="num">{{mock.month}}</div>
+        <div class="month" v-if="userSunriseData.whetherDealer == 1">
+          <div class="num">{{userSunriseData.monthRebate || 0}}</div>
           <div class="text">本月返利</div>
         </div>
-        <div class="total" v-if="mock.lv != 0">
-          <div class="num">{{mock.total}}</div>
+        <div class="total" v-if="userSunriseData.whetherDealer == 1">
+          <div class="num">{{userSunriseData.totalRebate || 0}}</div>
           <div class="text">总返利</div>
         </div>
         <div class="none" v-else>暂无返利，快去推广吧～</div>
       </div>
-      <div class="recruit">
+      <div class="recruit" @click="$router.push('/index/sunriseRecruit')">
         <div class="text">我的招募</div>
         <van-icon name="arrow" size="0.38rem" color="#BDC4CB"/>
       </div>
@@ -72,29 +72,37 @@
   </div>
 </template>
 <script>
+import {uqueryDealerByUserId} from '@/api/my/index.js'
 export default {
   components: {},
   mixins: [],
   name: '',
   data () {
     return {
-      mock:{
-        headImg:'/static/images/mock/01.jpg',
-        realNickName: '烈烈龙',
-        anonymous: '敖烈',
-        inviteCode: 121212,
-        lv: 2,
-        personNum: 21,
-        rebate: 5,
-        today: 12,
-        month: 6666.00,
-        total: 10101.00,
-        percentage: 60
-      }
+      // mock:{
+      //   headImg:'/static/images/mock/01.jpg',
+      //   realNickName: '烈烈龙',
+      //   anonymous: '敖烈',
+      //   inviteCode: 121212,
+      //   lv: 2,
+      //   personNum: 21,
+      //   rebate: 5,
+      //   today: 12,
+      //   month: 6666.00,
+      //   total: 10101.00,
+      //   percentage: 60
+      // },
+      userSunriseData: null
     }
   },
   props: {},
-  computed: {},
+  computed: {
+    percentage () {
+      let per = ((this.userSunriseData.promotionNum-0)/((this.userSunriseData.promotionNum-0) + (this.userSunriseData.nextNum-0)))*100
+      console.log(per)
+      return per
+    }
+  },
   watch: {},
   methods: {
     // 开通
@@ -102,9 +110,17 @@ export default {
       this.mock.lv = 1
       this.mock.personNum = 0
       this.mock.percentage = 0
+    },
+    getData () {
+      uqueryDealerByUserId(this.$store.state.userInfo.userId).then(res => {
+        this.userSunriseData = res.data
+        console.log(this.userSunriseData);
+      })
     }
   },
-  mounted () {},
+  mounted () {
+    this.getData()
+  },
   created () {},
   filters: {},
   directives: {},
