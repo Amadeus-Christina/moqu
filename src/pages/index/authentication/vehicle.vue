@@ -1,8 +1,8 @@
 <template>
   <div class="">
-    <vehicle-title @show="show"/>
-    <documents v-if="showView === 'documents'"/>
-    <vehicle-manage v-else />
+    <vehicle-title @show="show" :show="showView"/>
+    <documents v-if="showView === 'documents'" :carId="carAuthenticationId"/>
+    <vehicle-manage v-else @again="again" />
   </div>
 </template>
 <script>
@@ -19,7 +19,8 @@ export default {
   name: '',
   data () {
     return {
-      showView: 'documents'
+      showView: 'documents',
+      carAuthenticationId: null
     }
   },
   props: {},
@@ -29,6 +30,11 @@ export default {
     // 更改展示的页面
     show (data) {
       this.showView = data
+    },
+    // 重新申请认证
+    again(carAuthenticationId) {
+      this.showView = 'documents'
+      this.carAuthenticationId = carAuthenticationId
     }
   },
   mounted () {},

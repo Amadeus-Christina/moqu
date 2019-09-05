@@ -163,13 +163,22 @@ export function identityAuthentication(identityIdentification, realName, telepho
   return axios.post(url, data)
 }
 
-
 export function queryPromotionDetail() {
   const url = "/api/post/queryPromotionDetail"
   const data = {
   }
   return axios.post(url, data)
 }
+
+export function againAuthentication(carAuthenticationId) {
+  const url = "/api/identityAuthentication/againAuthentication"
+  const data = {
+    carAuthenticationId
+  }
+  return axios.post(url, data)
+}
+
+
 
 
 

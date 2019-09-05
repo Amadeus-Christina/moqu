@@ -1,5 +1,5 @@
 import {
-  SET_USER_INFO
+  SET_USER_INFO,
 } from './mutation-types.js'
 
 export default {
@@ -7,5 +7,4 @@ export default {
   [SET_USER_INFO](state, obj) {
     state.userInfo = obj;
   },
-
 }

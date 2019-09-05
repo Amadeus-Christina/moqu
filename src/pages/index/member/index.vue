@@ -1,5 +1,5 @@
 <template>
-  <div class="comment">
+  <div class="comment" v-if="findAllMemberCardPrice.length > 0">
     <div class="bg-vip-card">
       <div class="msg">陌趣社区黑卡用户最低享受5折起</div>
     </div>

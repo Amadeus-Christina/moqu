@@ -19,22 +19,19 @@ export default {
   name: '',
   data () {
     return {
-      show: 'documents'
     }
   },
-  props: {},
+  props: ['show'],
   computed: {},
   watch: {},
   methods: {
     // 我的关注 选项卡 激活, 并发送给父组件要显示的页面
     documentsActive () {
-      this.show = 'documents'
-      this.$emit("show", this.show)
+      this.$emit("show", 'documents')
     },
     // 我的粉丝 选项卡 激活 , 并发送给父组件要显示的页面
     manageActive () {
-      this.show = 'manage'
-      this.$emit("show", this.show)
+      this.$emit("show", 'manage')
     }
   },
   mounted () {},

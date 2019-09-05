@@ -1,5 +1,5 @@
 <template>
-  <div class="follow-button" :class="{ 'green' :  (showView == 'follower') && (following == false)}">
+  <div class="follow-button" :class="{ 'green' :  (following == false)}">
     <span v-if = 'following != true' @click="addFollow">
         <span class="plus">+</span>
         <span class="text-not-follow">关注</span>

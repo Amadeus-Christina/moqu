@@ -7,7 +7,7 @@
       <div v-if="item.type == '0'">正在使用</div>
       <div v-else-if="item.type == '1'">点击使用</div>
       <div v-else-if="item.status === '0'">标签待定</div>
-      <div v-else>重新认证</div>
+      <div v-else @click="again(item.carAuthenticationId)">重新认证</div>
     </div>
     <div class="right-top"
          :class="{'through': item.type,'notThrough': item.status === '2','wait': item.status === '0'}"
@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import {mapMutations} from 'vuex'
 export default {
   components: {},
   mixins: [],
@@ -25,7 +26,12 @@ export default {
   props: ['item','index','activeIndex'],
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    // 重新申请认证
+    again(carAuthenticationId) {
+      this.$emit('again',carAuthenticationId)
+    }
+  },
   mounted () {
   },
   created () {},

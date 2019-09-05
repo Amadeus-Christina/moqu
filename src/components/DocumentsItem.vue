@@ -9,7 +9,7 @@
         :max-count="1"
       >
         <img :src=item.imgSrc alt="图像" class="img">
-        <div class="msg">{{item.msg}}</div>
+        <div class="msg" :class="{'red' : item.msgRed}">{{item.msg}}</div>
       </van-uploader>
     </div>
 
@@ -74,18 +74,22 @@ export default {
         display: inline-block;
         box-shadow:0px 0px 30px 0px rgba(213,213,213,0.4);
         border-radius: 0.18rem;
+        object-fit: cover
       }
       .msg{
         width: 6rem;
         height: 0.6rem;
         color: #ffffff;
-        background:rgba(0,0,0,0.2);
+        background:rgba(0,0,0,0.5);
         font-size: 0.24rem;
         border-radius: 0 0 0.18rem 0.18rem;
         text-align: center;
         line-height: 0.6rem;
         position: absolute;
         bottom: 0.25rem;
+        &.red{
+          color: #FD5454;
+        }
       }
     }
 

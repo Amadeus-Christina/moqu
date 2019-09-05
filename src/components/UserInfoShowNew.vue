@@ -49,9 +49,9 @@
     <div class="blank"></div>
 <!--    身份标识-->
     <div class="identity">
-      <div class="vip" v-if="viewInfo.identity != ''">
+      <div class="vip" v-if="viewInfo.identityList.length > 0">
         <div class="vip-icon"></div>
-        {{viewInfo.identity}}
+        {{viewInfo.identityList[0]}}
       </div>
       <div class="card silver" v-if="viewInfo.cardTypeId == 1">
         <div class="icon"></div>
@@ -439,6 +439,7 @@ export default {
         color: #FFFFFF;
         display: flex;
         margin-right: 0.3rem;
+        border-right: none;
         .icon{
           width: 0.4rem;
           height: 0.4rem;

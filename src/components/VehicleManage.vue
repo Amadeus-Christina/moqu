@@ -10,7 +10,7 @@
     </div>
     <div class="text">待认证车辆：</div>
     <div class="noYet">
-      <vehicle-item v-for="(item,index) in noAuthentication" :key="index" :item="item"/>
+      <vehicle-item v-for="(item,index) in noAuthentication" :key="index" :item="item" @again="again"/>
     </div>
   </div>
 </template>
@@ -42,6 +42,10 @@ export default {
           this.getData ()
         }
       })
+    },
+    // 重新申请认证
+    again(carAuthenticationId) {
+      this.$emit('again',carAuthenticationId)
     },
     getData () {
       myCarManagement(this.$store.state.userInfo.userId).then(res => {

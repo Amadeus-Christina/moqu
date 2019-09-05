@@ -56,6 +56,7 @@
         await myInformation(1).then(res => {
           if (res.code == 200) {
             this.viewInfo = res.data
+            console.log(res.data)
           } else {
             this.$toast(res.msg)
           }
@@ -66,7 +67,6 @@
           this.haveAuthenticationList = res.data.HaveAuthentication.filter(item => {
             return item.type == '0'
           })
-          console.log(this.haveAuthenticationList)
         })
 
         if (this.userInfo.userId != this.viewInfo.userId){
