@@ -73,9 +73,9 @@
     </div>
 <!--    车辆信息-->
     <div class="vehicle-group">
-      <div class="vehicle" v-for="(item, index) in vehicleGroup" :key="index">
-        <div class="logo" :style="{backgroundImage: 'url(' + item.logo + ')'}"></div>
-        {{item.brand}}{{item.model}} &nbsp; 车主
+      <div class="vehicle" v-for="(item, index) in haveAuthenticationList" :key="index">
+        <div class="logo" :style="{backgroundImage: 'url(' + item.carMedalUrl + ')'}"></div>
+        {{item.carName}}{{item.carModel}} &nbsp; 车主
       </div>
     </div>
 <!--    个人简介-->
@@ -114,22 +114,9 @@ export default {
   data () {
     return {
       show: false,
-      blank: [],
-      vehicleGroup:[
-        {
-          logo: '/static/images/vehicle/Lamborghini.png',
-          brand: '兰博基尼',
-          model: 'Reventon'
-        },
-        {
-          logo: '/static/images/vehicle/falali.png',
-          brand: '法拉利',
-          model: 'Enzo'
-        }
-      ]
     }
   },
-  props: ['viewInfo', 'album', 'isFollower'],
+  props: ['viewInfo', 'album', 'isFollower', 'haveAuthenticationList'],
   computed: {
     userInfo() {
       return this.$store.state.userInfo

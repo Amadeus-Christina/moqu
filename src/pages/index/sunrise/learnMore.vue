@@ -7,11 +7,11 @@
         <div>会员权益</div>
       </div>
       <div class="content-wrap">
-        <div class="content" v-for="(item, index) in tableData" :key="index">
-          <div class="person-num">{{item.personNum}}</div>
-          <div class="lv">LV{{item.lv}}合伙人</div>
-          <div v-if="item.recruit == 0" class="recruit">无返利</div>
-          <div v-else class="recruit">返利{{item.recruit}}%</div>
+        <div class="content" v-for="(item, index) in table" :key="index">
+          <div class="person-num" v-if="item.maxNumber">{{item.minNumber}}～{{item.maxNumber}}</div>
+          <div class="person-num" v-else>{{item.minNumber}}以上</div>
+          <div class="lv">{{item.correspondingLevel}}</div>
+          <div class="recruit">{{item.memberBenefitsPercentage}}</div>
         </div>
       </div>
     </div>
@@ -20,6 +20,7 @@
   </div>
 </template>
 <script>
+import {queryPromotionDetail} from '@/api/my/index.js'
 export default {
   components: {},
   mixins: [],
@@ -52,14 +53,24 @@ export default {
           lv: '5',
           recruit: 10
         }
-      ]
+      ],
+      table: null
     }
   },
   props: {},
   computed: {},
   watch: {},
-  methods: {},
-  mounted () {},
+  methods: {
+    getData() {
+      queryPromotionDetail().then(res => {
+        this.table = res.data
+        console.log(res.data)
+      })
+    }
+  },
+  mounted () {
+    this.getData()
+  },
   created () {},
   filters: {},
   directives: {},

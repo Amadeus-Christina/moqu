@@ -1,11 +1,11 @@
 <template>
-  <div class="sunrise" v-if="userSunriseData.headImg">
+  <div class="sunrise" v-if="userSunriseData">
     <van-image
       round
       width="1.6rem"
       height="1.6rem"
       fit="cover"
-      :src=userSunriseData.headImg
+      :src=$store.state.userInfo.headImg
       class="head-img"
     />
     <div class="name">{{userSunriseData.realNickName}}({{userSunriseData.anonymous}})</div>
@@ -99,7 +99,6 @@ export default {
   computed: {
     percentage () {
       let per = ((this.userSunriseData.promotionNum-0)/((this.userSunriseData.promotionNum-0) + (this.userSunriseData.nextNum-0)))*100
-      console.log(per)
       return per
     }
   },
@@ -114,7 +113,6 @@ export default {
     getData () {
       uqueryDealerByUserId(this.$store.state.userInfo.userId).then(res => {
         this.userSunriseData = res.data
-        console.log(this.userSunriseData);
       })
     }
   },

@@ -4,19 +4,24 @@
             <input v-model="identityIdentification" type="text" class="border" placeholder="请输入身份标识">
             <input v-model="realName" type="text" class="border" placeholder="请输入真实姓名">
             <input v-model="telephone" type="text" class="border" placeholder="请输入手机号码">
-            <input v-model="IDCard" type="text" class="border" placeholder="请输入身份证号码">
+            <input v-model="IDCard" type="text" class="border" placeholder="请输入身份证号码" @blur="checkIDCard">
             <div class="sure" @click="nextStep">下一步</div>
         </div>
         <div class="page2" v-show="page == 2">
+            <input v-model="position" type="text" class="border" placeholder="请输入职位/称呼">
             <documents-item v-for="(item,index) in info" :key="index" :item="item" @add="add" @deleteUpload="deleteUpload"/>
-            <div class="sure" @click="nextStep">提交</div>
+            <div class="sure" @click="showToast">提交</div>
         </div>
     </div>
 </template>
 <script>
+  import documentsItem from '@/components/DocumentsItem'
   import {identityAuthentication} from '@/api/my/index.js'
+  import {uploadFile} from '@/api/index/index.js'
   export default {
-    components: {},
+    components: {
+      documentsItem
+    },
     mixins: [],
     name: '',
     data() {
@@ -26,25 +31,25 @@
         info: [
           {
             title: '职业证明材料',
-            name: 'frontCardPhone',
+            name: 'professionalCertificate',
             imgSrc: '../../static/images/account-info/zhiyezhengming.png',
             msg: '请上传职业证明材料'
           },
           {
             title: '身份证正面',
-            name: 'frontDrivingCard',
+            name: 'frontCard',
             imgSrc: '../../static/images/vehicle/Vehiclelicense.png',
             msg: '请上传身份证正面照片'
           },
           {
             title: '身份证反面',
-            name: 'backDrivingCard',
+            name: 'backCard',
             imgSrc: '../../static/images/vehicle/VehiclelicenseI.png',
             msg: '请上传身份证反面照片'
           },
           {
             title: '手持身份证',
-            name: 'frontLicensePlatePhone',
+            name: 'handCard',
             imgSrc: '../../static/images/vehicle/car.png',
             msg: '请上传手持身份证照片'
           }
@@ -53,7 +58,11 @@
         realName: null,
         telephone: null,
         IDCard: null,
-
+        position: null,
+        professionalCertificate: null,
+        frontCard: null,
+        backCard: null,
+        handCard: null
       }
     },
     props: [],
@@ -62,7 +71,7 @@
     methods: {
       // 进入下一步
       nextStep () {
-        if (this.identity != null && this.name != null && this.phone != null && this.IDCard != null ) {
+        if (this.identityIdentification != null && this.realName != null && this.telephone != null && this.IDCard != null) {
           this.page = 2
         } else {
           this.$toast.fail({
@@ -76,25 +85,25 @@
         let formData = new FormData();
         formData.append("file", file.file, "file_" + Date.parse(new Date()) + ".jpg");
         uploadFile(this, formData).then(res => {
-          if (file.name == 'frontCardPhone'){
-            this.frontCardPhone = res.data.data
+          if (file.name == 'professionalCertificate'){
+            this.professionalCertificate = res.data.data
           }
-          if (file.name == 'frontDrivingCard'){
-            this.frontDrivingCard = res.data.data
+          if (file.name == 'frontCard'){
+            this.frontCard = res.data.data
           }
-          if (file.name == 'backDrivingCard'){
-            this.backDrivingCard = res.data.data
+          if (file.name == 'backCard'){
+            this.backCard = res.data.data
           }
-          if (file.name == 'frontLicensePlatePhone'){
-            this.frontLicensePlatePhone = res.data.data
+          if (file.name == 'handCard'){
+            this.handCard = res.data.data
           }
         })
       },
       // 显示提交成功提示
       showToast() {
-        if(this.uploadList.length >= 4 && this.carMedalId != null && this.carModel != null){
-          carAuthentication(this.frontCardPhone, this.frontDrivingCard, this.backDrivingCard, this.frontLicensePlatePhone,
-            this.$store.state.userInfo.userId, this.carMedalId, this.carModel, this.carAuthenticationId).then(res => {
+        if(this.uploadList.length >= 4 && this.position != null){
+          identityAuthentication(this.identityIdentification, this.realName, this.telephone, this.$store.state.userInfo.userId, this.IDCard, this.position,
+            this.professionalCertificate, this.frontCard, this.backCard, this.handCard).then(res => {
             if (res.code == 200) {
               this.$toast.success({
                 message: '提交成功\n待审核'
@@ -117,6 +126,14 @@
           return item.name != fileName
         })
       },
+      // 输入框失去焦点验证身份证格式
+      checkIDCard() {
+        let idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+        if (!idcardReg.test(this.IDCard)) {
+          this.$toast.fail('身份证格式不正确')
+          this.IDCard = null
+        }
+      }
     },
     mounted() {
     },
@@ -133,25 +150,35 @@
 <style scoped lang="less">
     .identity{
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 0.4rem;
         position: relative;
+        .page1,
+        .page2{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 0.4rem;
+        }
         .border {
             font-size: 0.28rem;
             width: 6rem;
-            height: 0.9rem;
+            min-height: 0.9rem;
             border: 1px solid #E5E5E5;
             border-radius: 0.18rem;
             padding-left: 0.4rem;
             margin-bottom: 0.4rem;
+            line-height: 0.9rem;
         }
-        .sure {
+        .page1 .sure {
             line-height: 0.9rem;
             text-align: center;
             position: absolute;
             bottom: 1.5rem;
+        }
+        .page2 .sure {
+            margin: 1.5rem auto;
+            line-height: 0.9rem;
+            text-align: center;
         }
     }
 </style>

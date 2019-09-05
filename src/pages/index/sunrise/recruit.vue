@@ -1,11 +1,11 @@
 <template>
   <div class="recruit fillcontain">
-    <div class="group" v-for="(item, index) in recruitList" :key="index">
+    <div class="group" v-for="(item, index) in recruitData" :key="index">
       <div class="wrap">
         <div class="head-img" :style="{backgroundImage: 'url('+item.headImg+')'}"></div>
         <div class="name">{{item.realNickName}}</div>
-        <div class="status online" v-if="item.online == true">在线</div>
-        <div class="status offline" v-else>离线{{item.time}}</div>
+        <div class="status online" v-if="item.whetherOnline == 1">在线</div>
+        <div class="status offline" v-else>{{item.offlineTime}}</div>
       </div>
     </div>
   </div>
@@ -31,7 +31,8 @@ export default {
           online: false,
           time: '15小时'
         }
-      ]
+      ],
+      recruitData: null
     }
   },
   props: {},
@@ -40,7 +41,7 @@ export default {
   methods: {
     getData () {
       queryMyPromotion(this.$store.state.userInfo.userId).then(res => {
-        console.log(res)
+        this.recruitData = res.data
       })
     }
   },

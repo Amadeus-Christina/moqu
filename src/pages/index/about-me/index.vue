@@ -1,11 +1,12 @@
 <template>
   <div class="about-me" v-if="viewInfo.userId">
-    <user-info-show-new  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower"/>
+    <user-info-show-new  :viewInfo="viewInfo" :album="album" :isFollower="isFollower" @changeIsFollower="changeIsFollower" :haveAuthenticationList="haveAuthenticationList"/>
   </div>
 </template>
 <script>
   import userInfoShowNew from '@/components/UserInfoShowNew'
   import {myInformation, intercommunication} from "@/api/my/index.js"
+  import {myCarManagement} from '@/api/my/index.js'
   import {mapMutations} from 'vuex'
   export default {
     components: {
@@ -22,7 +23,9 @@
         // 访问页面的相册信息
         album: {},
         // 本人是否关注了访问页面的主人
-        isFollower: false
+        isFollower: false,
+        // 认证的车辆
+        haveAuthenticationList: null
       }
     },
     props: {},
@@ -53,10 +56,17 @@
         await myInformation(1).then(res => {
           if (res.code == 200) {
             this.viewInfo = res.data
-            console.log(res.data)
           } else {
             this.$toast(res.msg)
           }
+        })
+
+        // 获取要显示的车辆信息
+        await myCarManagement(this.viewInfo.userId).then(res => {
+          this.haveAuthenticationList = res.data.HaveAuthentication.filter(item => {
+            return item.type == '0'
+          })
+          console.log(this.haveAuthenticationList)
         })
 
         if (this.userInfo.userId != this.viewInfo.userId){

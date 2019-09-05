@@ -164,5 +164,13 @@ export function identityAuthentication(identityIdentification, realName, telepho
 }
 
 
+export function queryPromotionDetail() {
+  const url = "/api/post/queryPromotionDetail"
+  const data = {
+  }
+  return axios.post(url, data)
+}
+
+
 
 
