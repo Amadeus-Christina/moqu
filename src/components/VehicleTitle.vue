@@ -25,11 +25,11 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // 我的关注 选项卡 激活, 并发送给父组件要显示的页面
+    // 认证材料 选项卡 激活, 并发送给父组件要显示的页面
     documentsActive () {
       this.$emit("show", 'documents')
     },
-    // 我的粉丝 选项卡 激活 , 并发送给父组件要显示的页面
+    // 车辆管理 选项卡 激活 , 并发送给父组件要显示的页面
     manageActive () {
       this.$emit("show", 'manage')
     }

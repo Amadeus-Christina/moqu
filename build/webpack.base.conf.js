@@ -15,6 +15,10 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  //添加
+	externals: {
+		"BMap": "BMap"
+	},
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -27,7 +31,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      '#': resolve('static/images')
+      '#': resolve('static/images'),
     }
   },
   module: {

@@ -12,8 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/': {
-        // target: 'https://lvyou.shouwangs.com/',
-        target: 'https://www.moqushequ.com',
+        target: 'https://www.moqushequ.com/',
     		changeOrigin: true,
     		secure: true,
     		pathRewrite: {'^/api' : '/'},
@@ -28,7 +27,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-
+    
     /**
      * Source Maps
      */

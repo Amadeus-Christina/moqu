@@ -1,7 +1,7 @@
 <template>
   <div class="wrap fillcontain">
     <div class="container">
-      <img class="container-img" src="/static/images/message/nocontent.png" alt="无数据"/>
+      <img class="container-img" src="../../static/images/message/nocontent.png" alt="无数据"/>
       <div class="text">{{message}}</div>
     </div>
   </div>

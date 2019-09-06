@@ -1,12 +1,41 @@
-body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption {
+body,
+div,
+span,
+header,
+footer,
+nav,
+section,
+aside,
+article,
+ul,
+dl,
+dt,
+dd,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+b,
+textarea,
+button,
+input,
+select,
+figure,
+figcaption {
     padding: 0;
     margin: 0;
     list-style: none;
     font-style: normal;
     text-decoration: none;
     border: none;
-    font-family: "Microsoft Yahei",sans-serif;
-    -webkit-tap-highlight-color:transparent;
+    font-family: "Microsoft Yahei", sans-serif;
+    -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     &:focus {
@@ -14,100 +43,141 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
     }
 }
 
-
 /*定义滑块 内阴影+圆角*/
-::-webkit-scrollbar-thumb
-{
+
+::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #555;
 }
 
-input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
+input[type="button"],
+input[type="submit"],
+input[type="search"],
+input[type="reset"] {
     -webkit-appearance: none;
 }
 
-textarea { -webkit-appearance: none;}
+textarea {
+    -webkit-appearance: none;
+}
 
-html,body,#app {
+html,
+body,
+#app,
+.bg {
     height: 100%;
-    width: 100%;
-    //background-color: #f8f8f8;
+    width: 100%; // background-color: #f8f8f8;
     overflow-x: hidden;
 }
 
-.fillcontain{
+.fillcontain {
     height: 100%;
     width: 100%;
 }
-.clear:after{
+
+.clear:after {
     content: '';
     display: block;
     clear: both;
 }
 
-.clear{
-    zoom:1;
+.clear {
+    zoom: 1;
 }
 
-.back_img{
+.back_img {
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
-.margin{
+.margin {
     margin: 0 auto;
 }
 
-.left{
+.left {
     float: left;
 }
 
-.right{
+.right {
     float: right;
 }
 
-.hide{
+.hide {
     display: none;
 }
 
-.show{
+.show {
     display: block;
 }
 
-.ellipsis{
+.ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    color: #8E8E8E;
-  }
-  :-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    color: #8E8E8E;
-  }
-  ::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: #8E8E8E;
-  }
-  :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: #8E8E8E;
-  }
+
+.over-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.z-index {
+    z-index: 5;
+}
+
+.shadow {
+    background: rgba(0, 0, 0, 1);
+    box-shadow: 0px 0.02rem 0.2rem 0px #D5D5D5;
+    opacity: 0.4;
+    z-index: 2;
+}
+
 .sure {
-  width: 6rem;
-  height: 0.9rem;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 200, 240, 1) 0%,
-    rgba(30, 218, 212, 1) 100%
-  );
-  box-shadow: 0px 0px 0.3rem 0px rgba(1, 63, 112, 0.43);
-  border-radius: 0.5rem;
-  font-size: 0.32rem;
-  display: block;
-  margin: 0 auto ;
-  color: #ffffff;
+    width: 6rem;
+    height: 0.9rem;
+    background: linear-gradient( 90deg, rgba(0, 200, 240, 1) 0%, rgba(30, 218, 212, 1) 100%);
+    box-shadow: 0px 0px 0.3rem 0px rgba(1, 63, 112, 0.43);
+    border-radius: 0.5rem;
+    font-size: 0.32rem;
+    display: block;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+@bc: #BCBCBC;
+.bc {
+    color: @bc;
+}
+
+@placeholderColor: #BCBCBC;
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: @placeholderColor;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: @placeholderColor;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: @placeholderColor;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: @placeholderColor;
+}
+
+.dashed-bottom {
+    border-bottom: 1px dashed #E9E9E9;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #F5F5F5;
 }

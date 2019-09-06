@@ -59,10 +59,10 @@ export default {
         margin-left: 0.06rem;
       }
       .diamond-icon-gold{
-        background-image: url("/static/images/account-info/diamond_on.png");
+        background-image: url("../../static/images/account-info/diamond_on.png");
       }
       .diamond-icon{
-        background-image: url("/static/images/account-info/diamond.png");
+        background-image: url("../../static/images/account-info/diamond.png");
       }
     }
     .price {

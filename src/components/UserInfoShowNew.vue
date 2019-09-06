@@ -175,7 +175,7 @@ export default {
         top: 0.3rem;
         height: 0.5rem;
         width: 0.5rem;
-        background-image: url("/static/images/about-me/Setupthe.png");
+        background-image: url("../../static/images/about-me/Setupthe.png");
         background-position: center center;
         background-size: 0.5rem 0.5rem;
         background-repeat: no-repeat;
@@ -187,7 +187,7 @@ export default {
         top: 1.1rem;
         height: 0.5rem;
         width: 0.5rem;
-        background-image: url("/static/images/about-me/Theuploadpage.png");
+        background-image: url("../../static/images/about-me/Theuploadpage.png");
         background-position: center center;
         background-size: 0.5rem 0.5rem;
         background-repeat: no-repeat;
@@ -199,7 +199,7 @@ export default {
         top: 1.9rem;
         height: 0.5rem;
         width: 0.5rem;
-        background-image: url("/static/images/about-me/Focuson.png");
+        background-image: url("../../static/images/about-me/Focuson.png");
         background-position: center center;
         background-size: 0.5rem 0.5rem;
         background-repeat: no-repeat;
@@ -249,13 +249,12 @@ export default {
       background-size: cover;
       background-repeat: no-repeat;
       &.default-img{
-        background-image: url("/static/images/about-me/Mask.png");
+        background-image: url("../../static/images/about-me/Mask.png");
       }
     }
     .profile{
       width: 1.6rem;
       height: 1.6rem;
-      /*background-image: url("/static/images/mock/03.jpg");*/
       background-position: center center;
       background-size: 1.6rem 1.6rem;
       background-repeat: no-repeat;
@@ -268,7 +267,7 @@ export default {
         display: inline-block;
         width: 0.36rem;
         height: 0.36rem;
-        background-image: url("/static/images/about-me/vip.png");
+        background-image: url("../../static/images/about-me/vip.png");
         background-size: 0.36rem 0.36rem;
         background-repeat: no-repeat;
         position: absolute;
@@ -333,10 +332,10 @@ export default {
           line-height: 0.25rem;
           justify-content: center;
           &.icon-male{
-            background-image: url("/static/images/about-me/male.png");
+            background-image: url("../../static/images/about-me/male.png");
           }
           &.icon-female {
-            background-image: url("/static/images/about-me/female.png");
+            background-image: url("../../static/images/about-me/female.png");
           }
         }
       }
@@ -365,7 +364,7 @@ export default {
           background-position: center;
           background-size: 0.42rem 0.42rem;
           background-repeat: no-repeat;
-          background-image: url("/static/images/about-me/vip.png");
+          background-image: url("../../static/images/about-me/vip.png");
           position: absolute;
           left: -0.1rem;
         }
@@ -388,7 +387,7 @@ export default {
           .icon{
             width: 0.44rem;
             height: 0.39rem;
-            background-image: url("/static/images/about-me/1.png");
+            background-image: url("../../static/images/about-me/1.png");
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -405,7 +404,7 @@ export default {
           .icon{
             width: 0.44rem;
             height: 0.39rem;
-            background-image: url("/static/images/about-me/2.png");
+            background-image: url("../../static/images/about-me/2.png");
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -422,7 +421,7 @@ export default {
           .icon{
             width: 0.44rem;
             height: 0.39rem;
-            background-image: url("/static/images/about-me/3.png");
+            background-image: url("../../static/images/about-me/3.png");
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -443,7 +442,7 @@ export default {
         .icon{
           width: 0.4rem;
           height: 0.4rem;
-          background-image: url("/static/images/about-me/crown.png");
+          background-image: url("../../static/images/about-me/crown.png");
           background-position: center;
           background-size: 0.28rem 0.28rem;
           background-repeat: no-repeat;
@@ -459,7 +458,7 @@ export default {
       .video-authentication{
         height: 0.4rem;
         width: 0.4rem;
-        background-image: url("/static/images/about-me/Videoauthentication.png");
+        background-image: url("../../static/images/about-me/Videoauthentication.png");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;

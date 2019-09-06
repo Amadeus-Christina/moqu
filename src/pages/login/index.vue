@@ -1,10 +1,19 @@
 <template>
-    <div>12</div>
+<div class="bg">
+    <router-view/>
+</div>
+  
 </template>
 <script>
+
 export default {
-    
-}
+  data() {
+    return {
+     
+    };
+  },
+  
+};
 </script>
 <style lang="less" scoped>
 

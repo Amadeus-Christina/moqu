@@ -7,7 +7,14 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  userInfo: null, //用户信息
+	replyMessage:{},//点击回复
+	postDetails:JSON.parse(localStorage.getItem('postDetails')),//帖子详情
+	userInfo: null,//用户信息
+	call:'',
+	positioning:'',
+	imgList:[],
+	videoList:[],
+	viewInfo: null
 }
 
 export default new Vuex.Store({

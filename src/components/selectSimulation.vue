@@ -2,7 +2,7 @@
   <div class="select-simulation">
     <div class="select"  @click="openValue">
       <input v-model="value" class="input" type="text" :placeholder=placeholder>
-      <img class="img" src="/static/images/account-info/jiantouxia.png" alt="">
+      <img class="img" src="../../static/images/account-info/jiantouxia.png" alt="">
     </div>
     <div class="list" v-show="show">
       <ul v-if="isCar">

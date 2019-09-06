@@ -36,10 +36,11 @@
             <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '2'">{{item.reply.replyText}}</span>
           </div>
           <div class="content-middle-at-me clear" v-if="isAtMe">
-            <img class="content-img left" :src="item.postImg" alt="帖子图片">
+            <img v-if="item.postImg" class="content-img left" :src="item.postImg" alt="帖子图片">
+            <img v-else class="content-img left" :src="$store.state.userInfo.headImg" alt="帖子图片">
             <div class="content-middle-right left">
               <div class="atMyName">@{{$store.state.userInfo.realNickName}}({{$store.state.userInfo.anonymous}})</div>
-              <div class="comment">{{item.postText}}</div>
+              <div class="comment" v-html="item.postText"></div>
             </div>
           </div>
         </div>
@@ -178,7 +179,7 @@ export default {
         display: inline-block;
         width: 0.25rem;
         height: 0.25rem;
-        background-image: url("/static/images/message/comments.png");
+        background-image: url("../../static/images/message/comments.png");
         background-position: center center;
         background-size: 0.25rem 0.25rem;
         vertical-align: middle;

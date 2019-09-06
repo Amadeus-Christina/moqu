@@ -2,8 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 const Axios = axios.create({
-    // baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://lvyou.shouwangs.com/',
-    baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://www.moqushequ.com',
+    baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://www.moqushequ.com/',
     timeout: 20000,
     responseType: 'json',
     withCredentials: true, // 是否允许带cookie这些
@@ -19,7 +18,7 @@ let CancelToken = axios.CancelToken
 Axios.interceptors.request.use(
     config => {
         // 在发送请求之前做某件事
-
+        
         if (config.method === 'post' || config.method === 'put' || config.method === 'delete'|| config.method === 'get') {
             config.data = qs.stringify(config.data)
         }

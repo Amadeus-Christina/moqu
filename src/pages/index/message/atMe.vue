@@ -1,6 +1,6 @@
 <template>
   <div class="at-me-group fillcontain">
-    <message-item :messageInfo="message" :isAtMe="true"/>
+    <message-item :messageInfo="atMe" :isAtMe="true"/>
   </div>
 </template>
 <script>
@@ -14,30 +14,6 @@ export default {
   name: '',
   data () {
     return {
-      messageInfo: [
-        {
-          profilePicture: '/static/images/message/Anonymouscomments.png',
-          username: '山鬼',
-          anonymousUsername: '九月',
-          usernameTail: '在帖子中@了我',
-          contentImg: '/static/images/message/whispers.png',
-          time: '1小时前',
-          myUsername: '小玉',
-          myAnonymousUsername: '玉兔',
-          comment: '可真有来世，只愿升平早奏，韶华...'
-        },
-        {
-          profilePicture: '/static/images/message/Anonymouscomments.png',
-          username: '摸鱼',
-          anonymousUsername: '七月',
-          usernameTail: '在帖子中@了我',
-          contentImg: '/static/images/message/whispers.png',
-          time: '2小时前',
-          myUsername: '小玉',
-          myAnonymousUsername: '玉兔',
-          comment: '可真有来世，只愿升平早奏，韶华...'
-        }
-      ],
       atMe: null,
       message: [
         {
@@ -50,7 +26,7 @@ export default {
           "status":1,
           "postText":"请问恶趣味无群",
           "postImg":"https://lvyou.shouwangs.com/img/c6221c13-f3d1-4ade-82c5-b757505dbee8.jpg",
-          'createTime': '21小时前'
+          "createTime": '21小时前'
         }
       ]
     }

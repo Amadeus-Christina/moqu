@@ -56,7 +56,6 @@ export default {
     .profile{
       width: 0.8rem;
       height: 0.8rem;
-      /*background-image: url("/static/images/mock/03.jpg");*/
       background-position: center center;
       background-size: 0.8rem 0.8rem;
       background-repeat: no-repeat;
@@ -96,10 +95,10 @@ export default {
         line-height: 0.2rem;
         /*position: absolute;*/
         &.icon-male{
-          background-image: url("/static/images/about-me/male.png");
+          background-image: url("../../static/images/about-me/male.png");
         }
         &.icon-female {
-          background-image: url("/static/images/about-me/female.png");
+          background-image: url("../../static/images/about-me/female.png");
         }
       }
       .age {

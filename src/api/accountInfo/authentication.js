@@ -1,12 +1,12 @@
 import axios from "../config.js"
 
-export function realNameAuthentication(name, sex, age, idNumber, frontCard,
+export function realNameAuthentication(name, sex, birthday, idNumber, frontCard,
                                        backCard, handCard, userId,) {
   const url = "/api/identityAuthentication/realNameAuthentication"
   const data = {
     name,
     sex,
-    age,
+    birthday,
     idNumber,
     frontCard,
     backCard,
