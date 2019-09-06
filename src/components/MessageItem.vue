@@ -9,13 +9,18 @@
     <div class="message-item" v-else v-for="(item,index) in messageInfo" :key="index">
       <div class="photo">
         <img v-if="isWishpers" class="photo-img" src="../../static/images/message/Headportrait.png">
+        <img v-else-if="isAtMe" class="photo-img" :src="item.headImg">
         <img v-else class="photo-img" :src="item.head_img || item.user.headImg">
       </div>
       <div class="content-main">
         <div class="content-header">
           <div class="username" v-if="isWishpers">悄悄地</div>
+          <div class="username" v-else-if="item.headImg">{{item.realNickName}}({{item.value}})</div>
           <div class="username" v-else>{{item.real_nick_name || item.user.realNickName}}({{item.anonymous  || item.user.value}})</div>
-          <div class="usernameTail">  {{usernameTail}}
+          <div class="usernameTail">
+            <span v-if="isAtMe && item.status == 0">@了我</span>
+            <span v-if="isAtMe && item.status == 1">在帖子中@了我</span>
+            {{usernameTail}}
             <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '1'">帖子</span>
             <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '2'">评论</span>
           </div>
@@ -30,16 +35,17 @@
             <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '1'">{{item.post.postText}}</span>
             <span v-if="usernameTail === '点赞了我的' && item.user.beLikeType == '2'">{{item.reply.replyText}}</span>
           </div>
-          <div class="content-middle-at-me clear" v-if="usernameTail === '在帖子中@了我'">
-            <img class="content-img left" :src="item.contentImg" alt="帖子图片">
+          <div class="content-middle-at-me clear" v-if="isAtMe">
+            <img class="content-img left" :src="item.postImg" alt="帖子图片">
             <div class="content-middle-right left">
-              <div class="atMyName">@{{item.myUsername}}({{item.myAnonymousUsername}})</div>
-              <div class="comment">{{item.comment}}</div>
+              <div class="atMyName">@{{$store.state.userInfo.realNickName}}({{$store.state.userInfo.anonymous}})</div>
+              <div class="comment">{{item.postText}}</div>
             </div>
           </div>
         </div>
         <div class="content-footer">
-          {{item.time || item.time3 || item.user.time2}}
+          <span v-if="isAtMe">{{item.createTime}}</span>
+          <span v-else>{{item.time || item.time3 || item.user.time2 }}</span>
           <span v-if="usernameTail === '回复了我的评论'">
             <i class="icon"></i>
             回复
@@ -58,12 +64,15 @@ export default {
     return {
     }
   },
-  props: ['messageInfo','usernameTail','isWishpers'],
+  props: ['messageInfo','usernameTail','isWishpers','isAtMe'],
   computed: {},
   watch: {},
   methods: {},
-  mounted () {},
-  created () {},
+  mounted () {
+  },
+  created () {
+    console.log('this.messageInfo',this.messageInfo);
+  },
   filters: {},
   directives: {},
   beforeDestroy () {},

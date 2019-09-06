@@ -178,6 +178,14 @@ export function againAuthentication(carAuthenticationId) {
   return axios.post(url, data)
 }
 
+export function addDealer(userId) {
+  const url = "/api/post/addDealer"
+  const data = {
+    userId
+  }
+  return axios.post(url, data)
+}
+
 
 
 

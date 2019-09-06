@@ -44,7 +44,7 @@
         <span class="green">5%～10%</span>
         高额返利
       </div>
-      <div class="start-btn" @click="start">立即开通</div>
+      <div class="start-btn" @click="add">立即开通</div>
     </div>
     <div class="gray-background">
       <div class="add-up">
@@ -72,7 +72,7 @@
   </div>
 </template>
 <script>
-import {uqueryDealerByUserId} from '@/api/my/index.js'
+import {uqueryDealerByUserId,addDealer} from '@/api/my/index.js'
 export default {
   components: {},
   mixins: [],
@@ -104,15 +104,16 @@ export default {
   },
   watch: {},
   methods: {
-    // 开通
-    start() {
-      this.mock.lv = 1
-      this.mock.personNum = 0
-      this.mock.percentage = 0
-    },
     getData () {
       uqueryDealerByUserId(this.$store.state.userInfo.userId).then(res => {
         this.userSunriseData = res.data
+      })
+    },
+    // 开通
+    add() {
+      addDealer(this.$store.state.userInfo.userId).then(res => {
+        this.$toast.success('开通成功')
+        this.getData()
       })
     }
   },

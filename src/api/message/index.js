@@ -39,3 +39,11 @@ export function queryMySystemInfo(userId) {
   }
   return axios.post(url, data)
 }
+
+export function queryAtUserOrPost(atUserId) {
+  const url = "/api/post/queryAtUserOrPost"
+  const data = {
+    atUserId
+  }
+  return axios.post(url, data)
+}
