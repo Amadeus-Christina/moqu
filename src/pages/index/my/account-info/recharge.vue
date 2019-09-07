@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="recharge">
-      <button class="sure" @click="showToastSuccess">立即充值</button>
+      <button class="sure" @click="showToastSuccess('amount')">立即充值</button>
     </div>
     <van-popup v-model="show" round>
       <div class="recharge-pop">
@@ -29,7 +29,7 @@
           <input type="number" class="input" placeholder="请输入充值金额" v-model="customizeAmount" @blur="onBlur">
           <div class="icon">￥</div>
         </div>
-        <div class="confirm" @click="showToastSuccess">确 定</div>
+        <div class="confirm" @click="showToastSuccess('customizeAmount')">确 定</div>
       </div>
     </van-popup>
   </div>
@@ -91,7 +91,15 @@
         this.amount = data
       },
       // 充值成功提示
-      showToastSuccess() {
+      showToastSuccess(from) {
+        // 充值金额
+        let value = 0
+        if(from == 'amount') {
+          value = this.amount
+        }
+        if(from == 'customizeAmount'){
+          value = this.customizeAmount
+        }
         this.$toast.success({
           message: "充值成功"
         })
@@ -99,12 +107,11 @@
       // 充值金额只能为正整数
       onBlur() {
         let Reg = /^[1-9]\d*$/;
-        if (!Reg.test(this.customizeAmount)) {
-          this.$toast.fail('请输入一个整数金额')
-          this.customizeAmount = null
-          this.amount = null
-        } else {
-          this.amount = this.customizeAmount
+        if(this.customizeAmount){
+          if (!Reg.test(this.customizeAmount)) {
+            this.$toast.fail('请输入\n整数金额')
+            this.customizeAmount = null
+          }
         }
       },
       getData() {
