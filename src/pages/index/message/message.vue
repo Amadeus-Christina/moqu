@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-  import {mapMutations} from 'vuex'
+  import {mapActions} from 'vuex'
   import {myInformation} from "@/api/my/index.js"
   import {queryAllMessage} from "@/api/message/index.js"
   import itemList from '@/components/ItemList'
@@ -54,8 +54,11 @@
     computed: {},
     watch: {},
     methods: {
-      ...mapMutations([
-        'SET_USER_INFO'
+      // ...mapMutations([
+      //   'SET_USER_INFO'
+      // ]),
+      ...mapActions([
+        'setUserInfo'
       ]),
       async getMyInfo () {
         this.$toast.loading({
@@ -65,13 +68,14 @@
           message: "加载中..."
         });
         // 获取本人信息
-        await myInformation(1).then(res => {
-          if (res.code == 200) {
-            this.SET_USER_INFO(res.data)
-          } else {
-            this.$toast(res.msg)
-          }
-        })
+        // await myInformation(1).then(res => {
+        //   if (res.code == 200) {
+        //     this.SET_USER_INFO(res.data)
+        //   } else {
+        //     this.$toast(res.msg)
+        //   }
+        // })
+        await this.$store.dispatch("setUserInfo", 1);
 
         await queryAllMessage(this.$store.state.userInfo.userId).then(res => {
           if (res.code == 200) {

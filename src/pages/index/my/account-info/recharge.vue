@@ -26,7 +26,7 @@
         <div class="title">充&nbsp;&nbsp;&nbsp;值</div>
         <div class="close" @click="showPopup"></div>
         <div class="input-group">
-          <input type="number" class="input" placeholder="请输入充值金额" v-model="amount">
+          <input type="number" class="input" placeholder="请输入充值金额" v-model="customizeAmount" @blur="onBlur">
           <div class="icon">￥</div>
         </div>
         <div class="confirm" @click="showToastSuccess">确 定</div>
@@ -46,6 +46,7 @@
     data() {
       return {
         amount: 50,
+        customizeAmount: null,
         show: false,
         activeIndex: 0,
         wallet: [
@@ -94,6 +95,17 @@
         this.$toast.success({
           message: "充值成功"
         })
+      },
+      // 充值金额只能为正整数
+      onBlur() {
+        let Reg = /^[1-9]\d*$/;
+        if (!Reg.test(this.customizeAmount)) {
+          this.$toast.fail('请输入一个整数金额')
+          this.customizeAmount = null
+          this.amount = null
+        } else {
+          this.amount = this.customizeAmount
+        }
       },
       getData() {
         findPayPlan().then(res=>{

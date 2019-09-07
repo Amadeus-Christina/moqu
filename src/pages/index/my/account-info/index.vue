@@ -4,8 +4,6 @@
   </div>
 </template>
 <script>
-import {mapMutations} from 'vuex'
-import {myInformation} from "@/api/my/index.js"
 import itemList from '@/components/ItemList'
 export default {
   components: {
@@ -48,28 +46,8 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // ...mapMutations([
-    //   'SET_USER_INFO'
-    // ]),
-    // async getMyInfo () {
-    //   this.$toast.loading({
-    //     duration: 0,
-    //     forbidClick: true,
-    //     message: "加载中..."
-    //   });
-    //   // 获取本人信息
-    //   await myInformation(2).then(res => {
-    //     if (res.code == 200) {
-    //       this.SET_USER_INFO(res.data)
-    //     } else {
-    //       this.$toast(res.msg)
-    //     }
-    //   })
-    //   this.$toast.clear();
-    // }
   },
   mounted () {
-    // this.getMyInfo()
   },
   created () {},
   filters: {},

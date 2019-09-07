@@ -1,6 +1,10 @@
 import {
   // RECORD_ADDRESS,
   SET_USER_INFO,
+  GET_USER_INFO,
+
+  SET_VIEW_INFO,
+  GET_VIEW_INFO,
 
   CLICK_REPLY,
   POST_DETAILS,
@@ -12,6 +16,8 @@ import {
   VIDEOLIST
 } from './mutation-types'
 
+import {myInformation} from "@/api/my/index.js"
+
 export default {
   // 记录当前经度纬度
   // [RECORD_ADDRESS](state, {
@@ -22,9 +28,24 @@ export default {
   //   state.longitude = longitude;
   // },
   // 存入本人信息
-  [SET_USER_INFO](state, obj) {
-    state.userInfo = obj;
+  [SET_USER_INFO](state, userInfo) {
+    state.userInfo = userInfo
   },
+  // 获取本人信息
+  [GET_USER_INFO](state) {
+    return state.userInfo
+  },
+
+  // 存入访问人信息
+  [SET_VIEW_INFO](state, userInfo) {
+    state.viewInfo = userInfo
+  },
+  // 获取访问人信息
+  [GET_VIEW_INFO](state) {
+    return state.viewInfo
+  },
+
+
   [CLICK_REPLY](state, clickUser) {
     state.replyMessage = clickUser
   },

@@ -307,8 +307,8 @@ export default {
     .sure{
       text-align: center;
       line-height: 0.9rem;
-      /*margin-top: 0.5rem;*/
-      position: absolute;
+      margin-top: 0.5rem;
+      /*position: absolute;*/
       bottom: 1.5rem;
       left: 0.8rem;
     }

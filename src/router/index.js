@@ -158,29 +158,34 @@ export default new Router({
             {
               path: 'message',
               component: Message,
-              meta: { keepAlive: true },
+              meta: { keepAlive: true ,title: '消息'},
             },
             {
               path: 'comment',
-              component: Comment
+              component: Comment,
+              meta: {title: '评论'}
             },
             {
               path: 'atMe',
-              component: AtMe
+              component: AtMe,
+              meta: {title: '@我'}
             },
             {
               path: 'good',
-              component: Good
+              component: Good,
+              meta: {title: '点赞'}
             },
             {
               path: 'systemNotification',
               name: 'MessageSystemNotification',
-              component: MessageSystemNotification
+              component: MessageSystemNotification,
+              meta: {title: '系统通知'}
             },
             {
               path: 'wishpers',
               name: 'MessageWishpers',
-              component: MessageWishpers
+              component: MessageWishpers,
+              meta: {title: '悄悄话'}
             },
           ]
         },
@@ -218,104 +223,123 @@ export default new Router({
           path: 'aboutMe',
           name: 'AboutMe',
           component: AboutMeIndex,
-          meta: { keepAlive: true }
+          meta: { keepAlive: true ,title: '我的'},
         },
         {
           path: 'accountInfo',
           name: 'AccountInfoIndex',
-          component: AccountInfoIndex
+          component: AccountInfoIndex,
+          meta: {title: '账号资料'}
         },
         {
           path: 'accountSetting',
           name: 'AccountInfoSetting',
-          component: AccountInfoSetting
+          component: AccountInfoSetting,
+          meta: {title: '设置'}
         },
         {
           path: 'followList',
           name: 'FollowListIndex',
-          component: FollowListIndex
+          component: FollowListIndex,
+          meta: {title: '关注列表'}
         },
         {
           path: 'member',
           name: 'MemberIndex',
-          component: MemberIndex
+          component: MemberIndex,
+          meta: {title: '我的会员'}
         },
         {
           path: 'discover',
           name: 'DiscoverIndex',
-          component: DiscoverIndex
+          component: DiscoverIndex,
+          meta: {title: '发现'}
         },
         {
           path: 'recharge',
           name: 'AccountInfoRecharge',
-          component: AccountInfoRecharge
+          component: AccountInfoRecharge,
+          meta: {title: '充值'}
         },
         {
           path: 'wallet',
           name: 'AccountInfoWallet',
-          component: AccountInfoWallet
+          component: AccountInfoWallet,
+          meta: {title: '我的钱包'}
         },
         {
           path: 'videoAuthentication',
           name: 'VideoAuthentication',
-          component: VideoAuthentication
+          component: VideoAuthentication,
+          meta: {title: '视频认证'}
         },
         {
           path: 'cashOut',
           name: 'AccountInfoCashOut',
-          component: AccountInfoCashOut
+          component: AccountInfoCashOut,
+          meta: {title: '提现'}
         },
 
         {
           path: 'contact',
           name: 'Contact',
-          component: Contact
+          component: Contact,
+          meta: {title: '联系人'}
         },
         {
           path: 'vehicleAuthentication',
           name: 'VehicleAuthentication',
-          component: VehicleAuthentication
+          component: VehicleAuthentication,
+          meta: {title: '车辆认证'}
         },
 
         {
           path: 'coverImage',
           name: 'AboutMeCoverImage',
-          component: AboutMeCoverImage
+          component: AboutMeCoverImage,
+          meta: {title: '精选照片'}
         },
         {
           path: 'authentication',
           name: 'Authentication',
-          component: Authentication
+          component: Authentication,
+          meta: {title: '身份认证'}
         },
         {
           path: 'phoneAuthentication',
           name: 'PhoneAuthentication',
-          component: PhoneAuthentication
+          component: PhoneAuthentication,
+          meta: {title: '手机认证'}
         },
         {
           path: 'sunrise',
           name: 'SunriseIndex',
-          component: SunriseIndex
+          component: SunriseIndex,
+          meta: {title: '日出联盟'}
         },
         {
           path: 'sunriseLearnMore',
           name: 'SunriseLearnMore',
-          component: SunriseLearnMore
+          component: SunriseLearnMore,
+          meta: {title: '日出联盟'}
         },
         {
           path: 'sunriseRecruit',
           name: 'SunriseRecruit',
-          component: SunriseRecruit
+          component: SunriseRecruit,
+          meta: {title: '我的推广'}
         },
         {
           path: 'IDAuthentication',
           name: 'IDAuthentication',
-          component: IDAuthentication
+          component: IDAuthentication,
+          meta: {title: '身份认证'}
         },
         {
           path: 'IdentityAuthentication',
           name: 'IdentityAuthentication',
-          component: IdentityAuthentication
+          component: IdentityAuthentication,
+          meta: {title: '身份标识'}
         }
         // {
         //   path: 'myindex',
