@@ -5,6 +5,11 @@
 </template>
 <script>
 import itemList from '@/components/ItemList'
+import authenticationIcon from '#/account-info/certification.png'
+import memberIcon from '#/account-info/members.png'
+import walletIcon from '#/account-info/wallet.png'
+import mobilephoneIcon from '#/account-info/Mobilephone.png'
+import recruitingIcon from '#/account-info/recruiting.png'
 export default {
   components: {
     itemList
@@ -16,27 +21,27 @@ export default {
       accountInfoItemList: [
         {
           name: '身份认证',
-          iconPath: '../../../../../static/images/account-info/certification.png',
+          iconPath: authenticationIcon,
           toPath: '/index/authentication',
         },
         {
           name: '我的会员',
-          iconPath: '../../../../../static/images/account-info/members.png',
+          iconPath: memberIcon,
           toPath: '/index/member',
         },
         {
           name: '我的钱包',
-          iconPath: '../../../../../static/images/account-info/wallet.png',
+          iconPath: walletIcon,
           toPath: '/index/wallet',
         },
         // {
         //   name: '手机认证',
-        //   iconPath: '../../../../../static/images/account-info/Mobilephone.png',
+        //   iconPath: mobilephoneIcon,
         //   toPath: '/index/phoneAuthentication',
         // },
         {
           name: '日出联盟',
-          iconPath: '../../../../../static/images/account-info/recruiting.png',
+          iconPath: recruitingIcon,
           toPath: '/index/sunrise',
         }
       ]
@@ -58,6 +63,6 @@ export default {
 </script>
 <style scoped lang="less">
   .fillcontain{
-    background: #F7F7F7;
+    background: #ffffff;
   }
 </style>

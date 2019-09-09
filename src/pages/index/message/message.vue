@@ -8,6 +8,11 @@
   import {myInformation} from "@/api/my/index.js"
   import {queryAllMessage} from "@/api/message/index.js"
   import itemList from '@/components/ItemList'
+  import commentIconPath from '#/message/replyI.png'
+  import atMeIconPath from '#/message/@I.png'
+  import goodIconPath from '#/message/goodII.png'
+  import wishpersIconPath from '#/message/whispersI.png'
+  import systemNotificationIconPath from '#/message/SystemmessageI.png'
   export default {
     components: {
       itemList
@@ -19,31 +24,31 @@
         messageItemList:[
           {
             name: '评论',
-            iconPath: '../../../../static/images/message/replyI.png',
+            iconPath: commentIconPath,
             toPath: '/index/messageIndex/comment',
             msgNum: 0
           },
           {
             name: '@我',
-            iconPath: '../../../../static/images/message/@I.png',
+            iconPath: atMeIconPath,
             toPath: '/index/messageIndex/atMe',
             msgNum: 0
           },
           {
             name: '收到的赞',
-            iconPath: '../../../../static/images/message/goodII.png',
+            iconPath: goodIconPath,
             toPath: '/index/messageIndex/good',
             msgNum: 0
           },
           {
             name: '悄悄话',
-            iconPath: '../../../../static/images/message/whispersI.png',
+            iconPath: wishpersIconPath,
             toPath: '/index/messageIndex/wishpers',
             msgNum: 0
           },
           {
             name: '系统消息',
-            iconPath: '../../../../static/images/message/SystemmessageI.png',
+            iconPath: systemNotificationIconPath,
             toPath: '/index/messageIndex/systemNotification',
             msgNum: 0
           }

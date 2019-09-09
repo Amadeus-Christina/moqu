@@ -197,6 +197,6 @@
     }
   }
   .fillcontain{
-    background: #F7F7F7;
+    background: #FFFFFF;
   }
 </style>

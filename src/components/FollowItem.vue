@@ -72,13 +72,15 @@ export default {
       color: #ffffff;
       font-size: 0.2rem;
       text-align: center;
-      display: inline-block;
+      /*display: inline-block;*/
       /*margin: 0 auto;*/
       height: 0.3rem;
       width: 0.7rem;
       border-radius: 0.15rem;
       position: relative;
       vertical-align: middle;
+        display: flex;
+        align-items: center;
       &.male{
         background-color: #41CAC0;
       }
@@ -93,6 +95,8 @@ export default {
         background-repeat: no-repeat;
         vertical-align: middle;
         line-height: 0.2rem;
+          margin-left: 0.1rem;
+          margin-right: 0.05rem;
         /*position: absolute;*/
         &.icon-male{
           background-image: url("../../static/images/about-me/male.png");

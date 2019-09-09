@@ -26,6 +26,9 @@
   import {jsGetAge} from '@/utils/main.js'
   import {realNameAuthentication} from '@/api/accountInfo/authentication.js'
   import {uploadFile} from '@/api/index/index.js'
+  import frontCardIcon from '#/account-info/idcard.png'
+  import backCardIcon from '#/account-info/Reverse of id card.png'
+  import handCardIcon from '#/account-info/Hand-helidcard.png'
   export default {
     components: {
       selectSimulation,
@@ -48,19 +51,19 @@
           {
             title: '身份证正面',
             name: 'frontCard',
-            imgSrc: '../../../../../static/images/account-info/idcard.png',
+            imgSrc: frontCardIcon,
             msg: '请上传身份证正面照片',
           },
           {
             title: '身份证反面',
             name: 'backCard',
-            imgSrc: '../../../../../static/images/account-info/Reverse of id card.png',
+            imgSrc: backCardIcon,
             msg: '请上传身份证反面照片',
           },
           {
             title: '手持身份证',
             name: 'handCard',
-            imgSrc: '../../../../../static/images/account-info/Hand-helidcard.png',
+            imgSrc: handCardIcon,
             msg: '请上传手持身份证照片',
           }
         ],

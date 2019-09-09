@@ -17,6 +17,10 @@ import selectSimulation from '@/components/selectSimulation'
 import documentsItem from '@/components/DocumentsItem'
 import {uploadFile} from '@/api/index/index.js'
 import {carAuthentication, findAllCarMedal, againAuthentication} from '@/api/my/index.js'
+import frontCardPhoneIcon from '#/vehicle/idcard.png'
+import frontDrivingCardIcon from '#/vehicle/Vehiclelicense.png'
+import backDrivingCardIcon from '#/vehicle/VehiclelicenseI.png'
+import frontLicensePlateIcon from '#/vehicle/car.png'
 export default {
   components: {
     documentsItem,
@@ -33,52 +37,52 @@ export default {
         {
           title: '身份证正面',
           name: 'frontCardPhone',
-          imgSrc: '../../static/images/vehicle/idcard.png',
+          imgSrc: frontCardPhoneIcon,
           msg: '请上传身份证正面照片'
         },
         {
           title: '行驶证正面（蓝本）',
           name: 'frontDrivingCard',
-          imgSrc: '../../static/images/vehicle/Vehiclelicense.png',
+          imgSrc: frontDrivingCardIcon,
           msg: '请上传行驶证正面照片'
         },
         {
           title: '行驶证背面（蓝本）',
           name: 'backDrivingCard',
-          imgSrc: '../../static/images/vehicle/VehiclelicenseI.png',
+          imgSrc: backDrivingCardIcon,
           msg: '请上传行驶证反面照片'
         },
         {
           title: '车辆正面照片（车牌清晰）',
           name: 'frontLicensePlatePhone',
-          imgSrc: '../../static/images/vehicle/car.png',
+          imgSrc: frontLicensePlateIcon,
           msg: '请上传车辆正面照片'
         }
       ],
       // 原本的info
-      originalInfo: [
+      originalInfo:[
         {
           title: '身份证正面',
           name: 'frontCardPhone',
-          imgSrc: '../../static/images/vehicle/idcard.png',
+          imgSrc: frontCardPhoneIcon,
           msg: '请上传身份证正面照片'
         },
         {
           title: '行驶证正面（蓝本）',
           name: 'frontDrivingCard',
-          imgSrc: '../../static/images/vehicle/Vehiclelicense.png',
+          imgSrc: frontDrivingCardIcon,
           msg: '请上传行驶证正面照片'
         },
         {
           title: '行驶证背面（蓝本）',
           name: 'backDrivingCard',
-          imgSrc: '../../static/images/vehicle/VehiclelicenseI.png',
+          imgSrc: backDrivingCardIcon,
           msg: '请上传行驶证反面照片'
         },
         {
           title: '车辆正面照片（车牌清晰）',
           name: 'frontLicensePlatePhone',
-          imgSrc: '../../static/images/vehicle/car.png',
+          imgSrc: frontLicensePlateIcon,
           msg: '请上传车辆正面照片'
         }
       ],

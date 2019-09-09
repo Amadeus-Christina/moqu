@@ -6,6 +6,7 @@
 </template>
 <script>
 import itemList from '@/components/ItemList'
+import settingIcon from '#/account-info/TheeditorI.png'
 export default {
   components: {
     itemList
@@ -17,7 +18,7 @@ export default {
       accountInfoSettingItemList: [
         {
           name: '编辑信息',
-          iconPath: '../../../../../static/images/account-info/TheeditorI.png',
+          iconPath: settingIcon,
           toPath: '/',
         }
       ]

@@ -18,6 +18,10 @@
   import documentsItem from '@/components/DocumentsItem'
   import {identityAuthentication} from '@/api/my/index.js'
   import {uploadFile} from '@/api/index/index.js'
+  import professionalIcon from '#/account-info/zhiyezhengming.png'
+  import frontCardIcon from '#/account-info/idcard.png'
+  import backCardIcon from '#/account-info/Reverse of id card.png'
+  import handCardIcon from '#/account-info/Hand-helidcard.png'
   export default {
     components: {
       documentsItem
@@ -32,25 +36,25 @@
           {
             title: '职业证明材料',
             name: 'professionalCertificate',
-            imgSrc: '../../../../../static/images/account-info/zhiyezhengming.png',
+            imgSrc: professionalIcon,
             msg: '请上传职业证明材料'
           },
           {
             title: '身份证正面',
             name: 'frontCard',
-            imgSrc: '../../../../../static/images/vehicle/Vehiclelicense.png',
+            imgSrc: frontCardIcon,
             msg: '请上传身份证正面照片'
           },
           {
             title: '身份证反面',
             name: 'backCard',
-            imgSrc: '../../../../../static/images/vehicle/VehiclelicenseI.png',
+            imgSrc: backCardIcon,
             msg: '请上传身份证反面照片'
           },
           {
             title: '手持身份证',
             name: 'handCard',
-            imgSrc: '../../../../../static/images/account-info/Hand-helidcard.png',
+            imgSrc: handCardIcon,
             msg: '请上传手持身份证照片'
           }
         ],

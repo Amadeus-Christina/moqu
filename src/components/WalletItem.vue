@@ -24,7 +24,7 @@ export default {
     //激活状态切换
     change() {
       this.$emit('changeActiveIndex', this.index)
-      this.$emit('changeAmount', this.item.price)
+      this.$emit('changeAmount', this.item.money)
     }
   },
   mounted () {},

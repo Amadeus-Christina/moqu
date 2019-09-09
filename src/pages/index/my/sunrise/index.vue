@@ -67,32 +67,48 @@
         <div class="text">我的招募</div>
         <van-icon name="arrow" size="0.38rem" color="#BDC4CB"/>
       </div>
-      <div class="sure">立即分享</div>
+      <div class="sure" @click="showPopup">立即分享</div>
     </div>
+<!--    <van-popup-->
+<!--            v-model="show"-->
+<!--            position="bottom"-->
+<!--            :style="{ height: '3rem' }"-->
+<!--    >-->
+<!--      <div class="share-wrap">-->
+<!--        <div class="share-content">-->
+<!--          <div class="title">分享到</div>-->
+<!--          <div class="share">-->
+<!--            <div class="friend item" @click="shareFriend">-->
+<!--              <div class="img"></div>-->
+<!--              <div class="text">微信好友</div>-->
+<!--            </div>-->
+<!--            <div class="moments item">-->
+<!--              <div class="img"></div>-->
+<!--              <div class="text">微信朋友圈</div>-->
+<!--            </div>-->
+<!--            <div class="url item">-->
+<!--              <div class="img"></div>-->
+<!--              <div class="text">复制链接</div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="cancel" @click="showPopup">取消</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </van-popup>-->
   </div>
 </template>
 <script>
 import {uqueryDealerByUserId,addDealer} from '@/api/my/index.js'
+import {wxConfig} from '@/api/home/index.js'
+import wx from 'weixin-js-sdk'
 export default {
   components: {},
   mixins: [],
   name: '',
   data () {
     return {
-      // mock:{
-      //   headImg:'/static/images/mock/01.jpg',
-      //   realNickName: '烈烈龙',
-      //   anonymous: '敖烈',
-      //   inviteCode: 121212,
-      //   lv: 2,
-      //   personNum: 21,
-      //   rebate: 5,
-      //   today: 12,
-      //   month: 6666.00,
-      //   total: 10101.00,
-      //   percentage: 60
-      // },
-      userSunriseData: null
+      userSunriseData: null,
+      show: false
     }
   },
   props: {},
@@ -104,6 +120,9 @@ export default {
   },
   watch: {},
   methods: {
+    showPopup() {
+      this.show = !this.show;
+    },
     getData () {
       uqueryDealerByUserId(this.$store.state.userInfo.userId).then(res => {
         this.userSunriseData = res.data
@@ -114,6 +133,45 @@ export default {
       addDealer(this.$store.state.userInfo.userId).then(res => {
         this.$toast.success('开通成功')
         this.getData()
+      })
+    },
+    // 分享给微信朋友
+    shareFriend () {
+      let url = window.location.href;
+      wxConfig(url).then(res => {
+        wx.config({
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: res.appId, // 必填，公众号的唯一标识
+          timestamp: res.timeStamp, // 必填，生成签名的时间戳
+          nonceStr: res.nonceStr, // 必填，生成签名的随机串
+          signature: res.sign,// 必填，签名
+          jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+        });
+        wx.ready(function(){
+          // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+          wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+            // wx.updateAppMessageShareData({
+            //   title: '陌趣社区', // 分享标题
+            //   desc: '大家都爱用', // 分享描述
+            //   link: 'url', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            //   imgUrl: '../../../../../static/images/mock/03.jpg', // 分享图标
+            //   success: function () {
+            //     // 设置成功
+            //     this.$toast.success('分享成功')
+            //   }
+            // })
+            wx.onMenuShareAppMessage({
+              title: '陌趣社区', // 分享标题
+              desc: '健康的社区', // 分享描述
+              link: testUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+              imgUrl: '../../../../../static/images/mock/03.jpg', // 分享图标
+              type: '', // 分享类型,music、video或link，不填默认为link
+              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+              success: function () {
+              }
+            });
+          });
+        });
       })
     }
   },
@@ -312,6 +370,87 @@ export default {
       /*position: absolute;*/
       bottom: 0.5rem;
       left: 0.8rem;
+    }
+  }
+  .share-wrap{
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    .share-content{
+      width: 7.1rem;
+      height: 2.85rem;
+      background: #ffffff;
+      border-radius: 0.16rem;
+      font-size: 0.24rem;
+      display: flex;
+      flex-direction: column;
+      .title{
+        height: 0.6rem;
+        line-height: 0.6rem;
+        padding-left: 0.2rem;
+        color: #B5B5B5;
+      }
+      .share{
+        display: flex;
+        color: #B5B5B5;
+        .friend{
+          height: 1rem;
+          width: 1rem;
+        }
+        .friend .img{
+          background: url("../../../../../static/images/sunrise/WeChat.png");
+          width: 0.7rem;
+          height: 0.7rem;
+          background-size: 0.7rem 0.7rem;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .moments .img{
+          background: url("../../../../../static/images/sunrise/friends.png");
+          width: 0.7rem;
+          height: 0.7rem;
+          background-size: 0.7rem 0.7rem;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .url .img{
+          background: url("../../../../../static/images/sunrise/cope.png");
+          width: 0.7rem;
+          height: 0.7rem;
+          background-size: 0.7rem 0.7rem;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .item{
+          margin: 0.2rem 0.4rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .text{
+            margin-top: 0.05rem;
+          }
+        }
+      }
+      .cancel{
+        width: 7.1rem;
+        height: 0.8rem;
+        background-color: #E3E3E3;
+        font-size: 0.28rem;
+        color: #FFFFFF;
+        line-height: 0.8rem;
+        text-align: center;
+        border-radius: 0 0 0.16rem 0.16rem;
+      }
+    }
+  }
+</style>
+<style lang="less">
+  .sunrise{
+    .van-popup--bottom{
+      background-color: transparent;
+    }
+    .van-overlay{
+      background:rgba(0,0,0,0.3);
     }
   }
 </style>

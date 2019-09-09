@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="text">推广人数越多奖励返利比例越大哦～</div>
-    <div class="sure">立即分享</div>
+<!--    <div class="sure">立即分享</div>-->
   </div>
 </template>
 <script>

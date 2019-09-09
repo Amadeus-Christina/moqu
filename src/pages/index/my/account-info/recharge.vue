@@ -37,6 +37,8 @@
 <script>
   import {findPayPlan, paymentOrder} from '@/api/my/index'
   import walletItem from '@/components/WalletItem'
+  import wx from 'weixin-js-sdk'
+  import {wxConfig} from '@/api/home/index.js'
   export default {
     components: {
       walletItem
@@ -49,28 +51,29 @@
         customizeAmount: null,
         show: false,
         activeIndex: 0,
-        wallet: [
-          {
-            diamondNum: 50,
-            price: 50
-          },
-          {
-            diamondNum: 100,
-            price: 100
-          },
-          {
-            diamondNum: 200,
-            price: 200
-          },
-          {
-            diamondNum: 500,
-            price: 500
-          },
-          {
-            diamondNum: 1000,
-            price: 1000
-          }
-        ],
+        amountValue: 0,
+        // wallet: [
+        //   {
+        //     diamondNum: 50,
+        //     price: 50
+        //   },
+        //   {
+        //     diamondNum: 100,
+        //     price: 100
+        //   },
+        //   {
+        //     diamondNum: 200,
+        //     price: 200
+        //   },
+        //   {
+        //     diamondNum: 500,
+        //     price: 500
+        //   },
+        //   {
+        //     diamondNum: 1000,
+        //     price: 1000
+        //   }
+        // ],
         findPayPlan: {}
       }
     },
@@ -90,18 +93,40 @@
       changeAmount(data) {
         this.amount = data
       },
-      // 充值成功提示
+      // 充值
       showToastSuccess(from) {
         // 充值金额
-        let value = 0
+        this.amountValue = 0
         if(from == 'amount') {
-          value = this.amount
+          this.amountValue = this.amount
         }
         if(from == 'customizeAmount'){
-          value = this.customizeAmount
+          this.amountValue = this.customizeAmount
         }
-        this.$toast.success({
-          message: "充值成功"
+        let url = window.location.href;
+        paymentOrder(40, this.amountValue, 0, url).then(res => {
+          wx.config({
+            debug: false, // 开启调试模式
+            appId: res.data.configMap.appId, // 公众号的唯一标识
+            timestamp: res.data.configMap.timestamp, // 生成签名的时间戳
+            nonceStr: res.data.configMap.nonceStr, // 生成签名的随机串
+            signature: res.data.configMap.signature, // 签名
+            jsApiList: ["chooseWXPay"] // 填入需要使用的JS接口列表，这里是先声明我们要用到支付的JS接口
+          });
+          wx.ready(function() {
+            //弹出支付窗口
+            wx.chooseWXPay({
+              timestamp: res.data.payMap.timeStamp, // 支付签名时间戳，
+              nonceStr: res.data.payMap.nonceStr, // 支付签名随机串，不长于 32 位
+              package: res.data.payMap.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=xxxx）
+              signType: res.data.payMap.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+              paySign: res.data.payMap.paySign, // 支付签名
+              success: function(res) {
+                // 支付成功后的回调函数
+                this.$toast.success('支付成功')
+              }
+            });
+          });
         })
       },
       // 充值金额只能为正整数
@@ -127,9 +152,6 @@
     },
     mounted() {
       this.getData()
-      // paymentOrder(1,50,2).then(res => {
-      //   console.log('paymentOrder',res)
-      // })
     },
     created() {
     },

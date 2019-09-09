@@ -5,13 +5,12 @@ export function release(dt) {
   const data = dt
   return axios.post(url, data)
 }
-
-export function wxConfig() {
-  const url = "api/post/res"
-  const data = {
-
+export function wxConfig(localUrl) {
+  const url = "api/post/res3"
+  const data = {
+    url:localUrl
   }
-  return axios.post(url, data)
+  return axios.post(url, data)
 }
 
 export function searchUserOrPost(searchCondition) {

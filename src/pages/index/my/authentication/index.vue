@@ -50,6 +50,6 @@
 </script>
 <style scoped lang="less">
   .fillcontain{
-    background: #F7F7F7;
+    background: #ffffff;
   }
 </style>
