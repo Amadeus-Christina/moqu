@@ -186,6 +186,16 @@ export function addDealer(userId) {
   return axios.post(url, data)
 }
 
+export function paymentOrder(userId, money, payPlanId) {
+  const url = "/api/payPlan/paymentOrder"
+  const data = {
+    userId,
+    money,
+    payPlanId
+  }
+  return axios.post(url, data)
+}
+
 
 
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="video-authentication-blank">
+  <div class="video-authentication-blank fillcontain">
     <div class="text">请上传一段15秒以上的自我介绍视频：</div>
     <div class="video">
       <label id="labelr" class="pop_file" for="pop_video">
@@ -189,11 +189,14 @@
       justify-content: center;
       align-items: center;
       position: absolute;
-      bottom: 2rem;
+      bottom: 0.5rem;
       &.gray{
         background: #E3E3E3;
         box-shadow: 0 0;
       }
     }
+  }
+  .fillcontain{
+    background: #F7F7F7;
   }
 </style>

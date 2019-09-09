@@ -1,5 +1,5 @@
 <template>
-  <div class="documents">
+  <div class="documents fillcontain">
     <div class="page1" v-show="page == 1">
       <documents-item v-for="(item,index) in info" :key="index" :item="item" @add="add" @deleteUpload="deleteUpload"/>
 <!--      <div class="sure" @click="showToast">提交</div>-->
@@ -128,6 +128,7 @@ export default {
             })
             this.info = this.originalInfo
             this.carAuthenticationId = null
+            this.$emit('setNull')
           } else {
             this.$toast.fail({
               message: res.msg
@@ -230,7 +231,7 @@ export default {
 </script>
 <style scoped lang="less">
   .sure{
-    margin: 0.8rem auto 2rem;
+    margin: 0.8rem auto 0.5rem;
     text-align: center;
     line-height: 0.9rem;
   }
@@ -256,5 +257,4 @@ export default {
       bottom: 0;
     }
   }
-
 </style>

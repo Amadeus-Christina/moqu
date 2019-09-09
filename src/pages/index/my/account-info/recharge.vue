@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-  import {findPayPlan} from '@/api/my/index'
+  import {findPayPlan, paymentOrder} from '@/api/my/index'
   import walletItem from '@/components/WalletItem'
   export default {
     components: {
@@ -127,6 +127,9 @@
     },
     mounted() {
       this.getData()
+      // paymentOrder(1,50,2).then(res => {
+      //   console.log('paymentOrder',res)
+      // })
     },
     created() {
     },
@@ -206,7 +209,7 @@
   .recharge{
     margin: 0 auto;
     position: absolute;
-    bottom: 1.4rem;
+    bottom: 0.5rem;
     left: 0.8rem;
   }
   .recharge-pop{

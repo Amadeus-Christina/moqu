@@ -1,7 +1,7 @@
 <template>
-  <div class="">
+  <div class="fillcontain">
     <vehicle-title @show="show" :show="showView"/>
-    <documents v-if="showView === 'documents'" :carId="carAuthenticationId"/>
+    <documents v-if="showView === 'documents'" :carId="carAuthenticationId" @setNull="setNull"/>
     <vehicle-manage v-else @again="again" />
   </div>
 </template>
@@ -35,6 +35,10 @@ export default {
     again(carAuthenticationId) {
       this.showView = 'documents'
       this.carAuthenticationId = carAuthenticationId
+    },
+    // 清空重新认证的车辆ID
+    setNull(){
+      this.carAuthenticationId = null
     }
   },
   mounted () {},

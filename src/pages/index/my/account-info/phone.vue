@@ -74,7 +74,7 @@ export default {
         line-height: 0.9rem;
         text-align: center;
         position: absolute;
-        bottom: 1.8rem;
+        bottom: 0.5rem;
       }
     }
     .already{

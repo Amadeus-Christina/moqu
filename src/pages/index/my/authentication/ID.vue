@@ -207,7 +207,7 @@
         }
 
         .sure {
-            margin: 0.8rem auto 1.7rem;
+            margin: 0.8rem auto 0.5rem;
             line-height: 0.9rem;
             text-align: center;
         }

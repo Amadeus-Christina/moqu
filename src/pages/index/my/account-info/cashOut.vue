@@ -100,7 +100,7 @@ export default {
       text-align: center;
       line-height: 0.9rem;
       position: absolute;
-      bottom: 1.5rem;
+      bottom: 0.5rem;
       left: 0.8rem;
     }
   }

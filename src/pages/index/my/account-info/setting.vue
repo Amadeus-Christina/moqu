@@ -44,7 +44,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     .logout {
-      margin-bottom: 1.7rem;
+      margin-bottom: 0.5rem;
     }
   }
 

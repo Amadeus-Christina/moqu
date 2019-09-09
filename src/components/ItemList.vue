@@ -1,7 +1,7 @@
 <template>
   <div class="message-item-group">
     <div class="message-item clear" v-for="(item,index) in itemInfo" :key="index" >
-      <div @click="$router.push(item.toPath)">
+      <div @click="$router.push(item.toPath)" class="wrap">
         <i class="icon" v-if="item.iconPath">
           <img class="icon-img" :src="item.iconPath" alt="图标" v-if="item.iconPath">
         </i>
@@ -40,6 +40,11 @@ export default {
 </script>
 <style scoped lang="less">
   .message-item-group {
+    width: 100%;
+    .wrap{
+      height: 0.4rem;
+      width: 100%;
+    }
     .icon {
       height: 0.4rem;
       width: 0.4rem;

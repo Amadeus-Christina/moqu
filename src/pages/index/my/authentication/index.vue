@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="fillcontain">
     <item-list :itemInfo="itemList"/>
   </div>
 </template>
@@ -49,4 +49,7 @@
   }
 </script>
 <style scoped lang="less">
+  .fillcontain{
+    background: #F7F7F7;
+  }
 </style>

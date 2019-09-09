@@ -50,7 +50,7 @@
           {
             title: '手持身份证',
             name: 'handCard',
-            imgSrc: '../../../../../static/images/vehicle/car.png',
+            imgSrc: '../../../../../static/images/account-info/Hand-helidcard.png',
             msg: '请上传手持身份证照片'
           }
         ],
@@ -173,10 +173,10 @@
             line-height: 0.9rem;
             text-align: center;
             position: absolute;
-            bottom: 1.5rem;
+            bottom: 0.5rem;
         }
         .page2 .sure {
-            margin: 1.5rem auto;
+            margin: 1rem auto 0.5rem;
             line-height: 0.9rem;
             text-align: center;
         }

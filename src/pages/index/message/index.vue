@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="fillcontain">
        <router-view></router-view>
     </div>
 </template>

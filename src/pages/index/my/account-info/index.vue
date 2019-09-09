@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="fillcontain">
     <item-list :itemInfo="accountInfoItemList" />
   </div>
 </template>
@@ -57,4 +57,7 @@ export default {
 }
 </script>
 <style scoped lang="less">
+  .fillcontain{
+    background: #F7F7F7;
+  }
 </style>
